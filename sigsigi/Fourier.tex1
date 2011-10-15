@@ -1,0 +1,1748 @@
+% Matlab diffgleichung
+% Zeit-Bandbreite Produkt Bild wie Rabenstein seite 224 mit Gaussimpuls machen
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\setcounter{Aufgabe}{0}\setcounter{Beispiel}{0}
+\chapter{Frequenzanalyse \index{Frequenz!analyse@{-analyse}}}\label{KAP_FOURIER}
+\section{Einleitung}
+F"ur das "Ubertragen und Filtern von Signalen ist die
+Kenntnis des {\bf spektralen \index{spektral} Aufbaus der Signale} von besonderer Bedeutung.
+Das Spektrum von {\bf periodischen Signalen} der Klasse 2a
+(Leistungssignale) kann mittels der {\bf
+  Fourier-Reihen}\index{Fourier!Reihe@{-Reihe}}, die als Grenzfall
+der {\bf
+  Fourier-Transformation}\index{Fourier!Transformation@{-Transformation}}
+zu betrachten sind, bestimmt werden. Die {\bf Fourier-Transformation}
+kann zus\"atzlich das Spektrum von Signalen der Klasse 1 (endliche
+Energie) bestimmen.  Mit Hilfe der {\bf
+  Autokorrelationsfunktion}\index{Autokorrelationsfunktion} und deren
+Fourier-Transformierten\index{Fourier!Transformierte@{-Transformierte}},
+dem {\bf Leistungsdichtespektrum}\index{Leistungsdichtespektrum}, wird
+die Frequenzanalyse von Signalen der Klasse 2b durchgef\"uhrt
+\cite{COU:97, WOS:88, WYR:99:2}. \\ {\bf Periodische Ph"anomene}
+erscheinen h"aufig in der Physik und in den Ingenieurswissenschaften.
+Periodische Funktionen mit {\bf Sinus}- und {\bf Cosinusfunktionen} zu
+repr"asentieren, ist ein wichtiges praktisches Problem. Das f"uhrt zu
+den {\bf Fourier-Reihen} welche mit Sinus- und Cosinusfunktionen
+aufgebaut sind.  Die Einf"uhrung dieser Reihen durch Jean-Baptiste
+Joseph Fourier\footnote{Jean-Baptiste Joseph
+  Fourier\index{Fourier!Jean-Baptiste Joseph} (1768-1830) war ein
+  franz"osischer Physiker und Mathematiker. Er lebte und lehrte in
+  Paris und begleitete Napoleon nach "Agypten.  Sp"ater wurde er
+  Pr"afekt von Grenoble. Er verwendete Fourier-Reihen in seiner
+  Hauptarbeit ''Th\'eorie analytique de la chaleur'' (Paris 1822) in
+  welcher er die Theorie der W"armeleitung entwickelte. Diese neue
+  Reihenentwicklung\index{Reihenentwicklung} wurde zum wichtigsten
+  Hilfsmittel in der mathematischen Physik und hatte ausserdem einen
+  starken Einfluss auf die allgemeine Entwicklung der Mathematik
+  \cite{WYR:99:2}.}, aufbauend auf Leonhard
+Euler's\index{Euler!Leonhard} und Daniel
+Bernoulli's\index{Bernoulli!Daniel} Vorarbeiten, ist eine der
+wichtigsten Errungenschaften f"ur die Entwicklung der angewandten
+Mathematik \cite{OPP:WIL:96}.\\
+\nit Die {\bf Fourier-Transformation} ist neben der {\bf
+  Laplace-Transformation} eine der bekanntesten
+Integraltransformationen\index{Integraltransformation} \cite{POU:96}.
+Die Fourier-Transformation ist das fundamentale Werkzeug in den
+Ingenieurswissenschaften f\"ur die Spektralanalyse, vor allem, seit
+effiziente Algorithmen (z.B. {\bf FFT} \cite{BRI:74})\index{FFT} f\"ur die {\bf diskrete
+  Fourier-Transformation}\index{Fourier!Transformation@{-Transformation}!diskrete}
+vorhanden sind. Wir werden durch die Definition der {\bf
+  Laplace-Transformation} erkennen, dass die {\bf
+  Fourier-Transformation} als Spezialfall der Laplace-Transformation
+angesehen werden kann.
+
+\newpage
+\section {Fourier-Reihen\index{Fourier!Reihe@{-Reihe}}}
+Ist $f(x)$ eine eindeutige\index{eindeutig}, reelle,\index{Funktion!reell} im Intervall $[0,2\pi]$
+st"uckweise monotone\index{monoton} und
+differenzierbare\index{differenzierbar}, {\bf periodische\index{periodisch}
+Funktion} mit der {\bf Primitivperiode}\index{Periode!Primitiv-}\index{Primitivperiode} $2\pi$, so
+l"asst sich eine Fourier-Reihe von $f(x)$ entwickeln\footnote{Das
+  Zeichen $\rightsquigarrow$ wird anstelle von = verwendet, da $f(x)$
+  Sprungstellen\index{Sprungstellen} aufweisen kann.  Das Zeichen
+  $\rightsquigarrow$ wird verwendet, um ``besitzt die formale
+  Fourier-Reihe\index{Fourier!Reihe@{-Reihe}!formale}'' auszudr"ucken.} 
+(harmonische Analyse; Zerlegung von $f(x)$ in ihr diskontinuierliches
+Linienspektrum nach diskreten Frequenzen $k$)\\ \vspace*{2mm}\\ 
+\myboxx{
+\begin{equation}
+  f(x) \rightsquigarrow\frac{a_0}{2} + \sum\limits_{k=1}^{\infty} \klam{a_k \cos \klam{kx} + b_k \sin \klam{kx}} \quad k \in \mathbb{N}.\label{FOU_FORM_01}
+\end{equation}}\\~\\
+\nit $\frac{a_0}{2}$ ist der
+``Gleichstromanteil''\index{Gleichstromanteil} des Signals $f(x)$. Die
+Fourier-Koeffizienten\index{Fourier!Koeffizienten@{-Koeffizienten}}
+sind:\\~\\ \myboxx{\begin{eqnarray}
+    a_0 & = & \frac{1}{\pi}\int\limits_0^{2\pi} f(x)dx,\\
+    a_k & = & \frac{1}{\pi}\int\limits_0^{2\pi} f(x)\cos\klam{kx}dx,\\
+    b_k & = & \frac{1}{\pi}\int\limits_0^{2\pi} f(x)\sin\klam{kx}dx.\label{FOU_FORM_04}
+\end{eqnarray}}\\~\\
+\bem
+F"ur Funktionen der {\bf Primitivperiode}\index{Periode!Primitiv-} $T$
+wird in den Formeln~\ref{FOU_FORM_01} bis \ref{FOU_FORM_04} $k$ durch $k\frac{2\pi}{T}$ ersetzt. Die Integrationsgrenzen
+gehen "uber die Periode $T$ (z.B. $0\ldots T$) und der Faktor
+$\frac{1}{\pi}$ wird durch $\frac{2}{T}$ ersetzt. Somit ergeben sich folgende \"aquivalenten Ausdr\"ucke ($k \in \mathbb{N}$):\\ \vspace*{2mm}\\ 
+\myboxx{\begin{eqnarray}
+   f(t) &\rightsquigarrow & \frac{a_0}{2} + \sum\limits_{k=1}^{\infty} \klam{a_k \cos \klam{\frac{2\pi k}{T}~t} + b_k \sin \klam{\frac{2\pi k}{T}~t}},\\
+    a_0 & = & \frac{2}{T}\int\limits_0^{T} f(t)dt,\\
+    a_k & = & \frac{2}{T}\int\limits_0^{T} f(t)\cos\klam{\frac{2\pi k}{T}~t}dt,\\
+    b_k & = & \frac{2}{T}\int\limits_0^{T} f(t)\sin\klam{\frac{2\pi k}{T}~t}dt.
+\end{eqnarray}}
+\subsection{Orthogonalit"atsrelationen von trigonometrischen Funktionen}\index{Funktion!trigonometrische}
+\index{Orthogonalitatsrelationen@Orthogonalit\"atsrelationen}
+Die folgenden Orthogonalit"atsrelationen k"onnen bei der Berechnung der Fourier-Reihen hilfreich sein $(m,n\in\mathbb{N})$ \cite{BAR:90}.
+\begin{eqnarray}
+ \sin (x\pm\phi) &=&\sin(x)\cos(\phi)\pm\cos(x)\sin(\phi)\label{FOU_ORT_1} \\ 
+\int\limits_0^{2\pi}\cos(nt)\cos(mt)dt &=& \left \{ \begin{array}{ll} 
+0 & n\neq m\\
+2\pi & m=n=0\\
+\pi & m=n\neq 0
+\end{array}\right . \\ 
+\int\limits_0^{2\pi}\sin(nt)\sin(mt)dt &=& \left \{ \begin{array}{ll} 
+0 & n\neq m\\
+0 & m=n=0\\
+\pi & m=n\neq 0
+\end{array}\right .\\ 
+\int\limits_0^{2\pi}\cos(nt)\sin(mt)dt &=&0\label{FOU_ORT_3}
+\end{eqnarray}
+\bsp{Gesucht sind die Fourier-Koeffizienten der $T_0$-periodischen Dreieckfunktion\index{Dreieckfunktion} $x(t)$ von Abbildung~\ref{FOU_ABB_001}.}\\
+\begin{figure}[htb]
+\vspace*{-12mm}
+\begin{center}% matlab FOU_001.m
+  \bild{/fourier/FOU_001.eps,width=0.9}\vspace*{-3mm}\caption{Dreieckfunktion mit Amplitude $A=3$ und Periode $T_0=5$}\label{FOU_ABB_001}
+\end{center}
+\vspace*{-6mm}
+\end{figure}\\
+\begin{equation*}
+a_0=\frac{2}{T_0}\int\limits_{-T_0/2}^{T_0/2} x(t)dt=\frac{2}{T_0}\int\limits_{-T_0/2}^{T_0/2} \frac{A|t|}{T_0/2}dt=\frac{4\cdot A}{T_0^2}\cdot 2\int\limits_{0}^{T_0/2}t~dt=\frac{2\cdot 4\cdot A}{T_0^2}\cdot\frac{T_0^2}{2\cdot 4}=A
+\end{equation*}
+Wir k\"onnen aber auch direkt aus Abb.~\ref{FOU_ABB_001} erkennen, dass der
+``Gleichstromanteil''\index{Gleichstromanteil} $\frac{a_0}{2}$ gleich
+$\frac{A}{2}$ ist. Die Koeffizienten der Sinusfunktionen $b_k$ sind \\
+\begin{eqnarray*}
+b_k&=&\frac{2}{T_0}\int\limits_{-T_0/2}^{T_0/2} \frac{A|t|}{T_0/2}\sin\klam{\frac{2\pi k}{T_0}~t} dt=0 \quad\forall\quad k\in \mathbb{N},
+\end{eqnarray*}
+da sich die Anteile von $-T_0/2$ bis $0$ und von $0$ bis $T_0/2$
+gerade aufheben.  D.h, dass in der Dreiecksfolge von
+Abb.~\ref{FOU_ABB_001} keine Sinuskomponenten vorhanden sind. Wir
+werden sp\"ater in diesem Kapitel sehen, was
+{\bf Symmetrieverh"altnisse}\index{Symmetrieverhaltnisse@{Symmetrieverh\"altnisse}}
+(Formeln~\ref{FOU_FORm_SYM1} und \ref{FOU_FORm_SYM2}) bei der
+Zeitfunktion f\"ur einen Einfluss auf die Fourier-Koeffizienten $a_k$ und $b_k$ haben.
+
+
+\newpage 
+\nit F"ur die Koeffizienten der Cosinusfunktionen erhalten wir:
+\begin{eqnarray*}
+a_k&=&\frac{2}{T_0}\int\limits_{-T_0/2}^{T_0/2} \frac{A|t|}{T_0/2}\cos\klam{\frac{2\pi k}{T_0}~t} dt\\
+&=&\frac{4A}{T_0^2}\left [\int\limits_{0}^{T_0/2} t\cdot\cos\klam{\frac{2\pi k}{T_0}~t} dt-\int\limits_{-T_0/2}^{0} t\cdot\cos\klam{\frac{2\pi k}{T_0}~t} dt\right ]\\
+&=&\frac{4A}{T_0^2}\left [\left .\frac{\cos\klam{\frac{2\pi k}{T_0}t}}{\klam{\frac{2\pi k}{T_0}t}^2}+ \frac{t\sin\klam{\frac{2\pi k}{T_0}t}}{\frac{2\pi k}{T_0}t}\right |_0^{T_0/2} +\left .\frac{\cos\klam{\frac{2\pi k}{T_0}t}}{\klam{\frac{2\pi k}{T_0}t}^2}+ \frac{t\sin\klam{\frac{2\pi k}{T_0}t}}{\frac{2\pi k}{T_0}t}\right |_0^{-T_0/2}    \right ]\\
+&=&\frac{-4A}{\pi^2 k^2}\quad k=1,3,5,7,\ldots
+\end{eqnarray*}
+
+
+\begin{figure}[htb]
+\vspace*{-7mm}
+\begin{center}% matlab FOU_001.m
+  \bild{/fourier/FOU002.eps,width=0.9}\vspace*{-3mm}\caption{Dreieckfunktion mit Amplitude $A=3$ und Periode $T_0=5$ und die Approximation (gestrichelt) mit $\frac{a_0}{2}$ und nur zwei Cosinusfunktionen $a_1$ und $a_3$.}\label{FOU_ABB_002}
+\end{center}
+\vspace*{-6mm}
+\end{figure}
+\nit Alleine mit $a_1$ und $a_3$ sieht man in Abb.~\ref{FOU_ABB_002}, dass die
+Approximation der Dreieckfunktion\index{Dreieckfunktion} sehr gut gelingt. Mit mehr
+Koeffizienten $a_k$ wird man zwischen $x(t)$ und der
+Approximation\index{Approximation} keinen Unterschied mehr erkennen
+k\"onnen. Das bedeutet, dass die Sinus- und Cosinusfunktionen diese
+periodische, stetige Dreieckfunktion\index{Funktion!stetig}\index{Dreieckfunktion} perfekt
+abbilden k\"onnen. Wie wir im n\"achsten Beispiel sehen werden,
+gelingt das mit unstetigen Funktionen\index{Funktion!unstetig} nicht
+mehr.  
+
+\newpage \vspace*{-12mm}\bsp{}
+\begin{figure}[htb]
+\vspace*{-12mm}
+\begin{center}
+  \bild{/fourier/FOU1.ps,width=0.4}\caption{Rechteckfunktion mit Amplitude $A$ und Periode $2\pi$}\label{FOU1}
+\end{center}
+\vspace*{-6mm}
+\end{figure}\\
+\nit In der Abbildung~\ref{FRE_ABB_FOU2} sieht man die Approximation
+der Rechteckfunktion $f(x)$ durch eine gr"osser werdende Anzahl von
+Sinusfunktionen $S_1$, $S_2$, $S_3$ und $S_{40}$.
+Da $f(x)$ eine ungerade Funktion\index{Funktion!ungerade} ist, sind alle Cosinusterme $a_k=0\quad (k\in \mathbb{N}_0)$. Die Faktoren $b_k$ der Sinuskomponenten sind:\\
+\begin{equation*}
+b_k=\frac{1}{\pi}\klam{\int\limits_0^{\pi}A\sin(kt)dt-\int\limits_{-\pi}^0 A\sin(kt)dt}=\left.\left. \frac{A}{\pi k}\klam{-\cos(kt)}\right  |_{0}^{\pi}\right  |_{0}^{-\pi}=\frac{4A}{\pi k},\quad k\in 1,~3,~5\ldots
+\end{equation*}
+\begin{figure}[htb]
+\begin{center}\vspace*{-7mm}\hspace*{-8mm}
+  \bild{/fourier/FOU2.eps,width=1.1}\vspace*{-3mm}\caption{Approximation der Rechteckfunktion mit Amplitude $A=2$ und Periode $2\pi$ durch: (a)  eine Sinusfunktion $S_1$; (b) zwei
+    Sinusfunktionen $S_2$; (c) drei Sinusfunktionen $S_3$;
+    (d) 40 Sinusfunktionen $S_{40}$ }\label{FRE_ABB_FOU2}
+\end{center}
+\end{figure}
+
+\newpage
+\subsection{Gibbsches Ph"anomen\index{Phanomen@{Ph\"anomen}!Gibbsches}}
+\begin{figure}[htb]% matlab Gibbsches.m
+\begin{center}\vspace*{-7mm}
+  \bild{/fourier/Gibb.eps,width=0.71}
+\vspace*{-3mm}\caption{Gibbsches Ph"anomen bei Rechteckfunktion (Abb.~\ref{FOU1}) mit Amplitude $A=2$}\label{FRE_ABB_FOU2a}
+\end{center}\vspace*{-8mm}
+\end{figure}
+\nit In Abbildungen~\ref{FRE_ABB_FOU2} und \ref{FRE_ABB_FOU2a} sieht
+man, dass sich ein {\bf "Uberschwingen}
+\index{Uberschwingen@{\"Uberschwingen}} an den {\bf
+  Unstetigkeitsstellen}\index{Unstetigkeit} ergibt.  Dieses "Uberschwingen
+wird nach seinem Entdecker {\bf Gibbsches Ph"anomen}\index{Gibbsches Phanomen@{Gibbsches Ph\"anomen}} genannt
+\cite{PAP:88}. Allgemein l"asst sich sagen, wenn $f(x)$ an der Stelle
+$x=x_0$ eine Unstetigkeit besitzt, dann ist die {\bf Approximation}\index{Approximation}
+$S_{\infty}$ der Funktion $f(x)$ nicht nahe beim richtigen Wert von $f(x)$, egal
+wieviele Sinus- und Cosinusfunktionen man verwendet. Die Approximation $S_{\infty}$ beginnt
+in der Umgebung der Unstetigkeitsstelle stark zu
+oszillieren\footnote{Das "Uberschwingen betr"agt ca. 18\% der Amplitude (oder ca. 9\% der Sprungh"ohe) \cite{KUE:KOH:00, SCH:00}.} \cite{PAP:88}.  $S_{\infty}$ wird an der Unstetigkeit $x_0$ den folgenden Wert annehmen:
+\begin{equation*}
+  S_{\infty}(x_0)= \frac{f(x_0^+)+f(x_0^-)}{2}.
+\end{equation*}
+Hinweis: Mit dem Lanczos-Faktor\index{Lanczos-Faktor} ($sinc\klam{\frac{k\pi}{2n}}$) kann die Fourier-Reihe erweitert werden: $f(x)=\frac{a_0}{2} + \sum\limits_{k=1}^{n} ${\boldmath $sinc\klam{\frac{k\pi}{2n}}$}$\klam{a_k \cos \klam{kx} + b_k \sin \klam{kx}}$. Damit verringert sich das \"Uberschwingen, was aber mit einer geringeren Steilheit im \"Ubergangsbereich erkauft werden muss \cite{WEI:99}.% matlab FOU_lanczos % wei:99 seite 1025
+\aufg
+Berechnen Sie alle Werte $a_0 \ldots
+a_{\infty}$ und $b_1 \ldots b_{\infty}$ f"ur die Rechteckfunktion von
+Abb.~\ref{FOU1}. Beachten Sie, dass die aufgezeichnete
+Rechteckfunktion {\bf ungerade}\index{ungerade} ist und $f(x)=-f(x+\pi)$.
+
+\newpage
+\subsection{Darstellungen im Frequenzbereich}\index{Frequenz!bereich@{-bereich}}
+Im Frequenzbereich l\"asst sich die {\bf Fourier-Reihe} auf zwei
+verschiedene Arten darstellen. Entweder werden die {\bf Koeffizienten} der
+{\bf Cosinus-} und {\bf Sinusglieder} jeweils in je einer Abbildung aufgef"uhrt,
+oder es wird in zwei Abbildungen der {\bf Betrag}\index{Betrag} und
+die {\bf Phase}\index{Phase} des {\bf Spektrums}\index{Spektrum}
+aufgezeichnet.\\
+\begin{figure}[htb]
+\vspace*{-2mm}\begin{center}
+  \bild{/fourier/FOU3.ps,width=0.69}\caption{Verschiedene Darstellungen ($f_1(t)$ und $f_2(t)$) des Frequenzbereich: a) Cosinus- und Sinusglieder von $f_1(t)$; b) Betrag und Phase von $f_2(t)$}
+\end{center}
+\vspace*{-9mm}
+\end{figure}\\
+\nit Eine mathematische Formulierung f"ur die Berechnung von Betrag\index{Betrag} und Phase\index{Phase} lautet (f"ur $2\pi$-periodische Funktionen):\\~\\
+\myboxx{\begin{equation}
+  f(x) \rightsquigarrow \frac{a_0}{2} + \sum\limits_{k=1}^{\infty} d_k \cos \klam{kx+ \phi_k},\label{FOU_FORM_dk}
+\end{equation}}\\~\\
+mit $d_k=\sqrt{a_k^2 + b_k^2}$ und $\phi_k = -\arctan(b_k/a_k)+n\pi$. Der Phasenwinkel $\phi_k$ ist wegen der $\arctan$-Funktion nicht eindeutig bestimmbar. Mit $a_k$ und $b_k$ l"asst sich aber der Quadrant von $\phi_k$ bestimmen.\index{Quadrant} Eine weiter "aquivalente Darstellung verwendet die Sinusfunktion im Gegensatz zu Formel~\ref{FOU_FORM_dk}, wobei auch der Phasenwinkel neu definiert werden muss \cite{BAR:90, MEY:02}.
+\subsubsection{Die komplexe Fourier-Reihe}
+Ausgehend von den {\bf Eulerschen Formeln}\index{Euler!-sche Formeln} kann man die Fourier-Reihe mit
+Exponentialfunktionen\index{Exponentialfunktion} anstelle von
+Winkelfunktionen\index{Winkelfunktion} formulieren. Mit
+\begin{equation*}
+  \cos(x)  =  \frac {e^{jx} + e^{-jx}} {2}\quad\text{und}\quad \sin(x) = \frac {e^{jx} - e^{-jx}} {2j}
+\end{equation*}
+ergibt sich die {\bf komplexe Fourier-Reihe}\index{Fourier!Reihe@{-Reihe}!komplex} f"ur $f(x)$ zu\\~\\ 
+\myboxx{\begin{equation}
+  f(x) \rightsquigarrow \sum\limits_{k=-\infty}^{\infty}\label{FOU_FORM_010} 
+c_k e^{jkx}.
+\end{equation}}\\~\\
+\nit F\"ur die {\bf komplexen Fourier-Koeffizienten} $c_k$ ergibt sich folgende
+Formel mit $(k \in \mathbb{Z})$
+\begin{equation}
+c_k = \frac {1} {2\pi} \int\limits_0^{2\pi}f(x)e^{-jkx}dx = 
+  \begin{cases}
+    \frac{a_0}{2} & \mbox{ f"ur } k = 0,\\
+    \frac{1}{2}(a_k-jb_k) & \mbox{ f"ur } k > 0,\\
+    \frac{1}{2}(a_{-k} + jb_{-k}) & \mbox{ f"ur } k < 0,\\
+  \end{cases}\label{Fourier_ck}
+\end{equation} 
+beziehungsweise $a_k = c_{k} + c_{-k}$ und $b_k = j(c_{k} - c_{-k})$.
+
+
+
+\vspace*{-6mm}\bsp{Die Fourier-Reihe einer reinen Sinusschwingung $A_0\sin(\omega_0 t)$}
+Der einzige Faktor ist $b_1$, wobei $b_1=A_0$. Somit ist $d_1=A_0$ und $\phi_1=0$, sowie $c_1=-j\frac{A_0}{2}$ und  $c_{-1}=j\frac{A_0}{2}$. 
+
+\clearpage
+\subsubsection{Symmetrieverh"altnisse\index{Symmetrieverhaltnisse@{Symmetrieverh\"altnisse}} bei der Zeitfunktion {\boldmath $f(x)$}}
+Ist die Funktion $f(x)$ {\bf gerade}\index{gerade Funktion}, d.h. $f(x)=f(-x)$ so gibt es keine
+Sinusglieder, d.h.\\~\\
+\myboxx{\begin{equation}
+   a_k = \frac{2}{\pi}\int\limits_0^{\pi} f(x)\cos\klam{kx}dx;\quad b_k = 0.\label{FOU_FORm_SYM1}
+\end{equation}}\\~~\\
+Bei {\bf ungeraden Funktionen}\index{ungerade!Funktion} ist $f(x)=-f(-x)$ und es ergibt sich eine Fourier-Reihe ohne Cosinusglieder und ohne ``Gleichstromanteil''\index{Gleichstromanteil} ($\frac{a_0}{2}=0$):\\~\\
+\myboxx{\begin{equation}
+   b_k = \frac{2}{\pi}\int\limits_0^{\pi} f(x)\sin\klam{kx}dx;\quad a_k = 0.\label{FOU_FORm_SYM2}
+\end{equation}}\vspace*{-3mm}
+\bsp{Gerade und ungerade Funktion}
+\begin{figure}[htb]
+\begin{center}
+  \bild{/fourier/FOU4.fig.eps,width=0.55}
+\end{center}
+\vspace*{-6mm}
+\end{figure}\\
+\nit Haben die {\bf Halbperioden}\index{Periode!Halb-} die gleiche Form und sind
+sie in der gleichen Lage zur $x$-Achse $f(x)=f(x+\pi)$, so gibt es nur
+Glieder mit geraden Argumenten, d.h.  $a_{2k+1}=0, b_{2k+1}=0$. Ist
+aber nur die Form gleich, aber die Lage zur $x$-Achse verschieden, also
+$f(x)=-f(x+\pi)$, so gibt
+es nur Glieder mit ungeraden Argumenten, also $a_{2k}=0, b_{2k}=0$.
+\bsp{Form von Halbperioden}
+\begin{figure}[htb]
+\begin{center}\vspace*{-4mm}
+  \hspace*{-5cm}\bild{/fourier/FOU5.fig.eps,width=0.55}
+\end{center}
+\vspace*{-6mm}
+\end{figure}
+
+
+\newpage
+\vspace*{-12mm}
+\bsp{Fourier-Reihe der Rechteckfolge mit verschiedenen Tastverh\"altnissen $\frac{t_1}{T}$: $\frac{t_1}{T}=\frac{1}{2}$, $\frac{t_1}{T}=\frac{1}{4}$ und $\frac{t_1}{T}=\frac{1}{8}$.}\index{Tastverhaltnis@Tastverh\"altnis}
+\begin{figure}[htb] % xfig fou002.fig
+\vspace*{-12mm}\begin{center}
+  \bild{/fourier/FOU003.ps,width=0.38}
+\end{center}
+\vspace*{-7mm}
+\end{figure}\\
+Der Gleichstromanteil\index{Gleichstromanteil} $\frac{a_0}{2}$ der Funktion $x(t)$ ist $A\frac{t_1}{T}$,
+\begin{equation*}
+\frac{a_0}{2}=\frac{1}{T}\int_{-t_1/2}^{t_1/2}A~dt=\left .\frac{At}{T}\right |_{-t_1/2}^{t_1/2}=A\frac{t_1}{T}.
+\end{equation*}
+Da $f(t)$ eine {\bf gerade Funktion}\index{Funktion!gerade} ist, gibt es keine Sinuskomponenten, d.h., $b_k=0$. F\"ur die Cosinusfaktoren $a_k$ erhalten wir ($k\in\mathbb{N}$):
+\begin{equation*}
+a_k=\frac{2}{T}\int\limits_{-t_1/2}^{t_1/2}A\cos\klam{\frac{2\pi k}{T}t}dt=\left .\frac{2AT}{2\pi T k}\sin\klam{\frac{2\pi k}{T}t}\right |_{-t_1/2}^{t_1/2}=\frac{2A}{\pi k}\sin\klam{\frac{\pi t_1}{T}k}.
+\end{equation*}
+\begin{figure}[htb] % matlab FOU_011.m
+\vspace*{-9mm}\begin{center}
+  \bild{/fourier/FOU011.eps,width=0.9}
+\end{center}\vspace*{-14mm}\caption{Koeffizienten der Cosinusschwingungen f\"ur eine Rechteckfunktion mit Amplitude $A=1$ f\"ur verschieden Tastverh\"altnisse $\frac{t_1}{T}$}\label{FOU_ABB_TAST}
+\vspace*{-3mm}
+\end{figure}\\
+\nit Aus der Abbildung~\ref{FOU_ABB_TAST} sowie der Formel f"ur $a_k$ sieht man, dass f"ur ganzzahlige Verh"altnisse $\frac{T}{t_1}=n\in\mathbb{N}$, die $n.$ Harmonische (und Vielfache davon) verschwindet.\index{Harmonische} 
+
+\newpage
+\vspace*{-11mm}
+\bsp{Fourier-Reihen und Linienspektren}\index{Linienspektrum}\index{Fourier!-Reihe}\\
+\nit Die Fourier-Reihe von $f(t)=\left \{ \begin{array}{ll}    
+e^{\alpha t} & \text{f"ur } 0 \leq t<T~~(0<\alpha,T\in\mathbb{R})\\
+f(t+T)=f(t) & \forall t
+\end{array}\right .
+$ l"asst sich mit der komplexen Fourier-Reihe einfach bestimmen (wegen dem Exponentialverhalten von $f(t)$).
+\begin{equation*}
+c_k=\frac{1}{T}\int\limits_{0}^{T}f(t)e^{-j\frac{2\pi k}{T}t}dt=\frac{1}{T}\int\limits_{0}^{T}e^{\alpha t}e^{-j\frac{2\pi k}{T}t}dt=\left.\frac{e^{\klam{\alpha-j\frac{2\pi k}{T}}t}} {T\klam{\alpha -j\frac{2\pi k}{T}}}\right |_{0}^{T} =\frac{e^{\alpha T}-1}{T\klam{\alpha -j\frac{2\pi k}{T} }}
+\end{equation*}
+\begin{figure}[htb] % linienspektrum.m
+\vspace*{-5mm}\begin{center}
+  \bild{/fourier/spektren_bsp_exp.eps,width=0.95}
+\end{center}\vspace*{-4mm}\caption{Funktion $f(t)$ und deren Approximation mit den $c_k$ f"ur $k=-11,~-10,~\ldots,~10,11$}
+\vspace*{-3mm}
+\end{figure}\\
+\nit Mit den Formeln~\ref{Fourier_ck} und \ref{FOU_FORM_dk} erhalten wir $(0\leq k\in\mathbb{N})$ die Werte der Sinus-, der Cosinus-, der Betrags- und Phasenwerte:\\
+\begin{eqnarray*} 
+a_k  &=& c_k+c_{-k}=  \frac{e^{\alpha T}-1}{T(\alpha -j\frac{2\pi k}{T})}+\frac{e^{\alpha T}-1}{T(\alpha +j\frac{2\pi k}{T})}=\frac{2\alpha}{T}\cdot \frac{e^{\alpha T}-1}{\alpha^2+\klam{\frac{2\pi k}{T}}^2}\\
+b_k  &=& j(c_k-c_{-k})=  j\frac{e^{\alpha T}-1}{T(\alpha -j\frac{2\pi k}{T})}-j\frac{e^{\alpha T}-1}{T(\alpha +j\frac{2\pi k}{T} )}=\frac{-2\frac{2\pi k}{T}}{T}\cdot \frac{e^{\alpha T}-1}{\alpha^2+\klam{\frac{2\pi k}{T}}^2}\\
+d_k & = & \sqrt{a_k^2+b_k^2}=\frac{2\klam{e^{\alpha T}-1}}{T\sqrt{\alpha^2+\klam{\frac{2\pi k}{T}}^2}};~~~~\phi_k=-\arctan\klam{\frac{b_k}{a_k}}=\arctan\klam{\frac{\frac{2\pi k}{T} }{ \alpha}}
+\end{eqnarray*} 
+Mit $\alpha=2$ und $T=3$~s erhalten wir folgende vier Spektren:\\
+
+\begin{figure}[htb]
+\hspace*{-7cm}\vspace*{9mm}
+\begin{center}
+\bild{/fourier/spektren.eps,width=1.1}
+\end{center}
+\vspace*{-4mm}\caption{Vier verschiedene spektrale Darstellungsm"oglichkeiten mittels Liniendiagramm f"ur die Funktion $f(t)=e^{\alpha t}$ $0\leq t < T$  und $f(t+T)=f(t)~\forall~t$ mit $\alpha=2$ und $T=3$~s.}
+\end{figure}
+
+\clearpage
+
+
+\newpage
+\vspace*{-10mm}
+\bsp{Fourier-Reihe der Autokorrelationsfunktion $\varphi_{xx}(\tau)$ der Funktion $x(t)$:}\label{FOU_BSP_AUTO}\\
+\nit Die komplexe Fourier-Reihe\index{Fourier!Reihe@{-Reihe}!komplex} einer $T_0$-periodischen Funktion $x(t)$ ist per Definition (Formel~\ref{FOU_FORM_010}):
+\begin{equation*}
+   x(t) = \sum_{k=-\infty}^{\infty}c_k e^{j\frac{2\pi k}{T_0}t}.
+\end{equation*}
+Die Autokorrelationsfunktion\index{Autokorrelationsfunktion} $\varphi_{xx}(\tau)$ is gem\"ass Formel~\ref{SIG_FORM_AUTO}:
+\begin{equation*}
+\varphi_{xx}(\tau) = \frac {1} {T_0} \int\limits_{-T_0/2}^{T_0/2} x(t)x(t-\tau)dt = \frac {1} {T_0} \int\limits_{-T_0/2}^{T_0/2}\klam{\sum_{k=-\infty}^{\infty}c_k e^{j\frac{2\pi k}{T_0}t}}\klam{\sum_{l=-\infty}^{\infty}c_l e^{j\frac{2\pi l}{T_0}(t-\tau)}}dt.
+\end{equation*}
+Man kann durch Umformung zeigen \cite{TAU:SCH:71, WEI:89}, dass
+\begin{equation}
+\varphi_{xx}(\tau) = \!\!\! \sum_{k=-\infty}^{\infty}c_k c_{-k} e^{-j\frac{2\pi k}{T_0}\tau}=\!\!\! \sum_{k=-\infty}^{\infty}|c_k|^2 e^{-j\frac{2\pi k}{T_0}\tau}=|c_0|^2+2\cdot  \! \sum_{k=1}^{\infty}|c_k|^2\cos\klam{\frac{2\pi k}{T_0}\tau}. \label{FOU_FORM_LEISTUNG}
+\end{equation}
+Somit erkennt man, dass $\varphi_{xx}(\tau)=\varphi_{xx}(-\tau)$, d.h. $\varphi_{xx}(\tau)$ ist eine {\bf gerade Funktion}\index{gerade Funktion} (keine Sinusterme). Es ist $\varphi_{xx}(0)\geq |\varphi_{xx}(\tau)|$, ferner gilt, dass $\varphi_{xx}(\tau)$ und $x(t)$ die gleiche Periode $T_0$ haben. 
+%$\varphi_{xy}(\tau)$ ?????
+\aufg
+Best"attigen Sie das Resultat von Beispiel \ref{KAP_FOURIER}.\ref{FOU_BSP_AUTO} mit den Korrespondenzen:\\
+\begin{eqnarray*}
+x(t)=\frac{a_0}{2}& \Longrightarrow & \varphi_{xx}(\tau)=\klam{\frac{a_0}{2}}^2\\
+x(t)=a_k\cos(kt) & \Longrightarrow & \varphi_{xx}(\tau)=\frac{a_k^2}{2}\cos(\tau k)\\
+x(t)=b_k\sin(kt) & \Longrightarrow & \varphi_{xx}(\tau)=\frac{b_k^2}{2}\cos(\tau k)\\
+ & \text{und} & \\
+x(t) & = &\frac{a_0}{2}+\sum_{k=1}^{\infty}\klam{a_k\cos(kt)+b_k\sin(kt)} 
+\end{eqnarray*}
+
+\subsubsection{Leistung}\index{Leistung}
+Mit den Orthogonalit"atsrelationen\index{Orthogonalitatsrelationen@Orthogonalit\"atsrelationen} (\ref{FOU_ORT_1}-\ref{FOU_ORT_3}) oder direkt aus der Formel~\ref{FOU_FORM_LEISTUNG} folgt:\\~~\\
+\myboxx{\begin{equation}
+X^2=|c_0|^2+2\cdot \sum_{k=1}^{\infty}|c_k|^2=\klam{\frac{a_0}{2}}^2+\sum_{k=1}^{\infty}\frac{a_k^2+b_k^2}{2}=\klam{\frac{a_0}{2}}^2+\sum_{k=1}^{\infty}\frac{d_k^2}{2}
+\end{equation}}
+
+\newpage
+\section {Fourier-Integral\index{Fourier!Integral@{-Integral}} -- Fourier-Transformation\index{Fourier!Transformation@{-Transformation}}}
+Mit {\bf Fourier-Reihen} kann man periodische Funktionen
+durch eine Summe von trigonometrischen Funktionen (Sinus- und
+Cosinusfunktionen) approximieren und mit einem sogenannten {\bf
+  Linienspektrum}\index{Linienspektrum} darstellen. In der Praxis
+treten jedoch viele Vorg"ange auf, die nicht periodisch sind. Die
+Analyse nichtperiodischer Funktionen, z.B.  einmaliger Impulse f"uhrt
+auf ein {\bf kontinuierliches Spektrum}, das alle Frequenzen zwischen
+$0$ und $\infty$ enth"alt. Anstelle der trigonometrischen Summe der
+Fourier-Reihe tritt ein Integral, das {\bf Fourier-Integral}, das sich "uber
+alle Frequenzen von $0$ bis $\infty$ erstreckt. \\ Wir werden hier
+keine Herleitung des Fourier-Integrales aus der Fourier-Reihe machen,
+sondern die Resultate angeben. Im Prinzip f"uhrt man einen
+Grenz"ubergang durch und l"asst $T/2$ gegen $\infty$ streben. Damit
+erh"alt man eine analoge Beziehung wie bei den Fourier-Reihen:
+\begin{equation*}
+ f(t)= \int\limits_0^{\infty} \left [ a(y)\cos(yt) + b(y)\sin(yt) \right ] dy,
+\end{equation*}
+wobei
+\begin{equation*}
+  a(y)= \frac{1}{\pi}\int\limits_{-\infty}^{\infty} f(t)\cos(yt)dt
+  \qquad \mbox{ und } \qquad b(y)=
+  \frac{1}{\pi}\int\limits_{-\infty}^{\infty} f(t)\sin(yt)dt.
+\end{equation*}
+Anstelle des Summenzeichens bei der Fourier-Reihe tritt beim
+Fourier-Integral das Integralzeichen, der ganzzahlige Parameter $n$
+ist durch die stetige Ver"anderliche $y$ ersetzt. Somit wird die
+Funktion $f(t)$ als Integral "uber eine stetige Schar von
+trigonometrischen Funktionen dargestellt. Soll das Spektrum der
+Funktion $f(t)$ als {\bf Betrag}\index{Betrag} $d(y)$ und {\bf Phase}\index{Phase} $\phi(y)$
+gezeichnet werden, so verwendet man:
+\begin{equation*}
+d(y)= \sqrt{ a^2(y) + b^2(y)},~\phi(y) = -\arctan\klam{\frac{b(y)}{a(y)}}+n\pi\text{~und~}f(t)= \int\limits_0^{\infty} d(y)cos(yt+\phi(y)) dy.
+\end{equation*}
+$d(y)$ ist dabei von $y=n\omega$ (Frequenz) abh"angig. $y$ kann Werte
+von $0$ bis $\infty$ annehmen. Dadurch ergibt sich ein {\bf
+  kontinuierliches Spektrum}\index{Spektrum!kontinuierliches} im
+Gegensatz zum {\bf Linienspektrum}\index{Linienspektrum} bei der
+Fourier-Reihe. Ebenso wie die Fourier-Reihe kann auch das
+Fourier-Integral in der komplexen Form dargestellt werden.
+\begin{eqnarray*}
+  \mbox{Spektralfunktion\index{Spektralfunktion}, Bildbereich\index{Bildbereich}:}\quad \Psi(y) & = & \int\limits_{-\infty}^{\infty}f(t)e^{-jyt}dt \\
+  \mbox{Zeitfunktion\index{Zeitfunktion}, Originalbereich\index{Originalbereich}:}\quad f(t) & = & \frac{1}{2\pi}\int\limits_{-\infty}^{\infty}\Psi(y)e^{jyt}dy\\
+\end{eqnarray*}
+Das Spektrum der Zeitfunktion $f(t)$ wird dabei durch die
+Spektralfunktion $\Psi(y)$ dargestellt. Beide Formeln haben also den
+analogen Aufbau wie die Gleichungen bei der {\bf komplexen Form der
+Fourier-Reihe}. Es wird lediglich das Summenzeichen durch ein
+Integralzeichen ersetzt, und anstelle der Gr"ossen
+$n=1,2,3,\ldots$ tritt beim {\bf Fourier-Integral} die kontinuierlich
+ver"anderliche Gr"osse $y$.\\ Der "Ubergang zwischen $f(t)$ auf
+$\Psi(y)$ wird als {\bf Fourier-Transformation} bezeichnet. Wir werden die
+Spektralfunktion ab jetzt durch $F(j\omega)$ kennzeichnen. Somit ist
+die Fourier-Transformierte von $f(t)$ definiert durch\\~\\
+\myboxx{
+\begin{equation}
+  F(j\omega) = \int\limits_{-\infty}^{\infty} f(t)e^{-j\omega
+    t}dt\label{equ:FOU:1}
+\end{equation}}\\~\\
+und \\~~\\
+\myboxx{
+\begin{equation}
+  f(t) =  \frac{1}{2\pi}\int\limits_{-\infty}^{\infty} F(j\omega)e^{j\omega t}d\omega.\label{equ:FOU:2} 
+\end{equation}}
+
+\bsp{}
+Gesucht ist die  Fourier-Transformierte $F(j\omega)$ von $f(t)$, wenn  $f(t)=p_a(t).$
+\begin{equation*}
+  F(j\omega) = \!\!\int\limits_{-\infty}^{\infty} f(t)e^{-j\omega
+    t}dt = \!\!\int\limits_{-a}^a e^{-j\omega t}dt = \left. \frac{ e^{-j\omega t}}{-j\omega}\right |_{-a}^a \!\!\!\!\!\!= \frac{e^{-j\omega a}-e^{j\omega a}}{-j\omega} = 2\cdot \frac{\sin(\omega a)}{\omega}=2 \cdot sinc_a(\omega)
+\end{equation*}~\\
+\begin{figure}[htb]% matlab FOUbsp1.m
+\vspace*{-12mm}\hspace*{-1.1cm}
+  \bild{/fourier/FOUbsp1.eps,width=1.1}\vspace*{-4mm}\caption{Zeitsignal $f(t)=p_a(t)$ $(a=3)$ und Fourier-Transformierte $F(j\omega)$}\label{FOU_bild_FT_recht_sinc}
+\vspace*{-6mm}
+\end{figure}
+\aufg
+$f(t)=A\cdot e^{-at}\cdot u(t)$ mit $0 < a,A \in \mathbb{R}$. Berechnen Sie 
+$F(j\omega) \IFT f(t)$.
+\bsp{Fourier-Transformierte\index{Fourier!Transformierte@{-Transformierte}} von $\delta (t)$}
+\begin{equation*}
+\delta (t) \FT \int\limits_{-\infty}^{\infty}\delta (t) e^{-j\omega t} dt = e^{-j\omega 0} =1
+\end{equation*}
+Das bedeutet, dass der Impuls\index{Impuls} $\delta (t)$ im
+Frequenzbereich \"uber alle Frequenzen mit der {\bf
+  Amplitude}\index{Amplitude} 1 und {\bf Phase}\index{Phase} 0
+vorhanden ist.  
+
+\newpage
+\subsection{Das Bandbreitentheorem\index{Bandbreitentheorem}}
+Falls die Werte einer Funktion $f(t)$ ausserhalb eines Bereiches
+$(t_1,t_2)$ vernachl"assigbar sind, dann ist die L"ange dieses
+Intervalls $\Delta t=t_2-t_1$ die effektive L"ange von $f(t)$.
+Umgekehrt, wenn die Fourier-Transformierte ausserhalb einer {\bf Bandbreite}
+$\Delta\omega=\omega_2-\omega_1$ vernachl"assigbar ist, so ist
+$\Delta\omega$ die {\bf effektive Bandbreite}. Die Essenz des
+Bandbreitentheorems ist, dass\\~\\
+\myboxx{\begin{equation*}
+  \Delta\omega\cdot\Delta t\geq \gamma.
+\end{equation*}}\\~\\
+$\gamma$ h"angt von der Art der Zeitfunktion ab und liegt im Bereich
+von 1 und ist immer gr"osser oder gleich $1/2$. Das Bandbreitentheorem
+sagt, dass es nicht m"oglich ist, eine Funktion zu finden, die je eine
+beliebig kleine Bandbreite und ein beliebig kleines Zeitintervall
+aufweist \cite{POU:96}. Weil die {\bf Heisenbergsche
+  Unsch"arferelation}\index{Unscharferelation@{Unsch\"arferelation}!Heisenbergsche}
+der Quantenmechanik die Basis f\"ur das {\bf Bandbreitentheorem} ist,
+wird das Bandbreitentheorem auch oft die Unsch"arferelation der {\bf
+  Frequenzanalyse} genannt.
+\subsection{Konvergenzgeschwindigkeit\index{Konvergenz!-geschwindigkeit}}
+Die {\bf Konvergenzgeschwindigkeit}, d.h. das Abfallen gegen $0$ von $f(t)$
+oder $F(j\omega)$, folgt direkt vom Bandbreitentheorem. Salopp ausgedr"uckt gilt: Je glatter eine Funktion $f(t)$ ist, desto schneller f"allt ihre Fourier-Transformierte $F(j\omega)$ ab, und umgekehrt. Besonders langsam fallen die Transformierten von unstetigen Funktionen ab.\\
+\bsp{Konvergenzverhalten einiger spezieller Funktionen}\index{Konvergenz}
+\begin{table}[!htb]
+\vspace*{-4mm}\begin{center}
+\begin{tabular}{|c|l||c||l|c|} \hline
+\hspace*{4mm}& $f(t)$ & \FT & $F(j\omega)$ &\hspace*{4mm}\\ \hline\hline
+& 1: & & $2\pi\cdot\delta(\omega)$: &\\
+& Superglatt!& &F"allt $\infty$-schnell ab!& \\
+& Konvergiert nicht!&  &Extrem unstetig! &\\ \cline{2-4}
+& $e^{-\alpha t^2}$: & & $\sqrt{\frac{\pi}{\alpha}}e^{\frac{-\omega^2}{4\alpha}}$:&\\
+& Glatt. & & F"allt mit $\frac{1}{e^{\omega^2}}$ ab.&\\
+& F"allt mit $\frac{1}{e^{t^2}}$ ab. & & Glatt.&\\ \cline{2-4}
+& $\Lambda_{\alpha}(t)$:  & & $\frac{4}{\alpha}\cdot\frac{\klam{\sin\klam{\frac{\alpha\omega}{2}}}^2}{\omega^2}$:&\\
+& Eckig, aber stetig! & &  F"allt mit $\frac{1}{\omega^2}$ ab.&\\ 
+& Ist nach $\alpha$ schon Null! & & &\\ \cline{2-4}
+& $p_{\alpha}(t)$:  & & $2\cdot\frac{\sin(\alpha\omega)}{\omega}$: &\\
+& Eckig und unstetig! & &  F"allt mit $\frac{1}{\omega}$ ab.&\\
+& Ist nach $\alpha$ schon Null! & & &\\ \cline{2-4}
+& $\delta(t)$:  & & 1: &\\
+& Extrem unstetig! & & Konvergiert nicht!&\\
+\hspace*{2mm}\begin{rotate}{90}%
+      \hspace*{0.2cm} {\bf Konvergenz langsamer $\rightarrow$}%
+    \end{rotate}  & F"allt $\infty$-schnell ab! & & Superglatt!&
+\hspace*{2mm}\begin{rotate}{90}%
+      \hspace*{0.2cm} {\bf Konvergenz schneller $\rightarrow$}%
+    \end{rotate} \\ \hline
+\end{tabular}\vspace*{-1mm}\caption{Konvergenzverhalten im Zeit- und Frequenzbereich}
+\end{center}
+\vspace*{-6mm}
+\end{table}\\
+
+\newpage
+\subsection{Wichtige Eigenschaften der Fourier-Transformation}
+Wir gehen von den Fourier-Transformationspaaren $h(t) \FT H(j\omega)$
+und $g(t) \FT G(j\omega)$ aus, wobei $h(t)$ und $g(t)$ zwei beliebige
+(fouriertransformierbare\footnote{Siehe Kapitel~\ref{FRE_KAP_EXISTENZ}
+  f\"ur die Definition, was eine fouriertransformierbare Funktion
+  ist.}) Zeitfunktionen sind. Das
+Doetsch-Symbol\index{Doetsch!Symbol@{-Symbol}} $\FT$ verwenden wir um
+den Zusammenhang zwischen Zeit- und Frequenzbereich aufzuzeigen
+\cite{HEN:JEL:87}. Der ausgef\"ullte Punkt im Doetsch-Symbol bezeichnet den Bildbereich\index{Bildbereich} (Frequenzbereich). Wir werden $\FT$ f\"ur die Fourier- als auch die Laplace-Transformation verwenden.
+\subsubsection{Eigenschaften von Signalformen: Zeitbereich $\Longleftrightarrow$ Frequenzbereich}
+\begin{table}[!htb]
+\vspace*{-5mm}\begin{center}\begin{tabular}{|rcl|}\hline
+ Zeitbereich & $\FT$ & Frequenzbereich\\ \hline\hline
+$f(t)$ gerade                  & $\FT$ & $F(j\omega)$ gerade\\\hline
+$f(t)$ reell und gerade        & $\FT$ & $F(j\omega)$ reell und gerade\\\hline
+$f(t)$ imagin"ar und gerade   & $\FT$ & $F(j\omega)$ imagin"ar und gerade\\\hline
+$f(t)$ ungerade                & $\FT$ & $F(j\omega)$ ungerade\\\hline
+$f(t)$ reell und ungerade       & $\FT$ & $F(j\omega)$ imagin"ar und ungerade\\\hline
+$f(t)$ imagin"ar und ungerade & $\FT$ & $F(j\omega)$ reell und ungerade\\\hline
+$f(t)$ (zeit)kontinuierlich & $\FT$ & $F(j\omega)$ nicht periodisch\\\hline
+$f(t)$ (zeit)diskret & $\FT$ & $F(j\omega)$  periodisch\\\hline
+$f(t)$ periodisch & $\FT$ & $F(j\omega)$  (frequenz)diskret\\\hline
+$f(t)$ nicht periodisch & $\FT$ & $F(j\omega)$  (frequenz)kontinuierlich\\\hline
+\end{tabular}\vspace*{-1mm}\caption{Eigenschaften von Signalformen \cite{KIE:JAE:05, POU:96}}
+\end{center}
+\vspace*{-6mm}
+\end{table}
+\vspace*{-6mm}
+
+\subsubsection{Linearit"at}\index{Linearitat@{Linearit\"at}}
+\myboxx{
+\begin{equation}
+  \alpha\cdot f(t) + \beta\cdot g(t) \FT \alpha\cdot F(j\omega) + \beta\cdot G(j\omega)
+\end{equation}}
+\subsubsection{Parseval's Theorem\index{Theorem!Parseval's}}
+\myboxx{
+\begin{equation}
+  \int\limits_{-\infty}^{\infty}f(t)g^{\ast}(t)dt = \frac{1}{2\pi}
+  \int\limits_{-\infty}^{\infty}F(j\omega)G^{\ast}(j\omega)d\omega\label{FOU_FORM_PARSE}
+\end{equation}}
+\subsubsection{Bessel's Theorem\index{Theorem!Bessel's} (Rayleigh's Theorem\index{Theorem!Rayleigh's } \cite{ZIE:TRA:76})}
+\myboxx{
+\begin{equation}
+  \int\limits_{-\infty}^{\infty}|f(t)|^2 dt = \frac{1}{2\pi}
+  \int\limits_{-\infty}^{\infty}|F(j\omega)|^2 d\omega\label{equ:FOU:3}
+\end{equation}}
+\bsp{Bessel's Theorem\index{Theorem!Bessel's} (Rayleigh's Theorem\index{Theorem!Rayleigh's })}
+Gesucht ist $\int\limits_{-\infty}^{\infty}\left | \frac{\sin(\alpha\omega)}{\omega}\right |^2 d\omega$.\\ Mit $p_{\alpha}(t)\FT \frac{2}{\omega}\sin(\alpha\omega)$ folgt: $\int\limits_{-\infty}^{\infty}\left | \frac{\sin(\alpha\omega)}{\omega}\right |^2 d\omega=2\pi\cdot\int\limits_{-\infty}^{\infty}\left | \frac{p_{\alpha}(t)}{2}\right |^2 dt=\frac{\pi}{2}\int\limits_{-\alpha}^{\alpha}dt=\alpha\pi.$
+\subsubsection{"Ahnlichkeit}\index{Ahnlichkeit@{\"Ahnlichkeit}}
+\myboxx{
+\begin{equation}
+  f(\alpha t) \FT \frac{1}{|\alpha|}F \left (j\frac{\omega}{\alpha} \right ) \quad\alpha \in\mathbb{R}\setminus \{0\}\label{FRE_EQU_AEH}
+\end{equation}}\\~\\
+\vspace*{-8mm}\subsubsection{Verschiebung im Zeitbereich}\index{Verschiebung!im Zeitbereich}
+\myboxx{
+\begin{equation}
+  f(t\pm t_0) \FT F(j\omega)e^{\pm j\omega t_0}
+\end{equation}}\\~~\\
+Beweis: 
+\begin{eqnarray*}
+\int\limits_{-\infty}^{\infty}f(t\pm t_0)e^{-j\omega t} dt& = & ?\\
+\int\limits_{-\infty}^{\infty}f(t\pm t_0)e^{-j\omega (t\pm t_0)} dt& = & ? \cdot e^{\mp j\omega t_0} \\
+\text{mit  } t'=t\pm t_0 & & -\infty \longrightarrow -\infty \\
+\text{und  } \partial t'=\partial t & & +\infty \longrightarrow +\infty \\
+\int\limits_{-\infty}^{\infty}f(t')e^{-j\omega t'}dt' & = & F(j\omega)=~? \cdot e^{\mp j\omega t_0} \\
+&\longrightarrow & ?=F(j\omega)\cdot e^{\pm j\omega t_0}=\int\limits_{-\infty}^{\infty}f(t\pm t_0)e^{-j\omega t} dt 
+\end{eqnarray*}
+\subsubsection{Verschiebung im Frequenzbereich}\index{Verschiebung!im Frequenzbereich}
+\myboxx{
+\begin{equation}
+  f(t)e^{\pm j\omega_0 t} \FT F(j(\omega\mp\omega_0))\label{FOU_FORM_VF}
+\end{equation}}
+\bsp{Verschiebung im Frequenzbereich}
+Gesucht ist die Fourier-Transformierte von $\cos\klam{\omega_o t}$. Mit $\frac{1}{2}\FT\pi\delta(\omega)$ wird:
+\begin{equation*}
+  \cos\klam{\omega_0 t}=\frac{e^{j\omega_0 t}+e^{-j\omega_0 t}}{2}\FT \pi\delta(\omega-\omega_0)+\pi\delta(\omega+\omega_0)
+\end{equation*}
+\subsubsection{Ableitung im Zeitbereich}\index{Ableitung!im Zeitbereich}
+\myboxx{
+\begin{equation}
+  \frac{\partial^n f(t)}{\partial t^n} \FT (j\omega)^n F(j\omega)
+\end{equation}}
+\newpage
+\vspace*{-10mm}\bsp{Ableitung im Zeitbereich} 
+Es ist $f(t)=\Lambda_{\alpha}(t)$
+$(\alpha>0)$. Gesucht ist die Fourier-Transformierte von $f(t)$.
+\begin{eqnarray*}
+  \frac{\partial f(t)}{\partial t} &=& \frac{1}{\alpha} u(t+\alpha) - \frac{2}{\alpha} u(t) + \frac{1}{\alpha} u(t-\alpha)\\
+ \frac{\partial^2 f(t)}{\partial t^2} &=& \frac{1}{\alpha} \delta(t+\alpha) - \frac{2}{\alpha} \delta(t) + \frac{1}{\alpha} \delta(t-\alpha)\\
+\frac{\partial^2 f(t)}{\partial t^2} &\FT& \frac{1}{\alpha}e^{j\omega\alpha} - \frac{2}{\alpha}  + \frac{1}{\alpha} e^{-j\omega\alpha}=\frac{1}{\alpha}\klam{e^{j\omega\alpha/2}-e^{-j\omega\alpha/2}}^2=\frac{-4}{\alpha}\klam{\sin\klam{\frac{\omega\alpha}{2}}}^2\\
+f(t) & \FT & \frac{1}{(j\omega)^2}\cdot\frac{-4}{\alpha}\klam{\sin\klam{\frac{\omega\alpha}{2}}}^2= \frac{4}{\alpha\omega^2}\klam{\sin\klam{\frac{\omega\alpha}{2}}}^2\\
+f(t)=\Lambda_{\alpha}(t) & \FT & \alpha\cdot sinc^2\klam{\frac{\omega\alpha}{2}}
+\end{eqnarray*}
+
+\subsubsection{Ableitung im Frequenzbereich}\index{Ableitung!im Frequenzbereich}
+\myboxx{
+\begin{equation}
+  t^n f(t) \FT j^n \frac{\partial F(j\omega)}{\partial \omega^n}
+\end{equation}}
+\subsubsection{Faltung im Zeitbereich (Multiplikation im Frequenzbereich)}\index{Faltung!im Zeitbereich}
+\myboxx{
+\begin{equation}
+ f(t) \ast g(t) = \int\limits_{-\infty}^{\infty} f(\tau)g(t-\tau)d\tau \FT F(j\omega) \cdot G(j\omega)
+\end{equation}}
+\subsubsection{Faltung im Frequenzbereich (Multiplikation im Zeitbereich)}
+\myboxx{
+\begin{equation}
+ f(t) \cdot g(t) \FT \frac{1}{2\pi}F(j\omega) \ast G(j\omega)
+\end{equation}}
+\subsubsection{Vertauschungssatz (Dualit"at)}\index{Vertauschungssatz}\index{Dualitat@ {Dualit\"at}}
+\myboxx{
+\begin{eqnarray}
+ f(t) & \FT & F(j\omega)\nonumber \\
+ F(t) & \FT & 2\pi \cdot f(-j\omega)
+\end{eqnarray}}\\
+\bsp{Vertauschungssatz} Gesucht ist die Fourier-Transformierte von
+$\frac{1}{\alpha^2+t^2}$.\\ Mit $e^{-\alpha|t|}\FT
+\frac{2\alpha}{\alpha^2+\omega^2}$ folgt $\frac{1}{\alpha^2+t^2}\FT
+2\pi\cdot\frac{1}{2\alpha}e^{-\alpha|\omega|}=\frac{\pi}{\alpha}e^{-\alpha|\omega|}$.
+\subsubsection{Modulation}\index{Modulation}
+\myboxx{
+\begin{eqnarray}
+ \cos(\alpha t) \cdot f(t) & \FT & \frac{1}{2}\cdot \left [  F(j(\omega-\alpha)) + F(j(\omega+\alpha))\right ] \\
+ \sin(\alpha t) \cdot f(t) & \FT &   \frac{1}{2j}\cdot \left  [ F(j(\omega-\alpha)) - F(j(\omega+\alpha))\right ]
+\end{eqnarray}}\\~~\\
+\matlogo~stellt die Funktionen {\tt fourier} und {\tt ifourier} (beide symbolisch) zur Verf"ugung.\index{matlab@{\matlogo}}\index{fourier@{\tt fourier}}\index{ifourier@{\tt ifourier}} 
+Mit \verb¦ syms t w a real¦ und \verb¦fourier(sin(a*t))¦ erhalten wir:\\
+\nit \verb¦ i*pi*(dirac(w+a)-dirac(w-a))¦.
+\subsubsection{Zeitumkehrung}\index{Zeitumkehrung}
+\myboxx{
+\begin{equation}
+ f(-t) \FT F(-j\omega)
+\end{equation}}\\~\\
+\nit Die Zeitumkehrungsformel folgt aus der
+\"Ahnlichkeitsformel~\ref{FRE_EQU_AEH}. 
+\subsubsection{Integration im Zeitbereich}\index{Integration}
+\myboxx{
+\begin{equation}
+ \int\limits_{-\infty}^{t}f(\tau)d\tau \FT \frac{F(j\omega)}{j\omega}+F(0)\pi\delta(\omega)
+\end{equation}}\\~\\
+\subsubsection{Anfangswerte}\index{Anfangswert}
+\myboxx{
+\begin{equation}
+ f(0)=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}F(j\omega)d\omega \hspace*{1cm} F(0)=\int\limits_{-\infty}^{\infty}f(t)dt 
+\end{equation}}\\~\\
+\subsubsection{Unendlich lange Folge von Dirac-Impulsen\index{Dirac!Impuls@{-Impuls}} im Zeit- und Frequenzbereich}
+\myboxx{
+\begin{equation}
+ \sum_{n=-\infty}^{\infty} \delta(t-n\cdot t_0) \FT \sum_{n=-\infty}^{\infty} \frac{2\pi}{t_0}\delta\klam{\omega-n\cdot \frac{2\pi}{t_0}}
+\end{equation}}\\~\\
+Der Zusammaenhang von unendlich langen Folgen von Dirac-Impulsen im Zeit- und Frequenzbereich wird viel bei periodischen Funktionen gebraucht.\\
+Weitere Zusammen\-h"ange
+zwischen Zeitfunktion und Spektralfunktion sind im
+Anhang~\ref{sec:FOU:anhang} aufgef"uhrt. 
+
+
+\newpage
+\subsection{Existenz des Fourier-Integrals\index{Fourier!Integral@{-Integral}!Existenz}}\label{FRE_KAP_EXISTENZ}
+Bis jetzt haben wir die {\bf G"ultigkeit} der Gleichungen~\ref{equ:FOU:1}
+und \ref{equ:FOU:2} nicht untersucht. Im Allgemeinen sind die
+Fourier-Transformierten und ihre Inversen f"ur die meisten Funktionen
+aus der technischen Praxis existent. Die Fourier-Transformation von $f(t)$ und die inverse  Fourier-Transformation existieren \cite{BRI:74, POU:96}, wenn:
+\newtheorem{bedingung}{Bedingung}
+\begin{DFrame}
+\begin{bedingung}
+\begin{equation}
+  \int\limits_{-\infty}^{\infty}|f(t)|dt<\infty.
+\end{equation}
+D.h., $f(t)$ ist absolut integrierbar\index{absolut integrierbar}.
+\end{bedingung}
+\end{DFrame}\\
+\noindent Man sollte beachten, dass die Bedingung~1 hinreichend, aber nicht
+notwendig ist. Es gibt Funktionen $f(t)$, die Bedingung~1 nicht
+erf"ullen und trotzdem fouriertransformierbar sind. Diese Funktionen werden mit Bedingungen~2~\&~3 erfasst.
+\begin{DFrame}
+\begin{bedingung}
+  $f(t)$ ist  fouriertransformierbar, wenn
+\begin{equation}
+  \int\limits_{-\infty}^{\infty}|F(j\omega)|d\omega<\infty.
+\end{equation}
+D.h., die Fourier-Transformation $F(j\omega)$ von $f(t)$ ist absolut
+integrierbar.
+\end{bedingung}
+\end{DFrame}
+oder
+\begin{DFrame}
+\begin{bedingung}
+  $f(t)$ ist fouriertransformierbar, wenn: $f(t)$ eine
+  Linearkombination von absolut integrierbaren Funktionen
+  $f_{i}(t)$ und von inversen Fourier-Transformation von
+  $F_{j}(j\omega)$, die selber absolut integrierbar sind, ist.
+\end{bedingung}
+\end{DFrame}\\
+\bsp{Bedingung 1}
+$f(t)=\delta(t)$, $\int\limits_{-\infty}^{\infty}|f(t)|dt=1\Rightarrow f(t)$ ist fouriertransformierbar! $F(j\omega)=1$\\
+\bsp{Bedingung 2}
+$f(t)=1$, Bedingung 1 nicht erf"ullt! $F(j\omega)=2\pi\delta(\omega),\int\limits_{-\infty}^{\infty}|F(j\omega)|d\omega=2\pi\Rightarrow f(t)$ ist fouriertransformierbar!\\
+\bsp{Bedingung 3} $f(t)=1+\delta(t)$, Bedingung 1~\&~2 nicht erf"ullt!
+$\delta(t)\FT 1$ erf"ullt Bed.~1, $1\FT 2\pi\delta(t)$ erf"ullt Bed.~2
+$\Rightarrow$ $f(t)$ erf"ullt Bed.~3, $\Rightarrow f(t)$ ist fouriertransformierbar! $F(j\omega)=2\pi\delta(\omega)+1$.
+\newpage
+\section{Autokorrelationsfunktion und Leistungsdichtespektrum}
+\index{Autokorrelationsfunktion}\index{Leistungsdichtespektrum}
+\subsection{Leistungsdichtespektrum}
+Die {\bf normierte Leistung}\index{Leistung!normierte} {\boldmath $P_n$} eines Leistungssignales\index{Leistungssignal} $f(t)$ kann mit der Hilfe des {\bf Leistungsdichtespektrums} beschrieben werden. Gem\"ass Formel~\ref{SIG_FORM_02} ist die normierte Leistung $P_n$\\
+\begin{equation*}
+ P_n= \lim\limits_{T\rightarrow\infty}\frac{1}{T}\int\limits_{-T/2}^{T/2} |f(t)|^2dt= \lim\limits_{T\rightarrow\infty}\frac{1}{T}\int\limits_{-\infty}^{\infty} |f(t)|^2dt.
+\end{equation*}
+Mit Hilfe von Parseval's Theorem (oder Bessel's Theorem) (Formeln~\ref{FOU_FORM_PARSE} und \ref{equ:FOU:3})
+\index{Parseval's!Theorem}\index{Bessel's!Theorem} folgt\\
+\begin{equation*}
+ P_n= \lim\limits_{T\rightarrow\infty}\frac{1}{T}\int\limits_{-T/2}^{T/2} |f(t)|^2dt= \frac{1}{2\pi}\int\limits_{-\infty}^{\infty}\klam{\lim\limits_{T\rightarrow\infty}\frac{|F(j\omega)|^2}{T} }d\omega,
+\end{equation*}
+wobei $F(j\omega)\IFT f(t)$ ein Fourier-Transformationspaar sind \cite{COU:97, WOS:88}. Der Integrand\index{Integrand} wird als {\bf Leistungsdichtespektrum}\index{Leistungsdichtespektrum} bezeichnet:\\~\\
+\myboxx{\begin{equation}
+ \Phi(j\omega)=\lim\limits_{T\rightarrow\infty}\frac{|F(j\omega)|^2}{T}.\label{FOU_FORM_LDS}
+\end{equation}}\\~\\
+Die normierte Leistung $P_n$ ist somit\\~\\ 
+\myboxx{\begin{equation}
+P_n=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}\Phi(j\omega)d\omega.
+\end{equation}}
+
+\subsection{Energiedichtespektrum}\index{Energiedichtespektrum}
+Analog zum Leistungsdichtespektrum l\"asst sich f\"ur ein {\bf Energiesignal}\index{Energiesignal} das {\bf Energiedichtespektrum} finden. Die Energie {\boldmath $W_n$} ist definiert  (gem\"ass Formel~\ref{SIG_FORM_01})
+\begin{equation*}
+W_n = \lim\limits_{T\rightarrow\infty}\int\limits_{-T/2}^{T/2} |f(t)|^2dt= \frac{1}{2\pi}\int\limits_{-\infty}^{\infty} |F(j\omega)|^2dt.
+\end{equation*}
+Dies entspricht dem {\bf Parseval's
+  Theorem}\index{Parseval's!Theorem}.  $F(j\omega)\IFT f(t)$ sind ein
+Fourier-Trans\-formations\-paar. Das {\bf Energiedichtespektrum}\index{Energiedichtespektrum} ist somit \cite{WEI:89}\\~\\
+\myboxx{\begin{equation}
+ E(j\omega)=|F(j\omega)|^2.
+\end{equation}}
+\subsection{Wiener-Chintchine Theorem}\index{Wiener-Chintchine!Theorem}\index{Theorem!Wiener-Chintchine}
+Es kann gezeigt werden \cite{COU:97, HSU:03}, dass f\"ur {\bf Leistungssignale}\index{Leistungssignal}
+die {\bf Autokorrelationsfunktion} und das {\bf Leistungsdichtespektrum} ein
+{\bf Fourier-\-Trans\-formations\-paar} sind
+($\varphi_{xx}(t)\FT\Phi(j\omega)$).\\~\\
+\myboxx{\begin{equation}
+ \varphi_{xx}(t)=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}\Phi(j\omega)e^{j\omega t}d\omega\quad \FT\quad \Phi(j\omega)=\int\limits_{-\infty}^{\infty}\varphi_{xx}(t)e^{-j\omega t}dt
+\end{equation}}\\~\\
+Dieser Zusammenhang wird als {\bf Wiener-Chintchine Theorem}
+bezeichnet. Dieser Zusammenhang gilt auch bei Signalen der Klasse 2b.
+F\"ur periodische Leistungssignale $x(t)$ und mit Formel~\ref{FOU_FORM_VF} (Verschiebung im Frequenzbereich)\index{Verschiebung!im Frequenzbereich} erhalten wir gem\"ass Beispiel~\ref{KAP_FOURIER}.\ref{FOU_BSP_AUTO}\\
+\begin{equation*}
+  \varphi_{xx}(t)= \sum_{k=-\infty}^{\infty} |c_k|^2 e^{j\frac{2\pi k}{T_0}~t} \quad\FT \quad \Phi (j\omega)=\sum_{k=-\infty}^{\infty} |c_k|^2 \delta\klam{\omega-\frac{2\pi k}{T_0}}
+\end{equation*}
+\nit F\"ur {\bf Energiesignale}\index{Energiesignal} kann
+gezeigt werden, dass die {\bf Autokorrelationsfunktion} (Formel~\ref{SIG_FORM_AUTO_STOCH}) und das {\bf
+  Energiedichtespektrum}\index{Energiedichtespektrum} ein {\bf
+  Fourier-Trans\-formations\-paar} sind ($\varphi_{xx}(t)\FT E(j\omega)$):
+\\~\\
+\myboxx{\begin{equation}
+ \varphi_{xx}(t)=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}E(j\omega)e^{j\omega t}d\omega \quad \FT\quad E(j\omega)=\int\limits_{-\infty}^{\infty}\varphi_{xx}(t)e^{-j\omega t}dt
+\end{equation}}\\~\\
+\nit Die {\bf Kreuzkorrelation}\index{Kreuzkorrelation} von {\bf stochastischen, reellen Leistungssignalen}\index{Leistungssignal!stochastisch} (Klasse 2b) und die {\bf Kreuzleistungsdichte}\index{Kreuzleistungsdichte} sind ein {\bf Fourier-\-Trans\-formations\-paar} \\
+($\varphi_{xy}(t) \FT \Phi_{xy}(j\omega)$) \cite{FET:96}
+\\~\\
+\myboxx{\begin{equation}
+ \varphi_{xy}(t)=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}\Phi_{xy}(j\omega)e^{j\omega t}d\omega\quad \FT\quad \Phi_{xy}(j\omega)=\int\limits_{-\infty}^{\infty}\varphi_{xy}(t)e^{-j\omega t}dt
+\end{equation}}\\~\\
+\nit Dieser Zusammenhang gilt analog auch f\"ur Signale der Klasse 2a.
+\bsp{Weisses Rauschen}\index{Weisses Rauschen}\index{Rauschen!weiss}\\
+Bei Signalen, die keine korrelierten Abschnitte besitzen, ist die
+Autokorrelationsfunktion $\varphi_{xx}(\tau)=\delta(\tau)\cdot X^2$,
+wie wir in
+Abb.~\ref{SIG_ABB_rausche_AUTO}
+gesehen haben.
+\newpage
+\vspace*{-11mm}\bsp{Weisses Rauschen}\index{Rauschen!weiss}\\
+Wir betrachten ein typisches {\bf
+  St\"orsignal}\index{Storsignal@{St\"orsignal}}, das auch als {\bf
+  Pr\"ufsignal}\index{Prufsignal@{Pr\"ufsignal}} verwendet wird; das
+{\bf weisse Rauschen} (z.T. auch {\bf
+  Breitbandrauschen}\index{Breitbandrauschen}\footnote{Breitbandrauschen
+  unterscheidet sich von weissem Rauschen, da es nur in einem
+  begrenzten Frequenzbereich $-\Delta\omega\ldots \Delta\omega$ ein
+  konstantes Leistungsdichtespektrum\index{Leistungsdichtespektrum}
+  aufweist.} genannt \cite{WOS:88}). Die {\bf
+  Rauschleistung}\index{Rauschleistung} {\boldmath $P_r$} eines
+Widerstandes $R_r$ bei der {\bf Temperatur}\index{Temperatur} $T$ ist
+(gem\"ass Formel~\ref{SIG_FOR_PR}):
+\begin{equation*}
+  P_r=k\cdot T\cdot \Delta f =k\cdot T\cdot \frac{\Delta \omega}{2\pi}.
+\end{equation*}
+Mit dem Leistungsdichtespektrum $\Phi_{xx}(j\omega)$, das im
+Frequenzbereich $-\Delta\omega\ldots \Delta\omega$ konstant ist, erhalten wir:
+\vspace*{-3mm}\begin{eqnarray*}
+  P_r&=&\varphi_{xx}(0)=\frac{1}{2\pi}\int\limits_{-\Delta\omega}^{\Delta\omega}\Phi_{xx}(j\omega)e^{j\omega t}d\omega=\frac{kT\Delta\omega}{2\pi}\\
+\rightarrow&\quad&\Phi_{xx}(j\omega)=\frac{P_r\cdot 2\pi}{2\cdot\Delta\omega}=P_r\cdot\frac{\pi}{\Delta\omega}=\frac{kT}{2} \quad\forall\quad |\omega|<\Delta\omega.
+\end{eqnarray*}
+Mit dem {\bf Rechteckimpuls}\index{Rechteckimpuls} $p_{\Delta\omega}(j\omega)$ ergibt sich folgende Schreibweise:\\ $\Phi_{xx}(j\omega)=\frac{kT}{2}\cdot p_{\Delta\omega}(\omega)$.\\
+\begin{figure}[htb]% matlab FOU_Leistdichte.m
+\vspace*{-7mm}\hspace*{-0.5cm}
+  \bild{/fourier/FOU_Leist_Dicht.eps,width=1.05}\vspace*{-7mm}\caption{Leistungsdichtespektrum $\Phi_{xx}(j\omega)$ mit $kT=2$ und $\Delta\omega=3$ und $\Delta\omega=6$. Mit $\Delta\omega\rightarrow\infty$ ergibt sich $\varphi_{xx}(\tau)=\delta(\tau)\cdot\frac{kT}{2}$. Somit ist der Eintrag~\#11 in Tabelle~\ref{SIG_TAB_delta} erkl\"art.}
+\vspace*{-4mm}
+\end{figure}\\
+\nit Wenn $\Delta\omega\rightarrow\infty$ erhalten wir {\bf weisses
+  Rauschen}\index{Weisses Rauschen}. Somit geht auch
+$P_r\rightarrow\infty$ und
+$\varphi_{xx}(\tau)=\delta(\tau)\cdot\frac{kT}{2}$ \cite{HSU:03}.
+
+
+
+
+\newpage
+\section{Laplace-Transformation \index{Laplace!-Transformation}}
+Neben anderen Transformationen hat sich insbesondere die
+Laplace-Transformation zur mathematischen Darstellung und L"osung
+vieler Probleme naturwissenschaftlicher und technischer Disziplinen
+durchgesetzt. In der Elektrotechnik und Informationstechnik\index{Elektrotechnik}\index{Informationstechnik}
+spielt die {\bf Laplace-Transformation} bei nichtperiodischen
+Vorg"angen, insbesondere bei Einschaltvorg"angen, eine grosse Rolle.
+Die Laplace-Transformation stellt die M"oglichkeit dar, die Operation
+des {\bf Differenzierens} und {\bf Integrierens} auf das {\bf
+  Multiplizieren} und {\bf Dividieren} abzubilden. Die
+Laplace-Transformation ist mit der Fourier-Transformation eng verwandt
+\cite{GRE:99}.\\ Im Rahmen dieses Skriptes wird die
+({\bf einseitige) Laplace-Transformation}\index{Laplace!-Transformation!einseitige} ohne Herleitung angegeben. Die
+Laplace-Transformierte\index{Laplace!Transformierte@{-Transformierte}}  von $f(t)$ ist:\\~\\
+\myboxx{
+\begin{equation}
+  F(s) = \int\limits_0^{\infty}f(t)e^{-st}dt.
+\end{equation}}\\~\\
+Die {\bf Laplace-Transformierte} von $f(t)$ ist
+$F(s)=\mathcal{L}\left\{f(t)\right\}$, die {\bf Inverse}\index{Inverse} ist $f(t)=\mathcal{L}^{-1}\left\{F(s)\right\}$. Vielfach verwenden wir das {\bf Doetsch-Symbol}\index{Doetsch} ($f(t)\FT F(s)$). Wir verzichten hier auf eine mathematische
+Herleitung des Laplace-Integrals. Es sei jedoch gesagt, dass nur
+Funktionen $f(t)$ betrachtet werden sollen, die weniger als eine
+Exponentialfunktion wachsen, f\"ur $t\geq 0$ definert und \"uber das
+Intervall $(0,\infty)$ intgerierbar sind \cite{BRO:SEM:91}. Gegen"uber
+$j\omega$ bei der Fourier-Transformation ist bei der
+Laplace-Transformation $s$
+verallgemeinert zu $s=\sigma + j\omega$. Das bedeutet, dass die Fourier-Transformierte $F(j\omega)$ durch die Laplace-Transformation $F(s)$ ausgedr\"uckt werden kann.\\
+
+\bsp{Laplace-Transformierte der Einheitssprungfunktion $u(t)$}\index{Laplace!Transformierte@{-Transformierte}}  
+\begin{equation*}
+  F(s) = \int\limits_0^{\infty} u(t)e^{-st}dt = \int\limits_0^{\infty} e^{-st}dt = \left. \frac{ e^{-st}}{-s}\right |_0^{\infty} = \frac{1}{s} ~(\text{Konvergenzbereich}: \forall~\Re{\{s\}}~=\sigma>0)
+\end{equation*}\index{Konvergenz!-bereich}
+\begin{figure}[htb]
+\vspace*{-4mm}\begin{center}
+  \bild{/fourier/FOUbsp2.ps,width=0.6}
+\end{center}\vspace*{-5mm}\caption{Einheitssprungfunktion und deren Laplace-Transformation}
+\vspace*{-6mm}
+\end{figure}\\~\\
+Die Laplace-Transformation eignet sich besonders f\"ur die Berechnung von {\bf Einschwingvorg\"angen} \cite{WEI:89}.\index{Einschwingvorgang} Ein weiterer Vorteil der Laplace-Transformation, dass sie eine gr\"ossere Klasse von Zeitsignalen erfasst als die Fourier-Transformation.
+\newpage
+\vspace*{-11mm}
+\bsp{Laplace-Transformierte der Impulsfunktion $\delta(t)$}\index{Impulsfunktion}  
+\begin{equation*}
+  F(s) = \int\limits_0^{\infty} \delta(t)e^{-st}dt = e^{-s\cdot 0} = 1 ~~~(\text{Konvergiert f"ur alle}~\sigma.)
+\end{equation*}
+
+\subsection{Wichtige Eigenschaften der Laplace-Transformation}
+Die folgenden Eignschaften der Laplace-Transformation wurden \cite{BRO:SEM:91, POU:96} entnommen. 
+\subsubsection{Linearit"at}\index{Linearitat@{Linearit\"at}}
+\myboxx{
+\begin{equation}
+  \alpha\cdot f(t) + \beta\cdot g(t) \FT \alpha\cdot F(s) + \beta\cdot G(s)
+\end{equation}}
+\bsp{}
+Geg.:~$f(t)=\sin(\alpha t)\cdot u(t)$\hspace*{3cm}Ges.:~$F(s)$\\
+Mit $f(t)=\sin(\alpha t)\cdot u(t)=\frac{e^{j\alpha t} -e^{-j\alpha t} }{2j}\cdot u(t)$ und $e^{bt}\cdot u(t)\FT \frac{1}{s-b}$ folgt:\\
+$F(s)=\frac{1}{2j}\klam{ \frac{1}{s-j\alpha} - \frac{1}{s+j\alpha} }=\frac{\alpha}{s^2+\alpha^2 }$. Konvergenz f"ur $\sigma>0$.\index{Konvergenz}
+\aufg
+Bestimmen Sie die Laplace-Transformation $F(s)$ der Zeitfunktion\index{Zeitfunktion} $f(t)=\klam{3e^{-3t}-5e^{\frac{t}{20}}}u(t)$ sowie den Konvergenzbereich von $F(s)$.\index{Konvergenz!-bereich}
+
+\subsubsection{"Ahnlichkeit}\index{Ahnlichkeit@{\"Ahnlichkeit}}
+\myboxx{
+\begin{equation}
+  f(\alpha t) \FT \frac{1}{\alpha}F \left (\frac{s}{\alpha} \right ) \quad 0 <\alpha \in\mathbb{R} 
+\end{equation}}
+
+\subsubsection{Faltung im Zeitbereich (Multiplikation im Frequenzbereich)}\index{Faltung!im Zeitbereich}
+\myboxx{
+\begin{equation}
+ f(t) \ast g(t) = \int\limits_{0}^{\infty} f(\tau)g(t-\tau)d\tau \FT F(s) \cdot G(s)\label{FOU_FORM_FAL_Z}
+\end{equation}}\\~~\\
+Beide Zeitfunktionen $f(t)$ und $g(t)$ sind wie immer bei der einseitigen Laplace-Transformation\index{Laplace!-Transformation!einseitige} kausal.
+
+\subsubsection{Faltung im Frequenzbereich (Multiplikation im Zeitbereich)}\index{Faltung!im Frequenzbereich}
+\myboxx{
+\begin{equation}
+ f(t) \cdot g(t) \FT \frac{1}{2\pi j}\int\limits_{c-j\infty}^{c+j\infty} F(\xi) G(s-\xi)d\xi
+\end{equation}}\\~\\
+$c$ und $s$ m"ussen so gew"ahlt werden, dass der Integrationsweg von $c-j\infty$ bis $c+j\infty$ innerhalb des gemeinsamen Konvergenzbereiches von $F(\xi)$  und $G(s-\xi)$ liegen \cite{UNB:02}.
+
+\subsubsection{Ableitung im Zeitbereich}\index{Ableitung!im Zeitbereich}
+\myboxx{
+\begin{equation}
+  \frac{\partial f(t)}{\partial t} \FT sF(s) -f(0+)\label{FOU_FORM_ABLEITUNG}
+\end{equation}}\\
+
+\subsubsection{Ableitungen im Zeitbereich}\index{Ableitung!im Zeitbereich}
+\myboxx{
+\begin{equation}
+  \frac{\partial^n f(t)}{\partial t^n} \FT s^nF(s) -s^{n-1}f(0+)-s^{n-2}\frac{\partial f(0+)}{\partial t}-\ldots -s\frac{\partial^{n-1} f(0+)}{\partial t^{n-1}}
+\end{equation}}\\
+
+\subsubsection{Multiplikation mit \mat{t}}
+\myboxx{
+\begin{equation}
+ t\cdot f(t)  \FT \frac{-\partial F(s)}{\partial s}
+\end{equation}}\\
+
+\subsubsection{Ableitung im Frequenzbereich}\index{Ableitung!im Frequenzbereich}
+\myboxx{
+\begin{equation}
+  (-t)^n f(t) \FT  \frac{\partial^n F(s)}{\partial s^n}
+\end{equation}}\\ 
+
+\subsubsection{Verschiebung im Zeitbereich}\index{Verschiebung!im Zeitbereich}
+\myboxx{
+\begin{equation}
+  f(t\pm t_0) \FT F(s)e^{\pm t_0 s}\label{FOU_FORM_VZ}
+\end{equation}}
+Bemerkung: $f(t-t_0) \FT F(s)e^{-t_0 s}$ gilt, wenn $t_0>0$ und $f(t+t_0) \FT F(s)e^{+t_0 s}$ gilt, wenn $f(t)=0$ f"ur $t<t_0$. 
+
+\subsubsection{Verschiebung im Frequenzbereich (D\"ampfung im Zeitbereich)}\index{Verschiebung!im Frequenzbereich}\index{Dampfung@{D\"ampfung}!im Zeitbereich}
+\myboxx{
+\begin{equation}
+  f(t)e^{\mp\alpha t} \FT F(s\pm\alpha)\label{FOU_FORM_041}
+\end{equation}}
+\bsp{Verschiebung im Frequenzbereich}\index{Verschiebung!im Frequenzbereich}
+Gesucht ist die Zeitfunktion $f(t)$ von
+$F(s)=\frac{1}{s+\alpha}$.\\ Mit $u(t)\FT \frac{1}{s}$ und
+$f(t)e^{-\alpha t}\FT F(s+\alpha)$ (Formel~\ref{FOU_FORM_041}) folgt
+$e^{-\alpha t}u(t) \FT\frac{1}{s+\alpha}$.\\
+\bsp{}
+Geg.:~$f(t)=e^{-\alpha t}\sin(\omega t)\cdot u(t)$\hspace*{3cm}Ges.:~$F(s)$\\
+Mit $f(t)=\sin(\omega t)\cdot u(t)\FT \frac{\omega}{s^2+\omega^2} $ folgt:
+$F(s)=\frac{\omega}{(s+\alpha)^2+\omega^2}$. Konvergenz f"ur $\sigma>-\alpha$.\index{Konvergenz}
+\subsubsection{Integration}\index{Integration}
+\myboxx{
+\begin{equation}
+  \int\limits_0^t f(\tau)d\tau \FT \frac{F(s)}{s}\label{FOU_LAPLA_INTE}
+\end{equation}}
+\subsubsection{Anfangswert}\index{Anfangswert}
+\myboxx{
+\begin{equation}
+  \lim_{t\rightarrow 0} f(t) = \lim_{s\rightarrow \infty} sF(s),\text{~wenn }  \lim_{t\rightarrow 0} f(t)\text{~existiert}.
+\end{equation}}
+\subsubsection{Endwert}\index{Endwert}
+\myboxx{
+\begin{equation}
+  \lim_{t\rightarrow \infty} f(t) = \lim_{s\rightarrow 0} sF(s),\text{~wenn }  \lim_{t\rightarrow \infty} f(t)\text{~existiert}.
+\end{equation}}
+\bsp{}
+Geg.:~$f(t)=e^{-at}u(t)\FT\frac{1}{s+a}$\hspace*{2cm}Ges.:~Anfangs- und Endwert von $f(t)$.\\
+$\lim\limits_{t\rightarrow 0} f(t) =\lim\limits_{s\rightarrow \infty} sF(s)=\lim\limits_{s\rightarrow \infty} \frac{s}{s+a}=1 $\\
+$\lim\limits_{t\rightarrow \infty} f(t) =\lim\limits_{s\rightarrow 0} sF(s)=\lim\limits_{s\rightarrow 0} \frac{s}{s+a}=0 $\\
+\bsp{}
+Geg.:~$f(t)=\cos(\alpha t)u(t)\FT\frac{s}{s^2+\alpha^2}$\hspace*{2cm}Ges.:~Anfangs- und Endwert von $f(t)$.\\
+$\lim\limits_{t\rightarrow 0} f(t) =\lim\limits_{s\rightarrow \infty} sF(s)=\lim\limits_{s\rightarrow \infty} \frac{s^2}{s^2+\alpha^2}=1 $. Der Endwert existiert nicht, da $f(t)$ im Unendlichen immer zwischen $+1$ und $-1$ hin- und herpendelt.\\~\\
+\nit Weitere Zusammenh"ange zwischen Zeitfunktion und
+Spektralfunktion sind im Anhang~\ref{sec:FOU:anhang2} aufgef"uhrt.
+\subsection{R\"ucktransformation in den Zeitbereich}\index{Rucktransformation@{R\"ucktransformation}}
+Die Zeitfunktion $f(t)$ ist durch $F(s)$ eindeutig bestimmt, wenn gilt \cite{BRO:SEM:91, UNB:81}:\\
+$F(s)$ ist in $\text{Re}\{s\}\geq c$ {\bf analytisch}\index{analytisch}\index{Funktion!analytisch}, gilt ferner $\lim_{|s|\rightarrow \infty} F(s)=0$ gleichm\"assig bez\"uglich $\text{arg}\{s\}$ und  $\int_{c-j\infty}^{c+j\infty}|F(s)||ds|<\infty$, so ist $F(s)$ die Laplace-Transformierte\index{Laplace!Transformierte@{-Transformierte}} der Funktion $f(t)$, d.h.: \\~\\
+\myboxx{\begin{equation} 
+f(t)=\frac{1}{2\pi j}\int\limits_{c-j\infty}^{c+j\infty}F(s)e^{s t}ds.\label{FOU_FOR_UMK}
+\end{equation}}\\~\\
+Die Laplace-Transformation ist eine {\bf eineindeutige}\index{eineindeutig}
+Zuordnung von Originalfunktion $f(t)$ und Bildfunktion $F(s)$. Daher
+braucht man das {\bf Umkehrintegral}\index{Umkehrintegral}
+(Formel~\ref{FOU_FOR_UMK}) nicht jedes Mal zu berechnen; man kann auf vorhandene
+Tabellen zur\"uckgreifen. Das Umkehrintegral ist nicht in erster Linie
+Mittel zur Bestimmung der Originalfunktion $f(t)$, da das
+{\bf uneigentliche Integral}\index{Integral!uneigentliches} im Allgemeinen langsam konvergiert. Das Umkehrintegral kann mittels des {\bf Residuensatzes}\index{Residuensatz} berechnet werden \cite{BRO:SEM:91, HEN:JEL:87, KIE:JAE:05}.\\
+
+\subsection{R\"ucktransformation mittels Umkehrintegral}\index{Umkehrintegral}
+Beim komplexen Umkehrintegral (Formel~\ref{FOU_FOR_UMK}) wird $F(s)$ entlang einer Parallelen zur $j$-Achse von $c-j\infty$ bis $c+j\infty$ integriert. $c\in\mathbb{R}$ muss dabei im Konvergenzbereich\index{Konvergenzbereich} von $F(s)$ liegen \cite{FOE:03}.
+\bsp{R\"ucktransformation mittels Umkehrintegral\index{Umkehrintegral}}
+Wir wissen, dass $\delta(t)\FT 1$ f"ur alle $\sigma$ konvergiert. Mit $c=0$ wollen wir von $F(s)=1$ mit dem komplexen Umkehrintegral\index{Umkehrintegral!komplexes} die Zeitfunktion $f(t)$ bestimmen.
+\begin{eqnarray*} 
+f(t)=\frac{1}{2\pi j}\int\limits_{c-j\infty}^{c+j\infty}F(s)e^{s t}ds=\frac{1}{2\pi j}\int\limits_{0-j\infty}^{0+j\infty}1\cdot e^{s t}ds=\frac{1}{2\pi j}\cdot\left .\frac{e^{s t}}{t}\right |_{-j\infty}^{+j\infty}  =\frac{e^{j\infty t}-e^{-j\infty t}}{2\pi j \cdot t}=\\
+=\frac{\sin(\infty t)}{\pi t}=\delta(t),
+\end{eqnarray*}
+wobei wir f"ur den letzten Schritt den 11.~Eintrag von Tabelle~\ref{SIG_TAB_delta} verwendet haben.
+
+
+\subsection{R\"ucktransformation mittels Residuensatz}
+\bsp{R\"ucktransformation mittels des Residuensatzes\index{Residuensatz}}
+Wir suchen die Zeitfunktion $f(t)$ (immer gilt: $f(t)=0~\forall~t<0$) der Laplace-Transformierten\index{Laplace!Transformierte@{-Transformierte}} 
+\begin{equation*} 
+  F(s)=\frac{1}{(s+\alpha)(s+\beta)},\quad (0<\alpha,\beta \in \mathbb{R}, \alpha\neq\beta).
+\end{equation*}
+Mit dem Residuensatz\index{Residuensatz} folgt:
+\begin{eqnarray*} 
+  f(t)&=&\frac{1}{2\pi j}\int\limits_{-j\infty}^{j\infty}F(s)e^{s t}ds=\sum\limits_{i=1}^{k}\text{Res}\klam{F(s_k)e^{s_kt} }\\
+      &=&\lim\limits_{s\rightarrow -\alpha}\klam{(s+\alpha)F(s) e^{st} }+\lim\limits_{s\rightarrow -\beta}\klam{(s+\beta)F(s)e^{st}}\\      &=&\frac{e^{-\alpha t}}{\beta-\alpha}+\frac{e^{-\beta t}}{\alpha-\beta}=\frac{e^{-\alpha t}-e^{-\beta t}}{\beta-\alpha}.
+\end{eqnarray*}
+\nit Das Resultat ist identisch mit dem Resultat des Beispiels~\ref{KAP_FOURIER}.\ref{FOU_BSP_PBZ} (Partialbruchzerlegung) und dem Eintrag in Tabelle~\ref{FOU_TAB_LP2}.
+
+\subsection{R\"ucktransformation von gebrochen-rationalen\\ Funktionen\index{Funktion!gebrochen-rationale}}
+Eine h\"aufug verwendete M\"oglichkeit der R\"ucktransformation von gebrochen-rationalen Funktionen ist die Partialbruchzerlegung\index{Partialbruchzerlegung}.
+
+\newpage
+\bsp{Partialbruchzerlegung mit $(0<\alpha,\beta \in \mathbb{R}, \alpha\neq\beta)$}\label{FOU_BSP_PBZ}
+\vspace*{-5mm}\begin{eqnarray*}
+&&\frac{1}{(s+\alpha)(s+\beta)}=\frac{A}{s+\alpha}+\frac{B}{s+\beta}=\frac{s(A+B)+A\beta+B\alpha}{(s+\alpha)(s+\beta)}\\
+&&\rightarrow\quad A+B=0\quad\text{und}\quad A\beta+B\alpha=1\quad\rightarrow\quad A=\frac{1}{\beta-\alpha},\quad B=\frac{-1}{\beta-\alpha}\\
+&&\frac{1}{(s+\alpha)(s+\beta)}=\frac{\frac{1}{\beta-\alpha}}{s+\alpha}+\frac{\frac{-1}{\beta-\alpha}}{s+\beta}\IFT\frac{e^{-\alpha t}-e^{-\beta t}}{\beta-\alpha}
+\end{eqnarray*}
+Mit dem \mb {\tt residue} l\"asst sich die Partialbruchzerlegung\index{Partialbruchzerlegung} von gebrochen-rationalen Funktionen bestimmen.\index{Funktion!gebrochen-rationale}\\
+Die Partialbruchzerlegung\index{Partialbruchzerlegung} von mehrfachen Polen\index{Pol!mehrfach} mit der jeweiligen Vielfachheit $n_k$ ist \cite{UNB:89}:\\
+\begin{equation} 
+F(s)=\sum_{i=1}^k\sum_{j=1}^{n_k}\frac{A_{ij}}{(s-p_i)^j}.\label{FOU_FORM_mehrfachePole}
+\end{equation}
+Die Pole $p_i$ d"urfen reell oder komplex sein.\index{Pol!komplex}\index{Pol!reell} Die R"ucktransformation\index{Rucktransformation@R\"ucktransformation}
+von Formel~\ref{FOU_FORM_mehrfachePole} in den Zeitbereich\index{Zeitbereich} ist:\\
+\begin{equation}
+f(t)=\klam{\sum_{i=1}^k e^{p_i t}\sum_{j=1}^{n_k}\frac{A_{ij}t^{j-1}}{(j-1)!}}u(t). 
+\end{equation}
+Die Koeffizienten $A_{ij}$ (reell oder komplex) lassen sich mit dem Residuensatz\index{Residuensatz} berechnen:\\
+\begin{equation}
+A_{ij}=\frac{1}{(n_i-j)!}\frac{\partial^{n_i-j} }{\partial s^{n_i-j}}\left . \left [ (s-p_i)^{n_i}     F(s)  \right ]\right |_{s=p_i}
+\end{equation}
+
+\bsp{Partialbruchzerlegung mehrfacher Pole}
+Geg.:~$F(s)=\frac{8}{(s+1)(s+3)^3}=\frac{A_{11}}{s+1}+\frac{A_{21}}{s+3}+\frac{A_{22}}{(s+3)^2}+\frac{A_{23}}{(s+3)^3}$\\
+Ges.:~Partialbruchzerlegung von $F(s)$ (alle $A_{ij}$), Berechnung der Zeitfunktion $f(t)$ und Kontrolle mit \matlogo
+\begin{eqnarray*}
+A_{11}=\left . (s+1)F(s)\right |_{s=-1}&=&\frac{8}{(-1+3)^3}=1\\
+A_{23}=\left . (s+3)^3F(s)\right |_{s=-3}&=&\frac{8}{1+(-3)}=-4\\
+A_{22}=\frac{\partial}{\partial s}\left . (s+3)^3F(s)\right |_{s=-3} &=&\frac{\partial }{\partial s}\left .\frac{8}{s+1}\right |_{s=-3}= \left .\frac{-8}{(s+1)^2}\right |_{s=-3}= -2\\
+A_{21}=\frac{1}{2!}\frac{\partial^2 }{\partial s^2}\left . (s+3)^3F(s)\right |_{s=-3} &=& \frac{\partial^2 }{2\cdot\partial s^2}\left .\frac{8}{s+1}\right |_{s=-3}=   \frac{\partial }{\partial s}\left .\frac{-4}{(s+1)^2}\right |_{s=-3}= \left .\frac{8(s+1)}{(s+1)^4}\right |_{s=-3}= -1
+\end{eqnarray*}
+$F(s)=\frac{1}{s+1}+\frac{-1}{s+3}+\frac{-2}{(s+3)^2}+\frac{-4}{(s+3)^3}\IFT f(t)=\klam{e^{-t}  -e^{-3t} -2e^{-3t}t -2e^{-3t}t^2 }u(t)$\\
+Mit \verb¦ilaplace(8/poly2sym(poly([-3 -3 -3 -1]),'s'))¦ was identisch mit \\ \verb¦ilaplace(8/(s^4+10*s^3+36*s^2+54*s+27))¦ ist, erhalten wir ebenfalls\\ \verb¦exp(-t)+(-2*t-1-2*t^2)*exp(-3*t)¦. \index{exp@{\tt exp}}\index{ilaplace@{\tt ilaplace}}\index{poly@{\tt poly}}\index{poly2sym@{\tt poly2sym}}
+
+
+\subsection{R\"ucktransformation mittels Tabellen}
+Meistens wird f\"ur die R\"ucktransformation in den Zeitbereich
+(Originalbereich)\index{Originalbereich} auf Tabellen
+zur\"uckgegriffen.\\
+\bsp{R\"ucktransformation mittels Tabelle}
+Gesucht ist die Zeitfunktion $f(t)$ von $F(s)=\frac{s e^{-\beta s}}{s^2-\alpha^2}$. Gem\"ass Tabelle ist $\frac{s}{s^2-\alpha^2}\IFT\cosh(\alpha t)$. Mit Formel~\ref{FOU_FORM_VZ} folgt:\\
+\vspace*{-5mm}
+\begin{equation*}
+  \frac{s e^{-\beta s}}{s^2-\alpha^2}\IFT\cosh(\alpha(t-\beta)). 
+\end{equation*}
+\subsection{R\"ucktransformation mit {\boldmath \matlogo}}
+Mit Hilfe des \mb {\tt ilaplace} k"onnen wir die R"ucktransformation in den Zeitbereich symbolisch berechnen.\index{Matlab@{\matlogo}!symbolisch}\index{ilaplace@{\tt ilaplace}}
+
+
+\bsp{R\"ucktransformation mit \matlogo}
+Wir suchen wiederum die Zeitfunktion\index{Zeitfunktion} $f(t)$ der Laplace-Transformierten\index{Laplace!Transformierte@{-Transformierte}} $F(s)=\frac{1}{(s+\alpha)(s+\beta)}$ $\quad(0<\alpha,\beta \in \mathbb{R}, \alpha\neq\beta).$
+Mit der \mb\!\!sfolge\\
+\nit \verb¦ syms s t¦\\
+\nit \verb¦ syms a b real¦\\
+\nit \verb¦ ilaplace(1/((s+a)*(s+b)))¦ \\
+\nit erhalten wir als Resultat: \verb¦ (exp(-b*t)-exp(-a*t))/(-b+a)¦.
+\subsection{L\"osung von linearen Differentialgleichungen mit Hilfe der Laplace-Transformation}\index{Differentialgleichung!linear}
+Mit Hilfe der Laplace-Transformation lassen sich {\bf lineare
+  Differentialgleichungen}\index{Differentialgleichung!linear} (mit
+konstanten Koeffizienten) relativ einfach l\"osen \cite{STO:93}. Dies
+wird in drei Schritten durchgef\"uhrt:
+ \begin{enumerate}
+ \item Transformation der Differentialgleichung in den Bildbereich
+   (Frequenzbereich)\index{Bildbereich}\index{Frequenz!bereich@{-bereich}}
+     \item L\"osen der algebraischen Gleichung im Bildbereich
+     \item R\"ucktransformation der L"osung vom Bildbereich in den Originalbereich (Zeitbereich)\index{Zeitbereich}
+   \end{enumerate}
+
+\begin{figure}[htb]
+\vspace*{-2mm}\begin{center}
+  \myboxx{\bild{/fourier/FOU013.ps,width=0.9}}\vspace*{-1mm}\caption{Schema zur L\"osung von linearen Differentialgleichungen mit Hilfe der Laplace-Transformation}
+\end{center}
+\vspace*{-4mm}
+\end{figure}
+
+\bsp{Differentialgleichung eines $RLC$-Serieschwingkreises}\index{RLC@{$RLC$}!Serieschwingkreis@{-Serieschwingkreis}}\\
+\begin{figure}[htb]
+\vspace*{-7mm}\begin{center}
+  \bild{/fourier/FOU012.ps,width=0.42}\vspace*{-3mm}\caption{$RLC$-Serieschwingkreis}\label{FOU_ABB_RLC}
+\end{center}
+\vspace*{-6mm}
+\end{figure}\\
+\nit Wir wollen den Strom $i(t)$ der Schaltung von Abb.~\ref{FOU_ABB_RLC} berechnen. F\"ur die Anfangsbedingungen\index{Anfangsbedingungen}
+nehmen wir an, dass $i(0)=0.1$~A und $u_c(0)=3$~V ist.  Die
+Differentialgleichung der Schaltung lautet somit
+\begin{equation*}
+  L\cdot \frac{\partial i(t)}{\partial t}+R\cdot i(t) +\frac{1}{C}\int\limits_0^ti(\tau)d\tau +u_c(0)=u_0(t).
+\end{equation*}
+Wir w\"ahlen $L= 2$~H, $R=4~\Omega$ und $C=100$~mF. Die ideale Spannungsquelle $u_0(t)$ wird zum Zeitpunkt $t=0$ eingeschaltet und steigt dann linear mit der Zeit an, d.h., $u_0(t)=\frac{8~\text{V}}{\text{s}}t$ f\"ur $t>0$.
+Damit wird die Differentialgleichung\index{Differentialgleichung}
+\begin{equation}
+  2\cdot \frac{\partial i(t)}{\partial t}+4\cdot i(t) +10\cdot\int\limits_0^ti(\tau)d\tau +3=8\cdot t\cdot u(t),\label{FOU_GLG_DIFF}
+\end{equation}
+wobei wir die Einheiten bewusst weggelassen haben. Transformieren wir Gleichung~\ref{FOU_GLG_DIFF} in den Bildbereich\index{Bildbereich} (Frequenzbereich)\index{Frequenz!bereich@{-bereich}}, erhalten wir:
+\begin{equation*}
+  2\cdot \klam{sI(s)-0.1}+4\cdot I(s)+10\frac{I(s)}{s} + \frac{3}{s} = \frac{8}{s^2}.
+\end{equation*}
+Somit ist $I(s)$
+ \begin{equation*}
+  I(s)=\frac{0.2s^2-3s+8}{2s(s^2+2s+5)}.
+\end{equation*}
+Mit Hilfe der Transformationstabelle~\ref{FOU_TAB_LP2} finden wir die Zeitfunktion $i(t)$
+\begin{eqnarray*}
+  i(t)&=&\underbrace{\frac{e^{-t}[2\cos(2t)-\sin(2t)]}{20}}_{\text{von $i(0)=0.1$~A stammend}}\underbrace{-\frac{3}{4}\cdot e^{-t}\sin(2t)}_{\text{von $u_c(0)=3$~V stammend}}\underbrace{+\frac{4-2e^{-t}[2\cos(2t)+\sin(2t)]}{5}}_{\text{vom Eingangssignal stammend}}\\
+     &=&\frac{4}{5}-e^{-t}\klam{\frac{7\cos(2t)}{10}+\frac{6\sin(2t)}{5}}.
+\end{eqnarray*}
+Mit der \mb\!\!sfolge \verb¦ilaplace((0.2*s^2-3*s+8)/(2*s*(s^2+2*s+5)))¦
+erhalten wir als Resultat: \verb¦ 4/5-7/10*exp(-t)*cos(2*t)-6/5*exp(-t)*sin(2*t)¦.\index{ilaplace@{\tt ilaplace}}
+\begin{figure}[htb]% matlab FOU014.m
+\vspace*{-3mm}\begin{center}
+  \bild{/fourier/FOU014a.eps,width=0.9}\vspace*{-3mm}\caption{Strom $i(t)$ der $RLC$-Schaltung von Abb.~\ref{FOU_ABB_RLC}}
+\end{center}
+\vspace*{-4mm}
+\end{figure}
+\begin{figure}[htb]% matlab FOU014.m
+\vspace*{-3mm}\begin{center}
+  \bild{/fourier/FOU014b.eps,width=0.9}\vspace*{-3mm}\caption{Spannungen $u_0(t)$, $u_R(t)$, $u_L(t)$ und $u_C(t)$ der $RLC$-Schaltung von Abb.~\ref{FOU_ABB_RLC}}
+\end{center}
+\vspace*{-4mm}
+\end{figure}~\\
+\nit Sind die {\bf Anfangsbedingungen}\index{Anfangsbedingungen} von der Schaltung in Abb.~\ref{FOU_ABB_RLC} alle Null, so ist 
+\begin{equation*}
+  I(s)=\frac{8}{2s(s^2+2s+5)}\quad\IFT\quad  i(t)=\frac{4-2e^{-t}\klam{2\cos(2t)+\sin(2t)}}{5}.
+\end{equation*}
+Wenn die Anfangsbedingungen alle Null sind, kann z.B. $I(s)$ direkt mit den Impedanzen\index{Impedanz} $sL$, $R$ und $\frac{1}{sC}$ berechnet werden, n\"amlich:
+\begin{eqnarray*}
+  I(s)&=&\frac{U_0(s)}{R+sL+\frac{1}{sC}}=\frac{sC\cdot U_0(s)}{s^2LC+sRC+1}\\
+   I(s)&=&\frac{\frac{0.8}{s}}{0.2s^2+0.4s+1}=\frac{8}{s(2s^2+4s+10)}.\\
+\end{eqnarray*}
+D.h., wenn wir mit Impedanzen rechnen, k\"onnen Str\"ome, Spannungen, etc. bis auf die durch die  Anfangsbedingungen verursachten Werte bestimmt werden.
+
+\clearpage
+\bsp{Differentialgleichung}\index{Differentialgleichung}\\
+Gegeben ist $\ddot{y}(t)+\alpha^2 y(t)=f(t)$, wobei $0<\alpha\in\mathbb{R}$ und $f(t)$ eine beliebige Funktion ist mit $f(t)=0$ f\"ur $t<0$. Die Anfangsbedingungen\index{Anfangsbedingungen} sind $y(0)=\dot{y}(0)=0$ \cite{HEN:JEL:87}. Mit $y(t)\FT Y(s)$ und $f(t)\FT F(s)$ erhalten wir im Bildbereich\index{Bildbereich}
+ \begin{equation*}
+  s^2Y(s)+\alpha^2 Y(s) = F(s)\quad\rightarrow\quad Y(s)=\frac{F(s)}{s^2+\alpha^2}=F(s)\cdot G(s)
+\end{equation*}
+mit $G(s)=\frac{1}{s^2+\alpha^2}$. Mit dem Laplace-Transformationspaar
+$G(s)\IFT\frac{\sin(\alpha t)}{\alpha}$ und der Faltung im
+Zeitbereich\index{Faltung!im Zeitbereich}
+(Formel~\ref{FOU_FORM_FAL_Z}) erhalten wir
+ \begin{equation*}
+ y(t)=f(t) \ast g(t) = \int\limits_{0}^{\infty} f(\tau)g(t-\tau)d\tau= \frac{1}{\alpha}\int\limits_{0}^{\infty} f(\tau)\sin(\alpha(t-\tau))d\tau.
+\end{equation*}
+% Loesung mit MATLAB????
+
+\aufg
+Gegeben ist die Differentialgleichung\index{Differentialgleichung} $\ddot{y}(t)+\dot{y}(t)=x(t)$. Bestimmen Sie $y(t)$  f"ur $t>0$, wenn gilt: $y(t)=te^{t}$ f"ur $t\leq 0$ und $x(t)=u(t)$ (Einheitssprung).\index{Einheitssprung}\\~~\\ 
+
+
+
+
+\subsection{Zusammenhang zwischen der einseitigen Laplace-\\Transformation und der Fourier-Transformation}\index{Laplace-Transformation!einseitig}\index{Fourier-Transformation}
+Bei kausalen, stabilen\footnote{Damit das Signal $f(t)$ stabil ist, muss der Konvergenzbereich in der $s$-Ebene die $j\omega$-Achse enthalten.} und fourier-transformierbaren\footnote{Siehe Kapitel~\ref{FRE_KAP_EXISTENZ}} Signalen $f(t)$ kann man durch das Ersetzen von $s=\sigma+j\omega$ durch $j\omega$ (und umgekehrt) zwischen der einseitigen Laplace-Transformation und der Fourier-Transformation wechseln.\index{Signal!kausal}\index{Signal!fourier-transformierbar}\index{Signal!stabil} Dies erk"art, wieso wir f"ur die Bezeichnung der Fourier-Transformation $F(j\omega)$ und nicht $F(\omega)$ verwenden.\\ 
+
+\nit Kennen wir die einseitige Laplace-Transformation $F(s)$ des kausalen Signales $f(t)$, so kann man folgende Aussagen machen \cite{SCH:00}:\\
+\begin{itemize}
+\item Liegt die $j\omega$-Achse im Konvergenzbereich von $F(s)$, so kann $s$ durch $j\omega$  ausgetauscht werden, um $F(j\omega)$ zu erhalten.
+\item Liegt die $j\omega$-Achse ausserhalb des Konvergenzbereichs von $F(s)$, so konvergiert die Fourier-Transformation $F(j\omega)$ nicht.
+\item Liegt die $j\omega$-Achse auf dem Konvergenzbereichs von $F(s)$, so k"onnen die Fourier-Transformation $F(j\omega)$ und die einseitige Laplace-Transformation "ubereinstimmen, m"ussen aber nicht.
+\end{itemize}
+
+\clearpage
+\bsp{Dirac-Impuls $\delta(t)$} \index{Dirac-Impuls}
+\begin{eqnarray*}
+f(t)=\delta(t) & \FT & F(s)=\int\limits_{0}^{\infty}\delta(t)e^{-st}dt=e^{0}=1~(\text{Konvergenzbereich:~}-\infty<\sigma<\infty)\\
+f(t)=\delta(t) & \FT & F(j\omega)=\int\limits_{-\infty}^{\infty}\delta(t)e^{-j\omega t}dt=e^{0}=1
+\end{eqnarray*}
+
+\bsp{Sprungfunktion $u(t)$} \index{Sprungfunktion}
+\begin{eqnarray*}
+f(t)=u(t) & \FT & F(s)=\int\limits_{0}^{\infty}u(t)e^{-st}dt=\int\limits_{0}^{\infty}e^{-st}dt=\frac{1}{s}~(\text{Konvergenzbereich:~} 0<\sigma<\infty)\\
+f(t)=u(t) & \FT & F(j\omega)=\int\limits_{-\infty}^{\infty}u(t)e^{-j\omega t}dt=\int\limits_{0}^{\infty}e^{-j\omega t}dt=\pi\delta(\omega)+\frac{1}{j\omega}
+\end{eqnarray*}
+
+\bsp{Exponentialfunktion $e^{\alpha t}u(t)$ mit $\Re \{\alpha\}<0$} \index{Exponentialfunktion}
+\begin{eqnarray*}
+f(t)=e^{\alpha t}u(t) & \FT & F(s)=\int\limits_{0}^{\infty}e^{\alpha t}u(t)e^{-st}dt=\int\limits_{0}^{\infty}e^{(\alpha-s)t}dt=\frac{1}{s-\alpha}\\
+& &\hspace*{1.2cm}\text{(Konvergenzbereich:~} \Re \{\alpha\}<\sigma<\infty)\\
+f(t)=e^{\alpha t} u(t) & \FT & F(j\omega)=\int\limits_{-\infty}^{\infty}e^{\alpha t}u(t)e^{-j\omega t}dt=\int\limits_{0}^{\infty}e^{(\alpha-j\omega) t}dt=\frac{1}{j\omega-\alpha}
+\end{eqnarray*}
+
+
+\bsp{Sinusfunktion $\sin(\alpha t)u(t)$ mit $0<\alpha\in\mathbb{R}$} \index{Sinusfunktion}
+\begin{eqnarray*}
+f(t)=\sin(\alpha t)u(t) & \FT & F(s)=\int\limits_{0}^{\infty}\sin(\alpha t)u(t)e^{-st}dt=\frac{\alpha}{s^2+\alpha^2}\\
+& &\hspace*{1.2cm}\text{(Konvergenzbereich:~} 0<\sigma<\infty)\\
+f(t)=\sin(\alpha t)u(t) & \FT & F(j\omega)=\int\limits_{-\infty}^{\infty}\sin(\alpha t)u(t)e^{-j\omega t}dt=\\
+& & \hspace*{1.2cm}=\frac{\pi}{j2}(\delta(\omega-\alpha)-\delta(\omega+\alpha))+\frac{\alpha}{\alpha^2+(j\omega)^2}
+\end{eqnarray*}
+
+\newpage
+
+
+\section{Weitere Aufgaben zur Frequenzanalyse}
+
+\begin{enumerate}
+\item {\bf Modulation}\\ Die Fourier-Transformierte von $f(t)$ ist
+  $F(j\omega)$. Bestimmen Sie das Zeitsignal $f_1(t)$, wenn gilt, dass
+  $f_1(t) \FT F_1(j\omega)= F(j(\omega-\omega_0)) + F(j(\omega+\omega_0))$.
+  
+\item {\bf Bessel's Theorem}\\ Berechnen Sie mit Hilfe von Bessel's
+  Theorem
+  (Rayleigh's Theorem) die folgenden Integrale ($\alpha>0$):\\
+  (a) $\int\limits_{-\infty}^{\infty}sinc^2(\alpha t)dt$
+  \hspace*{19mm}(b)$\int\limits_{-\infty}^{\infty}sinc^4(\alpha t)dt$
+  \hspace*{19mm}(c)$\int\limits_{-\infty}^{\infty}\frac{dt}{(\alpha^2+t^2)^2}$
+
+\item {\bf "Ubertragungskanal}
+\vspace*{-1.5cm}\\
+  \begin{figure}[htb]
+  \parbox[t]{0.35\linewidth}{
+     \begin{center}
+        \hspace*{6cm}
+        \bild{/fourier/FOUfig1.fig.eps,width=1}
+    \end{center} }
+  \end{figure}
+  \vspace*{-1cm}\\ Ein "Ubertragungskanal hat den obenstehenden
+  Frequenzgang $F(j\omega)$. Ein Signal $s(t)=A_0\cdot \sin (2\pi t/T_1
+  +\phi_0)$ mit $A_0=5,$ $T_1=10\text{~}\mu s$ und $\phi_0=0$ soll "uber
+  diesen Kanal gesendet werden. Ist das m\"oglich?
+
+\item {\bf Spektrum}
+\vspace*{-1.5cm}\\
+  \begin{figure}[htb]
+  \parbox[t]{0.35\linewidth}{
+     \begin{center}
+        \hspace*{6cm}
+        \bild{/fourier/FOUfig2.fig.eps,width=1}
+    \end{center} }
+  \end{figure}
+  \vspace*{-1cm}\\
+Vom Zeitsignal $s_1(t)$ ist das Spektrum $S_1(j\omega)$ bekannt. Nun wird die Amplitude des Zeitsignals halbiert und die Impulsdauer $T$ verdoppelt. Zeichnen Sie das neue Spektrum $S_2(j\omega)$. 
+
+\item {\bf Impulsfunktion}\\ Das Spektrum der Impulsfunktion $\delta
+  (t)$ ist 1. Bestimmen Sie die Zeitfunktion $f(t)$, wenn gilt, dass
+  $F(j\omega)=\delta(\omega)$.
+
+\item {\bf Signalzerlegung}
+\vspace*{-1.5cm}\\
+  \begin{figure}[htb]
+  \parbox[t]{0.35\linewidth}{
+     \begin{center}
+        \hspace*{6cm}
+        \bild{/fourier/FOUfig3.fig.eps,width=1}
+    \end{center} }
+  \end{figure}
+  \vspace*{-1cm}\\
+ Gegeben ist das Signal $f(t)$. Zeigen Sie einen L"osungsweg auf um das Spektrum $F(j\omega)$ zu bestimmen und berechnen Sie es.\\ Hinweis: Linearit"atseigenschaft 
+\newpage
+\item {\bf Fourier-Analyse}
+    \vspace*{-2.5mm}     
+    \begin{enumerate}
+    \item  Eine periodische Funktion $f(t)$ hat folgendes
+      symmetrisches Spektrum $F(j\omega)$. Die Frequenz der Funktion
+      $f(t)$ wird verdoppelt. Was passiert mit dem Spektrum?
+      Skizzieren Sie das neue Spektrum mit den relevanten Angaben.
+      \vspace*{-0.4cm}\\
+      \parbox[t]{0.6\linewidth}{
+      \begin{center}
+        \hspace*{2cm}
+        \bild{/fourier/FT1.fig.eps,width=1}
+     \end{center} }
+     \vspace*{-0.1cm}
+    \item  Was k\"onnen Sie \"uber die Koeffizienten $a_n$ und
+      $b_n$ der Fourier-Reihenentwicklung des folgenden Signales $f(t)$
+      aussagen $(n\in\mathbb{N})$?  Wie gross ist der Konstantanteil?
+      \vspace*{-1.4cm}\\
+      \begin{figure}[htb]
+      \parbox[t]{0.5\linewidth}{
+      \begin{center}
+        \hspace*{3cm}
+         \bild{/fourier/FT2.fig.eps,width=1}
+     \end{center} }
+     \end{figure}
+     \vspace*{-0.7cm}
+   \item  $f(t)=A\cdot e^{-a^2t^2}$ und
+     $F(j\omega)=\frac{A\sqrt{\pi}}{a}\cdot e^{-\omega^2/4a^2}$ sind
+     ein Fourier-Paar. $g(t)$ ist $3\cdot f(3t)$. Skizzieren Sie $g(t)$
+     und deren Fourier-Transformation $G(j\omega)$.
+  \end{enumerate}
+
+\item {\bf Parseval's Theorem}\\ \index{Parseval's!Theorem}
+Die Energiedichte eines nichtperiodischen, reellen Energiesignales $x(t)$ ist\index{reell}
+\begin{equation*} 
+  E=\int\limits_{-\infty}^{\infty}|x(t)|^2dt.
+\end{equation*}
+ \begin{enumerate}
+     \item Zeigen Sie, dass
+\begin{equation*} 
+E=\int\limits_{-\infty}^{\infty}\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}X(j\omega)e^{j\omega t}d\omega~x(t)~dt.
+\end{equation*}
+geschrieben werden kann.
+     \item  Zeigen Sie, indem Sie die Integrationsreihenfolge vertauschen, dass 
+\begin{equation*} 
+E=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}X(j\omega)X^*(j\omega)d\omega=\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}|X(j\omega)|^2\omega
+\end{equation*}
+ist.
+   \end{enumerate}
+\newpage
+\item {\bf Energie}\\ Die Fourier-Transformierte von $x(t)$ ist $X(j\omega)=\frac{a}{\sigma +j\omega}.$\\ ($\int \frac{dx}{ax^2+b}=\frac{1}{\sqrt{ab}}\arctan(\sqrt{a/b} \cdot x)$)
+  \begin{enumerate}
+  \item Bestimmen Sie mit der Hilfe von Bessel's Theorem
+    (Formel~\ref{equ:FOU:3}) die normierte Energie des Signals $x(t)$.
+  \item Zur welcher Zeitfunktion $x(t)$ geh"ort die Transformierte
+    $X(j\omega)$?\\ Verwenden Sie das Fourier-Transformiertenpaar aus
+    Formel 2.40 im Tabellenanhang~\ref{sec:FOU:anhang}!
+  \item Pr"ufen Sie mit der Zeitfunktion $x(t)$ nach, ob Sie dieselbe
+    normierte Energie wie unter (a) erhalten.\\
+  \end{enumerate} 
+\item{\bf Operation}\\ 
+ \vspace*{-1cm}\\ 
+ \begin{figure}[htb]
+  \parbox[t]{0.8\linewidth}{
+     \begin{center}
+        \hspace*{2cm}
+        \bild{/fourier/FOUfig4.ps,width=1}
+    \end{center} }
+  \end{figure}
+  \vspace*{-0.5cm}\\ Ein Signal $x_1(t)$, dessen spektrale
+  Amplitudendichte $X_1(j\omega)$ bekannt ist, wird so transformiert, dass
+  $X_1(j\omega)$ in $X(j\omega)$ "ubergeht. Um welche Transformation (Operation)
+  handelt es sich im Zeit- und im Frequenzbereich?
+\item{\bf Ableitung}\\ Bestimmen Sie die Fourier-Transformierten
+  $F_1(j\omega)$ von $f_1(t)=\frac{\partial}{\partial t} \cos(\alpha
+  t)$ und $F_2(j\omega)$ von $f_2(t)=-\alpha\sin(\alpha t)$. Verwenden Sie die Ausblendeigenschaft der
+  Impulsfunktion!
+\item{\bf Fourier-Reihe}\\ Bestimmen Sie die Fourier-Koeffizienten $a_k$ und $b_k$
+  f\"ur $x(t)=\sin(t+\alpha)$ $(\alpha\in\mathbb{R})$.
+\item {\bf Mathematik (just for fun)}\\ Wie gross ist die
+  Wahrscheinlichkeit im schweizerischen Zahlenlotto\index{Lotto} (6 aus 45), einen 0-, 1- , 2- ,
+  $\ldots$, 6-er zu haben? Wie gross ist die
+  Wahrscheinlichkeit im Euromillions-Lotto\index{Euromillions} ((5 aus 50) und (2 aus 9)) alles richtig zu haben?
+\item {\bf Mathematik (just for fun)}\\ Ein Flugzeug mit vier
+  Triebwerken, je zwei an einem Fl"ugel, fliegt von Ottawa (Hauptstadt
+  Kanadas) nach Ouagadougou (Hauptstadt Burkina Fasos).  Die
+  Wahrscheinlichkeit, dass ein Triebwerk ausf"allt ist 0.1\%. Wie
+  gross ist die Wahrscheinlichkeit, dass das Flugzeug notlanden muss,
+  wenn man weiss, dass es mit 4 oder 3 Triebwerken oder mit je einem
+  funktionsf"ahigen Triebwerk pro Tragfl"ache weiterfliegen kann? Wie
+  gross ist die Wahrscheinlichkeit notzulanden, wenn die Ausfallrate
+  eines Triebwerkes 10\% betr"agt?
+  
+\item {\bf Mathematik (just for fun)}\\ Eine Karte wird aus eine
+  Kartenspiel\index{Kartenspiel} mit 52 Karten gezogen. Wie gross ist
+  die Wahrscheinlichkeit\index{Wahrscheinlichkeit}, dass die Karte
+  \begin{enumerate}
+     \item eine 2 ist?
+     \item die $\heartsuit$ 2 ist?
+     \item eine $\spadesuit$  ist?
+   \end{enumerate}
+\item{\bf Fourier-Reihe}\\ Bestimmen Sie die Fourier-Koeffizienten\index{Fourier!Koeffizienten@{-Koeffizienten}} ($a_n$ und $b_n$) des periodischen Signals $y(t)$  mit Periodendauer\index{Periodendauer} $T=4$.
+\begin{figure}[htb]\vspace{-2mm}
+     \begin{center}
+        \hspace*{2cm}
+        \bild{/fourier/fourier_probe.eps,width=0.551}
+    \end{center} \vspace{-1.7cm}
+  \end{figure}
+
+\item{\bf Normierte Energie}\\ Die Spannung $u_R(t)=2\frac{\sin(\omega_0 t)}{t}$ [V] wird \"uber einem Widerstand von einem Ohm
+gemessen. Die dabei an den Widerstand abgegebene Energie ist: $E_n=8\pi$ [J]. Wie gross $\omega_o$?
+
+\item{\bf R\"atsel (just for fun): Die verflixten sieben Sieben \cite{DOE:65}.}\\  
+\index{R\"atsel}In der folgenden Division, die ganzahlig aufgeht, sind einige Zahlen durch '$\ast$' ersetzt worden. Ersetzten Sie alle '$\ast $' durch die richtige Zahl.
+\vspace*{-2mm}\begin{verbatim}
+**7*******    :    ****7* = **7**
+******
+______
+*****7*
+*******
+_______
+  *7****
+  *7****
+  ______
+  *******
+  ****7**
+  _______
+    ******
+    ******
+    ______  
+         0
+\end{verbatim}
+
+
+\end{enumerate}
+
+\newpage
+\setcounter{section}{0}
+\renewcommand{\thesection}{\thechapter.\Alph{section}}
+\vspace*{20pt}
+{\LARGE\textbf{Anhang zum Kapitel~\thechapter}}
+\section{Tabelle von Fourier-Transformationspaaren}\label{sec:FOU:anhang}
+Die Fourier-Transformationspaare sind zum Teil von \cite{BRO:SEM:91, POU:96, WYR:99:2} entnommen.
+Es gilt jeweils: $0 < (\alpha, \beta, t_0, \omega_0, A ) \in \mathbb{R},n \in \mathbb{N}$.
+
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{|r||l|l|}\hline
+\# & Zeitfunktion: $f(t)$  & Spektralfunktion: $F(j\omega)$ \\\hline\hline
+1 & $A\cdot p_{\alpha}(t)=\begin{cases}
+    A & \mbox{f"ur } |t| < \alpha,\\
+    \frac{A}{2} & \mbox{f"ur } |t| = \alpha,\\
+    0  & \mbox{f"ur } |t| > \alpha.\\
+  \end{cases}$ & $\frac{2A}{\omega}\sin(\alpha\omega)=2A\alpha\cdot sinc(\alpha\omega)$ \\ 
+ & \bild{/fourier/FOU_Trafo_2_48_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_48_b.eps,width=0.46} \\ \hline
+3 & $A(1-p_{\alpha}(t))=\begin{cases}
+    0 & \mbox{f"ur } |t| < \alpha,\\
+    \frac{A}{2} & \mbox{f"ur } |t| = \alpha,\\
+    A  & \mbox{f"ur } |t| > \alpha.\\
+  \end{cases}$ & $2\cdot\pi\cdot A\delta(\omega)-2A\alpha\cdot sinc(\alpha\omega)$ \\ 
+& \bild{/fourier/FOU_Trafo_2_79_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_79_b.eps,width=0.46} \\ \hline
+
+\end{tabular}
+\vspace*{-1mm}\caption{Fourier-Transformationspaare}\label{FOU_TAB_FOURIER}
+\end{center}
+\vspace*{-6mm}
+\end{table}
+
+\newpage
+
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{|r||l|l|}\hline
+\# & Zeitfunktion: $f(t)$  & Spektralfunktion: $F(j\omega)$ \\\hline\hline
+4 & $A\cdot\Lambda_{\alpha}(t) =
+  \begin{cases}
+    A - \frac{A|t|}{\alpha}& \mbox{f"ur } |t| < \alpha,\\
+    0 & \mbox{f"ur } |t| \geq 0.\\
+  \end{cases}$ & $A\alpha\cdot\klam{\frac{\sin\klam{\frac{\alpha\omega}{2}}}{{\frac{\alpha\omega}{2}}}}^2=A\alpha\cdot\klam{sinc\klam{\frac{\alpha\omega}{2}}}^2$  \\ 
+& \bild{/fourier/FOU_Trafo_2_55_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_55_b.eps,width=0.46} \\ \hline
+5 & $Ae^{-\alpha |t|}$ & $\frac{2\alpha A}{\alpha^2 + \omega^2}$\\ 
+& \bild{/fourier/FOU_Trafo_2_39_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_39_b.eps,width=0.46} \\ \hline
+6 & $Ae^{-\alpha t}u(t)$ & $A\frac{\alpha-j\omega}{\alpha^2+\omega^2}$\\ 
+& \bild{/fourier/FOU_Trafo_2_40_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_40_b.eps,width=0.46} \\ \hline
+\end{tabular}
+\vspace*{-1mm}\caption{Fourier-Transformationspaare}
+\end{center}
+\vspace*{-6mm}
+\end{table}
+\newpage
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{|r||l|l|}\hline
+7 & $Ae^{-\alpha t^2}$ & $A\sqrt{\frac{\pi}{\alpha}}e^{\frac{-\omega^2}{4\alpha}}$\\ 
+& \bild{/fourier/FOU_Trafo_2_38_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_38_b.eps,width=0.46} \\ \hline
+8 & $e^{-\alpha t^2+\beta t}$ & $\sqrt{\frac{\pi}{\alpha}}e^{\frac{\beta^2-j2\alpha\beta\omega-\omega^2}{4\alpha}}$\\ \hline
+9 & $e^{\pm j\alpha t^2}$ & $\sqrt{\frac{\pi}{\alpha}}e^{\mp j\frac{\omega^2-\alpha\pi}{4\alpha}}$\\ \hline
+10 & $\frac{1}{t}\sin(\alpha t)=sinc_{\alpha}(t)$ & $\pi\cdot p_{\alpha}(\omega)$\\ \hline
+11 & $sinc(\alpha t)$ & $\frac{\pi}{\alpha}\cdot p_{\alpha}(\omega)$\\ \hline
+12 & $\frac{A\cdot t}{\alpha} \cdot p_{\alpha}(t)$ & $j\frac{2A}{\omega}\klam{\cos(\omega\alpha)-\frac{\sin(\omega\alpha)}{\omega\alpha}}$\\ 
+& \bild{/fourier/FOU_Trafo_2_56_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_56_b.eps,width=0.46} \\ \hline
+13 & $\frac{A\cdot |t|}{\alpha} \cdot p_{\alpha}(t)$ & $2A\alpha\klam{\frac{\sin(\omega\alpha)}{\omega\alpha}- 2\klam{\frac{\sin\klam{\frac{\omega\alpha}{2}}}{\omega\alpha}}^2 }$\\ 
+& \bild{/fourier/FOU_Trafo_2_57_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_57_b.eps,width=0.46} \\ \hline
+\end{tabular}
+\vspace*{-1mm}\caption{Fourier-Transformationspaare}
+\end{center}
+\vspace*{-6mm}
+\end{table}
+\newpage
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{|r||l|l|}\hline
+14 & $\klam{\frac{1}{t}\sin(\alpha t)}^2=\klam{sinc_{\alpha}(t)}^2$ & $\frac{\pi}{2}\cdot (2\alpha -|\omega|)\cdot p_{2\alpha}(\omega)=\pi\alpha\cdot\Lambda_{2\alpha}(\omega)$\\ \hline
+15 & $\frac{1}{|t|}\sin(\alpha t)$ & $-j\cdot sgn(\omega)\ln\left |\frac{|\omega|+\alpha}{|\omega|-\alpha}\right |$\\ \hline
+16 & A & $2\pi\cdot A\cdot\delta(\omega)$ \\ 
+& \bild{/fourier/FOU_Trafo_2_75_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_75_b.eps,width=0.46} \\ \hline
+17 & $A\cdot e^{j\omega_0 t}$ & $2\pi A\cdot\delta(\omega-\omega_0)$ \\ 
+& \bild{/fourier/FOU_Trafo_2_58_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_58_b.eps,width=0.46} \\ \hline
+18 & $\delta(t-\beta)$ & $e^{-j\beta \omega}$ \\ \hline
+19 & $A\sin(\alpha t)$ & $jA\pi[\delta(\omega+\alpha) - \delta(\omega-\alpha) ]$ \\ 
+& \bild{/fourier/FOU_Trafo_2_60_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_60_b.eps,width=0.46} \\ \hline
+\end{tabular}
+\vspace*{-1mm}\caption{Fourier-Transformationspaare}
+\end{center}
+\vspace*{-6mm}
+\end{table}
+\newpage
+
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{|r||l|l|}\hline
+20 & $A\sin(\omega_0 t)p_{\alpha}(t)$ & $jA\klam{\frac{\sin\klam{\alpha(\omega+\omega_0)}}{\omega+\omega_0}-\frac{\sin\klam{\alpha(\omega-\omega_0)}}{\omega-\omega_0}} $ \\ 
+& \bild{/fourier/FOU_Trafo_2_53_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_53_b.eps,width=0.46} \\ \hline
+21 & $A\klam{\sin(\alpha t)}^2$ & $\frac{A\pi}{2}[-\delta(\omega+2\alpha) +2\delta(\omega)  -\delta(\omega-2\alpha) ]$ \\ 
+& \bild{/fourier/FOU_Trafo_2_62_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_62_b.eps,width=0.46} \\ \hline
+22 & $A\cos(\alpha t)$ & $A\pi[\delta(\omega+\alpha) + \delta(\omega-\alpha) ]$ \\ 
+& \bild{/fourier/FOU_Trafo_2_59_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_59_b.eps,width=0.46} \\ \hline
+23 & $ A\cdot\sin(\omega_0 t) e^{-at}u(t)$ & $\frac{A\omega_0}{(a^2+\omega_0^2-\omega^2)^2+j2a\omega}=\frac{A\omega_0}{(a+j\omega)^2+\omega_0^2}$\\ \hline % 2.47
+24 & $ A\cdot\cos(\omega_0 t) e^{-at}u(t)$ & $\frac{A(a+j\omega)}{(a+j\omega)^2+\omega_0^2}$\\ \hline % 2.46
+\end{tabular}
+\vspace*{-1mm}\caption{Fourier-Transformationspaare}
+\end{center}
+\vspace*{-6mm}
+\end{table}
+\newpage
+
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{|r||l|l|}\hline
+25 & $A\cos(\omega_0 t)p_{\alpha}(t)$ & $A\klam{\frac{\sin\klam{\alpha(\omega+\omega_0)}}{\omega+\omega_0}+\frac{\sin\klam{\alpha(\omega-\omega_0)}}{\omega-\omega_0}} $ \\ 
+& \bild{/fourier/FOU_Trafo_2_52_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_52_b.eps,width=0.46} \\ \hline
+26 & $A\cos(\omega_0 t)p_{\frac{\pi}{2\omega_0}}(t)$ & $A\frac{2\omega_0}{\omega_0^2-\omega^2}\cos\klam{\frac{\pi\omega}{2\omega_0}}$ \\ 
+& \bild{/fourier/FOU_Trafo_2_54_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_54_b.eps,width=0.46} \\ \hline
+27 & $A\klam{\cos(\alpha t)}^2$ & $\frac{A\pi}{2}[\delta(\omega+2\alpha) +2\delta(\omega)  +\delta(\omega-2\alpha) ]$ \\ 
+& \bild{/fourier/FOU_Trafo_2_61_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_61_b.eps,width=0.46} \\ \hline
+28 & $\sin(\alpha t^2)$ & $-\sqrt{\frac{\pi}{\alpha}}\sin\klam{\frac{\omega^2-\alpha\pi}{4\alpha}}$ \\ \hline
+29 & $\cos(\alpha t^2)$ & $\sqrt{\frac{\pi}{\alpha}}\cos\klam{\frac{\omega^2-\alpha\pi}{4\alpha}}$ \\ \hline
+\end{tabular}
+\vspace*{-1mm}\caption{Fourier-Transformationspaare}
+\end{center}
+\vspace*{-6mm}
+\end{table}
+\newpage
+
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{|r||l|l|}\hline
+30 & $A\cdot u(t)$ & $A\cdot\klam{\pi\cdot\delta(\omega)-j\frac{1}{\omega}}$\\
+& \bild{/fourier/FOU_Trafo_2_77_a.eps,width=0.46} & \bild{/fourier/FOU_Trafo_2_77_b.eps,width=0.46} \\ \hline
+31 & $\frac{1}{t}$ & $j\pi sgn(\omega)$\\ \hline
+32 & $t^{-n}$ & $-j\pi\frac{(-j\omega)^{n-1}}{(n-1)!}sgn(\omega)$\\ \hline
+33 & $|t|$ & $-\frac{2}{\omega^2}$\\ \hline
+34 & $r(t)=t\cdot u(t)$ & $j\pi\frac{\partial \delta(\omega)}{\partial  t}-\frac{1}{\omega^2}$\\ \hline
+35 & $A\cdot sgn(t)$ & $\frac{-2jA}{\omega}$\\ \hline % 2.76
+36 & $t^{-n}sgn(t)$ & $(-j)^{n+1} \frac{2\cdot n!}{\omega^{n+1}}$\\ \hline
+37 & $\sqrt{|t|}$ & $-\sqrt{\frac{2\pi}{|\omega|}}$\\ \hline
+38 & $A\cdot\sum\limits_{n=-\infty}^{\infty}\delta(t-n\cdot t_0)$ & $\frac{2\pi A}{t_0}\cdot\sum\limits_{n=-\infty}^{\infty}\delta(\omega-n\cdot\frac{2\pi}{t_0})$\\ \hline  % 2.72
+39 & $A\cdot\sum\limits_{n=-\infty}^{\infty}\delta(t-n\cdot t_0-\frac{t_0}{2})$ & $\frac{2\pi A}{t_0}\cdot\sum\limits_{n=-\infty}^{\infty}(-1)^n\delta(\omega-n\cdot\frac{2\pi}{t_0})$\\ \hline  % 2.73
+40 & $A\cdot\sum\limits_{n=0}^{N-1}\delta(t-n\cdot t_0-\beta+\frac{(N-1)t_0}{2})$ & $Ae^{j\beta\omega}\frac{\sin\klam{N\omega t_o/2}}{\sin\klam{\omega t_0/2}}$\\ \hline  % 2.71
+41 & $\sum\limits_{n=-\infty}^{\infty}\delta(t-n\cdot t_0)\klam{A+\alpha\cos(\omega_0 t)}$ & $\scriptstyle\frac{2\pi}{t_0}\cdot\sum\limits_{n=-\infty}^{\infty}\klam{A\delta(\omega-n\frac{2\pi}{t_0})+\frac{\alpha}{2}\klam{\delta(\omega-n\frac{2\pi}{t_0}+\omega_0)+\delta(\omega-n\frac{2\pi}{t_0}-\omega_0)}}$\\ \hline % 2.74a
+42 & $\sum\limits_{n=-\infty}^{\infty}\delta(t-n\cdot t_0)\klam{A+\alpha\sin(\omega_0 t)}$ & $\scriptstyle\frac{2\pi}{t_0}\cdot\sum\limits_{n=-\infty}^{\infty}\klam{A\delta(\omega-n\frac{2\pi}{t_0})+\frac{j\alpha}{2}\klam{\delta(\omega-n\frac{2\pi}{t_0}+\omega_0)-\delta(\omega-n\frac{2\pi}{t_0}-\omega_0)}}$\\ \hline % 2.74b
+43 & $A\delta(t)$ & $A$\\ \hline % 2.68
+44 & $A\delta(t-t_0)$ & $Ae^{-jt_0\omega}$\\ \hline % 2.69
+45 & $A\klam{\delta(t+t_0)+\delta(t-t_0)}$ & $2A\cos(\omega t_0)$\\ \hline % 2.70
+46 & $e^{j\beta t}\klam{A+\alpha\cos(\omega_0 t)}$ & $\scriptstyle 2\pi\klam{A\delta(\omega-\beta)+\frac{\alpha}{2}\klam{\delta(\omega-\beta+\omega_0)+\delta(\omega-\beta-\omega_0)}}$\\ \hline % 2.66
+47 & $e^{j\beta t}\klam{A+\alpha\sin(\omega_0 t)}$ & $\scriptstyle 2\pi\klam{A\delta(\omega-\beta)+\frac{j\alpha}{2}\klam{\delta(\omega-\beta+\omega_0)-\delta(\omega-\beta-\omega_0)}}$\\ \hline % 2.67
+48 & $A\klam{1-e^{-at}}u(t)$ & $\pi A\delta(\omega)-A\klam{\frac{a}{a^2+\omega^2}+\frac{ja^2}{\omega(a^2+\omega^2)}}$\\ \hline % 2.78
+49 & $sgn(t)\cdot A\cdot e^{-a|t|}$ & $-2jA\frac{\omega}{\omega^2+a^2}$\\ \hline % 2.41
+50 & $ A\cdot e^{j\omega_0t-a|t|}$ & $\frac{2A}{a}\cdot\frac{a^2}{(\omega-\omega_0)^2+a^2}$\\ \hline % 2.42
+51 & $ A\cdot\cos(\omega_0 t) e^{-a|t|}$ & $\frac{A}{a}\cdot\frac{2a^2(a^2+\omega_0^2+\omega^2)}{(a^2+\omega_0^2-\omega^2)^2+4a^2\omega^2}$\\ \hline % 2.43
+52 & $ A\cdot p_{\alpha}(t-\beta)$ & $2Ae^{-j\beta\omega}\frac{\sin(\alpha\omega)}{\omega}=\frac{jA}{\omega}\klam{e^{-j\omega(\beta+\alpha)}-e^{-j\omega(\beta-\alpha)}}$\\ \hline % 2.49
+53 & $ A\cdot e^{j\omega_0 t} p_{\alpha}(t)$ & $2A\frac{\sin(\alpha(\omega_0-\omega))}{\omega_0-\omega}$\\ \hline % 2.51
+54 & $ A\cdot \klam{p_{\alpha}(t-\beta)+p_{\alpha}(t+\beta)}$ & $2A\frac{\cos(\beta\omega)\sin(\alpha\omega)}{\omega}$\\ \hline % 2.50
+% 2.44-2.45 fehlt noch
+\end{tabular}
+\vspace*{-1mm}\caption{Fourier-Transformationspaare}
+\end{center}
+\vspace*{-6mm}
+\end{table}
+
+%\newpage
+%\FTtitel
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA1.ps,width=1}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA2.ps,width=0.9}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA3.ps,width=0.9
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\newpage
+%\FTtitel
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA4.ps,width=0.85}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA5.ps,width=0.9}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA6.ps,width=0.9}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\newpage
+%\FTtitel
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA7.ps,width=0.9}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA8.ps,width=0.9}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\newpage\FTtitel
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA9.ps,width=0.9}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA10.ps,width=0.83}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\newpage\FTtitel
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA11.ps,width=0.9}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA12.ps,width=0.9}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\newpage
+%\FTtitel
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA13.ps,width=0.9}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+%\newpage
+%\FTtitel
+%\begin{figure}[htb]
+%\begin{center}
+%  \bild{/fourier/FOUA14.ps,width=0.85}
+%\end{center}
+%\vspace*{-6mm}
+%\end{figure}
+
+\newpage 
+
+\section{Tabelle von Laplace-Transformationspaaren}\label{sec:FOU:anhang2}\index{Laplace}
+Die Laplace-Transformationspaare sind von \cite{BRO:SEM:91, POU:96, WYR:99:2} entnommen.
+Es gilt: $0 < (\alpha, \beta) \in \mathbb{R}, n \in \mathbb{N}$.
+\begin{table}[!htb]
+\begin{center}
+\begin{tabular}{|r||l|l|}\hline
+\# & $f(t)$, wobei $f(t)=0$ f\"ur $t<0$  & $F(s)$ \\\hline\hline
+1 & $\frac{\partial^n f(t)}{\partial t^n}$ & $s^nF(s) - s^{n-1}f(0)-s^{n-2}\frac{\partial f(0)}{\partial t}-\ldots -\frac{\partial^{n-1} f(0)}{\partial^{n-1} t}$ \\ \hline
+2 & $\int\limits_0^t f(x)dx$ & $\frac{F(s)}{s}$ \\ \hline
+3 & $\frac{f(t)}{t}$ & $\int\limits_0^{\infty} F(s)ds$ \\ \hline
+4 & $f(t\pm\alpha)u(t\pm\alpha)$ & $e^{\pm s\alpha}F(s)$ \\ \hline
+5 & $f_1 (t)\ast f_2 (t)\ast f_3 (t)$ & $F_1 (s)\cdot F_2 (s)\cdot F_3 (s)$ \\ \hline
+6 & $f_1 (t)\cdot f_2 (t)$ & $\frac{1}{2\pi j}(F_1 (s)\ast F_2 (s))$ \\ \hline
+7 & $\lim\limits_{t \to 0^+}f(t)$ & $\lim\limits_{s \to \infty} sF(s)$ \\ \hline
+8 & $\lim\limits_{t \to \infty}f(t)$ & $\lim\limits_{s \to 0} sF(s)$ \\ \hline
+9 & $u(t)$ & $\frac{1}{s}$ \\ \hline
+10 & $\delta(t)$ & 1 \\ \hline
+11 & $\frac{t^{n-1}}{(n-1)!}$ & $\frac{1}{s^n}$ \\ \hline
+12 & $\frac{1}{\sqrt{\pi t}}$ & $\frac{1}{\sqrt{s}}$ \\ \hline
+\end{tabular}
+\vspace*{-1mm}\caption{Laplace-Transformationspaare}
+\end{center}
+\vspace*{-6mm}
+\end{table}~\\~\\
+\nit Die folgende Tabelle ist nach dem Grad des Nenners geordnet. Die Tabelle ist bis zum Nennergrad 3 vollst\"andig und stammt von \cite{BRO:SEM:91}.
+
+
+\newpage
+\begin{table}[!htb]
+\vspace*{-2mm}\begin{center}
+\begin{tabular}{|l|l|}\hline
+ $F(s)$  & $f(t)$, wobei $f(t)=0$ f\"ur $t<0$, $0<(\alpha, \beta)\in \mathbb{R}$ ist. \\\hline\hline
+$\frac{1}{s}$ & 1\\ \hline
+$\frac{1}{s+\alpha}$ & $e^{-\alpha t}$\\ \hline
+$\frac{1}{s^2}$ & $t$\\ \hline
+$\frac{1}{s(s+\alpha)}$ & $\frac{1-e^{-\alpha t}}{\alpha}$\\ \hline
+$\frac{1}{(s+\alpha)(s+\beta)}$ & $\frac{e^{-\alpha t}-e^{-\beta t}}{\beta-\alpha}$\\ \hline
+$\frac{s}{(s+\alpha)(s+\beta)}$ & $\frac{\alpha e^{-\alpha t}-\beta e^{-\beta t}}{\alpha-\beta}$\\ \hline
+$\frac{1}{(s+\alpha)^2}$ & $t e^{-\alpha t}$\\ \hline
+$\frac{s}{(s+\alpha)^2}$ & $e^{-\alpha t}(1-\alpha t)$\\ \hline
+$\frac{1}{s^2-\alpha^2}$ & $\frac{\sinh(\alpha t)}{\alpha}$\\ \hline
+$\frac{s}{s^2-\alpha^2}$ & $\cosh(\alpha t)$\\ \hline
+$\frac{1}{s^2+\alpha^2}$ & $\frac{\sin(\alpha t)}{\alpha}$\\ \hline
+$\frac{s}{s^2+\alpha^2}$ & $\cos(\alpha t)$\\ \hline
+$\frac{1}{(s+\beta)^2+\alpha^2}$ & $\frac{e^{-\beta t}\sin(\alpha t)}{\alpha}$\\ \hline
+$\frac{s}{(s+\beta)^2+\alpha^2}$ & $\frac{e^{-\beta t}(\alpha\cos(\alpha t)-\beta\sin(\alpha t))}{\alpha}$\\ \hline$\frac{1}{s^3}$ & $\frac{t^2}{2}$\\ \hline
+$\frac{1}{s^2(s+\alpha)}$ & $\frac{e^{-\alpha t}+\alpha t -1}{\alpha^2}$\\ \hline
+$\frac{1}{s(s+\alpha)(s+\beta)}$ & $\frac{(\alpha-\beta)+\beta e^{-\alpha t}-\alpha e^{-\beta t}}{\alpha\beta(\alpha-\beta)}$\\ \hline
+$\frac{1}{s(s+\alpha)^2}$ & $\frac{1-e^{-\alpha t}-\alpha t e^{-\alpha t}}{\alpha^2}$\\ \hline
+$\frac{1}{(s+\alpha)(s+\beta)(s+\gamma)}$ & $\frac{(\gamma-\beta)e^{-\alpha t}+(\alpha-\gamma)e^{-\beta t}+(\beta-\alpha)e^{-\gamma t}}{(\alpha-\beta)(\beta-\gamma)(\gamma-\alpha)}$\\ \hline
+$\frac{s}{(s+\alpha)(s+\beta)(s+\gamma)}$ & $\frac{\alpha(\beta-\gamma)e^{-\alpha t}+\beta(\gamma-\alpha)e^{-\beta t}+\gamma(\alpha-\beta)e^{-\gamma t}}{(\alpha-\beta)(\beta-\gamma)(\gamma-\alpha)}$\\ \hline
+$\frac{s^2}{(s+\alpha)(s+\beta)(s+\gamma)}$ & $\frac{-\alpha^2(\beta-\gamma)e^{-\alpha t}-\beta^2(\gamma-\alpha)e^{-\beta t}-\gamma^2(\alpha-\beta)e^{-\gamma t}}{(\alpha-\beta)(\beta-\gamma)(\gamma-\alpha)}$\\ \hline
+$\frac{1}{(s+\alpha)(s+\beta)^2}$ & $\frac{e^{-\alpha t}-[1+(\beta-\alpha)t]e^{-\beta t}}{(\beta-\alpha)^2}$\\ \hline
+$\frac{s}{(s+\alpha)(s+\beta)^2}$ & $\frac{-\alpha e^{-\alpha t}+[\alpha+t\beta(\beta-\alpha)]e^{-\beta t}}{(\beta-\alpha)^2}$\\ \hline
+$\frac{s^2}{(s+\alpha)(s+\beta)^2}$ & $\frac{\alpha^2 e^{-\alpha t}+\beta(\beta-2\alpha-t\beta^2+\alpha\beta t)e^{-\beta t}}{(\beta-\alpha)^2}$\\ \hline
+$\frac{1}{(s+\alpha)^3}$ & $\frac{t^2 e^{-\alpha t}}{2}$\\ \hline
+$\frac{s}{(s+\alpha)^3}$ & $\frac{(2-\alpha t)te^{-\alpha t}}{2}$\\ \hline
+$\frac{s^2}{(s+\alpha)^3}$ & $\frac{(2-4\alpha t+\alpha^2 t^2)e^{-\alpha t}}{2}$\\ \hline
+$\frac{1}{s[(s+\beta)^2+\alpha^2]}$ & $\frac{\alpha-e^{-\beta t}[\alpha\cos(\alpha t)+\beta\sin(\alpha t)]}{\alpha(\alpha^2+\beta^2)}$\\ \hline
+$\frac{1}{s(s^2+\alpha^2)}$ & $\frac{1-\cos(\alpha t)}{\alpha^2}$\\ \hline
+$\frac{1}{(s+\alpha)(s^2+\beta^2)}$ & $\frac{\beta e^{-\alpha t} +\alpha\sin(\beta t)-\beta\cos(\beta t)}{\beta(\alpha^2+\beta^2)}$\\ \hline
+$\frac{s}{(s+\alpha)(s^2+\beta^2)}$ & $\frac{-\alpha e^{-\alpha t} +\alpha\cos(\beta t)+\beta\sin(\beta t)}{\alpha^2+\beta^2}$\\ \hline
+$\frac{s^2}{(s+\alpha)(s^2+\beta^2)}$ & $\frac{\alpha^2 e^{-\alpha t} -\alpha\beta\sin(\beta t)+\beta^2\cos(\beta t)}{\alpha^2+\beta^2}$\\ \hline
+$\frac{1}{(s+\alpha)[(s+\beta)^2+\gamma^2]}$ & $\frac{e^{-\alpha t}-e^{-\beta t}\cos(\gamma t)+\frac{\alpha -\beta}{\gamma}e^{-\beta t}\sin(\gamma t) }{(\beta-\alpha)^2+\gamma^2}$\\ \hline
+$\frac{s}{(s+\alpha)[(s+\beta)^2+\gamma^2]}$ & $\frac{-\alpha e^{-\alpha t}+\alpha e^{-\beta t}\cos(\gamma t)-\frac{\alpha\beta -\beta^2-\gamma^2}{\gamma}e^{-\beta t}\sin(\gamma t) }{(\beta-\alpha)^2+\gamma^2}$\\ \hline
+$\frac{s^2}{(s+\alpha)[(s+\beta)^2+\gamma^2]}$ & $\frac{\alpha^2 e^{-\alpha t}+[(\alpha-\beta)^2+\gamma^2-\alpha^2 ]e^{-\beta t}\cos(\gamma t)-\klam{\alpha\gamma+\beta\klam{\gamma-\frac{\beta(\alpha -\beta)}{\gamma}}}e^{-\beta t}\sin(\gamma t) }{(\beta-\alpha)^2+\gamma^2}$\\ \hline
+$\frac{1}{s^4}$ & $\frac{t^3}{6}$\\ \hline
+\end{tabular}
+\vspace*{-1mm}\caption{Laplace-Transformationspaare}\label{FOU_TAB_LP2}
+\end{center}
+\vspace*{-6mm}
+\end{table}
