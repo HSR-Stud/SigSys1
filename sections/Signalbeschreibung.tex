@@ -1,22 +1,30 @@
 \section{Signalbeschreibung \skript{1}}
 \subsection{Energie- und Leistungssignale \skript{3}}
-\begin{tabular}{ll}
-\parbox{12cm}{
-	\includegraphics[width=12cm]{./bilder/signalklassen.png}}
-	& \parbox{6cm}{
-	Klasse 1: Energiesignal\\
-	Klasse 2: Leistungssignal\\ \\
-	Normierte Signalenergie 
-	$$E_n = W_n = \lim\limits_{T\rightarrow\infty}\int\limits_{-T/2}^{T/2}
-	|f(t)|^2dt$$
-	$$E_n = \frac{1}{2 \pi} \int\limits_{-\infty}^{\infty} |F(j \omega)|^2 d \omega$$ 
-	
-	Normierte Signalleistung
-	$$P_n = \lim\limits_{T\rightarrow\infty}\frac{1}{T}\int\limits_{-T/2}^{T/2}
-	|f(t)|^2dt$$ 
-	$$P_n = \frac{1}{2 \pi} \int\limits_{-\infty}^{\infty} \left( \lim\limits_{T
-	\rightarrow \infty} \frac{|F(j \omega)|^2}{T} \right) d \omega$$ }
-\end{tabular}
+\begin{tabular}{|l|l|l|}
+	\hline
+	\textbf{Klasse 1: Energiesignal} & \multicolumn{2}{|c|}{\textbf{Klasse 2: Leistungssignale}} \\
+	\hline
+	zeitbegrenzt oder abklingend,  	& \multicolumn{2}{|c|}{nicht zeitbregrenzt} \\ 
+	einmalige Vorgänge, Impulse		& \multicolumn{2}{|c|}{}\\
+	$W_n < \infty$		 	& \multicolumn{2}{|c|}{$W_n = \infty $} \\
+	$P_n = 0$				& \multicolumn{2}{|c|}{$P_n \neq 0 $} \\
+	\hline
+							& \textbf{Klasse 2a: periodisch}	& \textbf{Klasse 2b: aperiodisch} \\
+	\hline
+	\includegraphics[width=5.9cm]{./bilder/Signale/SinusAbklingend.png} &
+	\includegraphics[width=5.9cm]{./bilder/Signale/Dreieck.png} &
+	\includegraphics[width=5.9cm]{./bilder/Signale/Noise.png} \\
+	\hline
+ \end{tabular} \\
+ % TODO: Abstand zu Tabelle vergrössern
+ \textbf{Zeitbereich:} \\
+ Normierte Signalenergie : $E_n = W_n = \lim\limits_{T\to\infty}\,\int\limits_{-\frac{T}{2}}^\frac{T}{2}|f(t)|^2\,dt$ \\
+ Normierte Signalleistung: $P_n = \lim\limits_{T\to\infty}\,
+ \frac{1}{T}\int\limits_{-\frac{T}{2}}^\frac{T}{2}|f(t)|^2\,dt$ \\
+ \textbf{Frequenzbereich:} \\
+ Normierte Signalenergie: $E_n = \frac{1}{2\pi}\,\int\limits_{-\infty}^\infty|F(j\omega)|^2\,dt$ \\
+ Normierte Signalleistung: $P_n = \frac{1}{2\pi}\,\int\limits_{-\infty}^\infty\left(
+ \lim\limits_{T\to\infty}\frac{|F(j\omega)|^2}{T}\right)\,dt$
 
 \subsection{Mittelwerte \skript{5}}
 \begin{tabular}{p{5cm}p{5.5cm}p{7.5cm}}
@@ -41,9 +49,9 @@
 	} 
 	& \parbox{12cm}{
 	Für \textbf{Energiesignale} (Klasse 1):
-	$$\varphi_{xx}(\tau) = \lim_{T\rightarrow\infty}\int\limits_{-T/2}^{T/2}
+	$$\varphi_{xx}(\tau) = \lim_{T\to\infty}\int\limits_{-T/2}^{T/2}
 	x(t)x(t-\tau)dt=
-	\lim_{T\rightarrow\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt =
+	\lim_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt =
 	\varphi_{xx}(-\tau)$$
 	
 	Für \textbf{periodische Leistungssignale} (Klasse 2a):
