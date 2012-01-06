@@ -11,13 +11,12 @@
 	\hline
 							& \textbf{Klasse 2a: periodisch}	& \textbf{Klasse 2b: aperiodisch} \\
 	\hline
-	\includegraphics[width=5.9cm]{./bilder/Signale/SinusAbklingend.png} &
-	\includegraphics[width=5.9cm]{./bilder/Signale/Dreieck.png} &
-	\includegraphics[width=5.9cm]{./bilder/Signale/Noise.png} \\
+	\parbox[c][4cm]{5.9cm}{\includegraphics[width=5.9cm]{./bilder/Signale/SinusAbklingend.png}} &
+	\parbox[c][4cm]{5.9cm}{\includegraphics[width=5.9cm]{./bilder/Signale/Dreieck.png}} &
+	\parbox[c][4cm]{5.9cm}{\includegraphics[width=5.9cm]{./bilder/Signale/Noise.png}} \\
 	\hline
- \end{tabular} \\
- % TODO: Abstand zu Tabelle vergrössern
- \begin{multicols}{2}
+\end{tabular} \\
+\begin{multicols}{2}
  \textbf{Zeitbereich:} \\
  Normierte Signalenergie : $E_n = W_n = \lim\limits_{T\to\infty}\,\int\limits_{-\frac{T}{2}}^\frac{T}{2}|f(t)|^2\,dt$ \\
  Normierte Signalleistung: $P_n = \lim\limits_{T\to\infty}\,
@@ -27,15 +26,31 @@
  Normierte Signalleistung: $P_n = \frac{1}{2\pi}\,\int\limits_{-\infty}^\infty\left(
  \lim\limits_{T\to\infty}\frac{|F(j\omega)|^2}{T}\right)\,dt$
 \end{multicols}
+
+
 \subsection{Mittelwerte \skript{5}}
-\begin{tabular}{p{5cm}p{5.5cm}p{7.5cm}}
-\input{./sigsigi/mittelwerte}
-	Varianz, Standardabweichung
-	& \fbox{$\text{Var}(x)=\sigma^2= \frac {1} {T} \int\limits_{-T/2}^{T/2}
-	(x(t)-X_0)^2dt = X^2-X_0^2$}
-	& $\qquad \qquad \qquad$ Mittl. Fehler im Quadrat
+\begin{tabular}{p{4.6cm}p{7.4cm}p{6cm}}
+	Arithmetischer Mittelwert, Gleichwert, Linearer MW &
+	$X_0 = \overline{X} = X_m = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x(t)dt$ &
+	Ist die Fläche unter der Zeitfunktion über eine Periode.
+    \\
+	Quadratischer MW, Leistung &
+	$X^2 = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x^2(t)dt$ & 
+	$X^n = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x^n(t)dt$ (MW $n$. Ordnung) 
+	\\
+	Effektivwert &
+	$X = X_{\text{eff}}= \sqrt{X^2} = \sqrt{\frac{1}{T} \int\limits ^{t_0+T} _{t_0}{x^2(t)dt}}$
+	& 
+	\\
+	Gleichrichtwert &
+	$X_{|m|} = \bar{|X|} = \frac{1}{T} \int\limits_{t_0}^{t_0+T}{|x(t)| dt}$ &
+    Arithm. Mittelwert der Zweiweggleichrichterschaltung
+    \\
+	Varianz, Standardabweichung	&
+	$\text{Var}(x)=\sigma^2= \frac {1} {T} \int\limits_{-T/2}^{T/2}(x(t)-X_0)^2dt = X^2-X_0^2$ &
+	Mittl. Fehler im Quadrat
+	\\
 \end{tabular}
-\\ \\	
 
 
 \newpage
