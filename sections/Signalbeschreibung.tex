@@ -137,7 +137,7 @@
     \frac{1}{2} & \mbox{f"ur } t = 0,\\
     1 & \mbox{f"ur } t > 0.\\
   \end{cases}$$	
-	$$\mathcal{L:}\quad u(t) \FT \frac1s$$
+	$$\mathcal{L:}\quad u(t) \laplace \frac1s$$
 	} \\
 
 \hline & \\
@@ -154,7 +154,7 @@
     0 & \mbox{f"ur } t = 0,\\
     1 & \mbox{f"ur } t > 0.\\
   \end{cases}$$
-	$$\mathcal{F:}\quad \sgn(t) \FT \frac{-2j}{\omega}$$
+	$$\mathcal{F:}\quad \sgn(t) \laplace \frac{-2j}{\omega}$$
 	\\
 	} \\
 \hline & \\
@@ -170,7 +170,7 @@
     0 & \mbox{f"ur } t \leq 0\\
     t & \mbox{f"ur } t > 0\\
   \end{cases}$$
-	$$\mathcal{L:}\quad r(t) \FT \frac{1}{s^2}$$
+	$$\mathcal{L:}\quad r(t) \laplace \frac{1}{s^2}$$
 	\\
 	} \\
 \hline & \\
@@ -187,7 +187,7 @@
     \frac{1}{2} & \mbox{f"ur } |t| = a\\
     0 & \mbox{f"ur } |t| > a\\
   \end{cases}$$
-	$$\mathcal{F:}\quad p_a(t) \FT 2a \sinc(a \omega) = \frac{2}{\omega} \sin(a \omega)$$
+	$$\mathcal{F:}\quad p_a(t) \laplace 2a \sinc(a \omega) = \frac{2}{\omega} \sin(a \omega)$$
 	\\
 	} \\
 \hline & \\
@@ -203,7 +203,7 @@
     1 - \frac{|t|}{a}& \mbox{f"ur } |t| < a\\
     0 & \mbox{f"ur } |t| \geq a\\
   \end{cases}$$
-	$$\mathcal{F:}\quad \Lambda_a(t) \FT
+	$$\mathcal{F:}\quad \Lambda_a(t) \laplace
 	a\left(\frac{\sin(\frac{a\omega}{2})}{\frac{a\omega}{2}}\right)^2 = a \sinc^2\left(\frac{a\omega}{2}\right)$$ \\
 	} \\
 \hline & \\
@@ -217,9 +217,9 @@
 	$$ \sinc_{\alpha}(t) = \frac{\sin(\alpha t)}{t} \qquad 
 	\sinc(\alpha t) = \frac{\sin(\alpha t)}{\alpha t}$$
 	
-	$$\mathcal{F:}\quad  \sinc_{\alpha}(t) = \frac{\sin(\alpha t)}{t} \FT
+	$$\mathcal{F:}\quad  \sinc_{\alpha}(t) = \frac{\sin(\alpha t)}{t} \laplace
 	\pi p_{\alpha}(\omega)$$
-	$$\mathcal{F:}\quad  \sinc(\alpha t) = \frac{\sin(\alpha t)}{\alpha t} \FT
+	$$\mathcal{F:}\quad  \sinc(\alpha t) = \frac{\sin(\alpha t)}{\alpha t} \laplace
 	\frac{\pi}{\alpha} p_{\alpha}(\omega)$$ } \\
 \end{tabular}
 
@@ -249,7 +249,7 @@
 	10. & $\delta(t)=\frac{\partial u(t)}{\partial t}$ & Ableitung des Einheitssprungs\index{Ableitung}\\ \hline
 	11. & $\delta(t)=\lim\limits_{\omega\rightarrow \infty}\frac{\sin(\omega
 	t)}{\pi t}$ & Definition\\ \hline 
-	12. & $\mathcal{L}, \mathcal{F}:\quad \delta(t) \FT 1$ 
+	12. & $\mathcal{L}, \mathcal{F}:\quad \delta(t) \laplace 1$ 
 		& Frequenzbereich \\ \hline
 	\end{tabular}\\
 	\vspace{.1cm}\\
@@ -348,9 +348,9 @@ $\mu^2+\sigma^2$ & $\dfrac{A^2}{2}$ \\
   	Die Breite des Faltungsproduktes entspricht der Summe der Breite der
   	einzelnen Faktoren.\\ \\
   	Faltung im Zeitbereich $\rightarrow$ Multiplikation im Frequenzbereich 
-  	$$f(t) * g(t) \FT F(s) G(s)$$
+  	$$f(t) * g(t) \laplace F(s) G(s)$$
   	Faltung im Frequenzbereich $\rightarrow$ Multiplikation im Zeitbereich
-  	$$F(s) * G(s) \IFT \frac{1}{2 \pi} f(t) g(t)$$ } \\
+  	$$F(s) * G(s) \Laplace \frac{1}{2 \pi} f(t) g(t)$$ } \\
 \end{tabular}
 
 \begin{tabular}{ll}
