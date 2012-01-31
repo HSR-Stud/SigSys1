@@ -11,22 +11,25 @@
 	\hline
 							& \textbf{Klasse 2a: periodisch}	& \textbf{Klasse 2b: aperiodisch} \\
 	\hline
-	\parbox[c][4cm]{5.9cm}{\includegraphics[width=5.9cm]{./bilder/Signale/SinusAbklingend.png}} &
-	\parbox[c][4cm]{5.9cm}{\includegraphics[width=5.9cm]{./bilder/Signale/Dreieck.png}} &
-	\parbox[c][4cm]{5.9cm}{\includegraphics[width=5.9cm]{./bilder/Signale/Noise.png}} \\
+	\parbox[c][4cm]{6cm}{\includegraphics[width=5.9cm]{./bilder/Signale/SinusAbklingend.png}} &
+	\parbox[c][4cm]{6cm}{\includegraphics[width=5.9cm]{./bilder/Signale/Dreieck.png}} &
+	\parbox[c][4cm]{6cm}{\includegraphics[width=5.9cm]{./bilder/Signale/Noise.png}} \\
 	\hline
 \end{tabular} \\
 
-\begin{multicols}{2}
- \textbf{Zeitbereich:} \\
- Normierte Signalenergie : $E_n = W_n = \lim\limits_{T\to\infty}\,\int\limits_{-\frac{T}{2}}^\frac{T}{2}|f(t)|^2\,dt$ \\
- Normierte Signalleistung: $P_n = \lim\limits_{T\to\infty}\,
- \frac{1}{T}\int\limits_{-\frac{T}{2}}^\frac{T}{2}|f(t)|^2\,dt$ \\
- \textbf{Frequenzbereich:} \\
- Normierte Signalenergie: $E_n = \frac{1}{2\pi}\,\int\limits_{-\infty}^\infty|F(j\omega)|^2\,dt$ \\
- Normierte Signalleistung: $P_n = \frac{1}{2\pi}\,\int\limits_{-\infty}^\infty\left(
- \lim\limits_{T\to\infty}\frac{|F(j\omega)|^2}{T}\right)\,dt$
-\end{multicols}
+\begin{tabular}{|p{6cm}|p{6cm}|p{6cm}|}
+ \hline
+ 	&\textbf{Zeitbereich} &  \textbf{Frequenzbereich} \\
+ \hline
+	 Normierte Signalenergie & $E_n = W_n =
+	 \lim\limits_{T\to\infty}\,\int\limits_{-\frac{T}{2}}^\frac{T}{2}|f(t)|^2\,dt$ &
+	 $E_n = \frac{1}{2\pi}\,\int\limits_{-\infty}^\infty|F(j\omega)|^2\,dt$ \\
+ \hline
+	 Normierte Signalleistung: & $P_n = \lim\limits_{T\to\infty}\,
+	 \frac{1}{T}\int\limits_{-\frac{T}{2}}^\frac{T}{2}|f(t)|^2\,dt$ &  $P_n = \frac{1}{2\pi}\,\int\limits_{-\infty}^\infty\left(
+	 \lim\limits_{T\to\infty}\frac{|F(j\omega)|^2}{T}\right)\,dt$ \\
+\hline
+\end{tabular}
 
 
 \subsection{Mittelwerte \skript{5}}
