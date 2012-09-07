@@ -1,3 +1,7 @@
+tmp/*
+SigSys2.pdf
+*.synctex*
 *.aux
-*.out
 *.log
+*.out
+*.toc
