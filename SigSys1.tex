@@ -2,7 +2,7 @@
 % Dokumentinformationen %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\titleinfo}{Signale und Systeme 1 - Zusammenfassung}
-\newcommand{\authorinfo}{Braun \& Co, J.Rast}
+\newcommand{\authorinfo}{Braun \& Co, J.Rast, C.Gwerder, S.K\"orner}
 \newcommand{\versioninfo}{$Revision: 1 $ - powered by \LaTeX} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,9 +19,15 @@
 \begin{document}
 
 \input{sections/Signalbeschreibung}
+\newpage
+\input{sections/Frequenzanalyse}
 \input{sections/Systeme}
-\input{sections/Signale}
+\newpage
+%\input{sections/Signale}
 \section{Idiotenseite}
-\input{idiotenseite/diverses/diversesInclude}
+\input{idiotenseite/diverses/subsections/unbestimmteIntegrale}
+\input{idiotenseite/diverses/subsections/Ableitungen}
 \input{idiotenseite/elektrotechnik/subsections/signalformen}
+\includepdf[pages={1-9}]{Tabellen.pdf}
+
 \end{document}
