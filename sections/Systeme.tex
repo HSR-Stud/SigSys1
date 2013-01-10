@@ -42,7 +42,7 @@ Lineare bzw. nichtlineare Systeme \skript{113}
 	Reelle Systeme \skript{121} &
 	ein reelles Eingangssignal bewirkt immer ein reelles Ausgangssignal& \\
 \hline
-	Invertierbare Systeme \skript{121} &
+	Invertierbare Systeme \newline \skript{121} &
 	bei jedem Ausgangssignal kann eindeutig auf das Eingangssignal geschlossen werden &
 	\parbox{7cm}{
 		invertierbar: $y = x^3 \rightarrow x = \sqrt[3]{y}$ \\ \\
@@ -188,7 +188,8 @@ Handelt es sich um ein \textbf{modifiziertes Hurwitz-Polynom} so ergibt es ein
 $P(s)$ ist nur dann ein Hurwitz-Polynom, wenn folgende Bedingungen erfüllt sind:
 \begin{enumerate}
 	\item	alle Koeffizienten $a_i$ von $P(s)$ sind grösser als Null (und sind vorhanden).\\
-				(bei einem Polynom 2.Ordnung ist es instabil, wenn min. 1 Koeffizient negativ ist)
+				(bis zum und mit Polynomen von Grad 2, ist es notwendig, dass alle Koeffizienten positiv
+				sind, damit das Polynom asymptotisch stabil ist)
 	\item	alle Hurwitz-Determinanten $D_1$ bis $D_n$ sind grösser als Null\\
 				\begin{align}
 					D_1 &= a_{n-1} > 0 \nonumber\\
@@ -212,9 +213,10 @@ $P(s)$ ist nur dann ein Hurwitz-Polynom, wenn folgende Bedingungen erfüllt sind
 
 \textbf{Modifiziertes Hurwitz-Polynom}\\
 Nebst allen $a_i \geq 0$ müssen alle Hurwitz-Determinanten $D_1, D_2, \ldots, D_{n-2} > 0$
-und $D_{n-1} = D_n = 0$ sein. \\
+und $D_{n-1} = D_n = 0$ sein. \\ \\
 
-
+Für Polynome $P(s) = a_n \cdot s^n + a_{n-1} \cdot s^{n-1} + \ldots + a_1 \cdot s^1 + a_0$ vom
+Grad n gild für $a_i > 0$:\\
 \begin{tabular}{|l||l| l|}\hline
 $N$   &   $P(s)$ ist ein Hurwitz-Polynom (stabil) &  $P(s)$ ist ein
 modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
@@ -230,8 +232,6 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
            \\ \hline   
 \end{tabular}\\
 \begin{itemize}
-  \item Wenn \textbf{ein Koeffizient negativ} ist $(a_x < 0)$, dann ist das System
-  \textbf{instabil}.
   \item Wenn \textbf{alle Koeffizienten negativ} sind, kann $-1$ ausgeklammert
   werden und in den Zähler verschoben werden\\ $\Rightarrow$ \textbf{System
   stabil} oder \textbf{grenzstabil} (siehe Punkt 3)
