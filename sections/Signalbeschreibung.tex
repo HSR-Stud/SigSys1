@@ -264,13 +264,13 @@
 		\hline
 	\end{tabular}\\
 	\vspace{.1cm}\\
-	}
+	} \\
+\hline
 \end{tabular}
 
 
+\subsection{Rauschen \skript{24}}
 \begin{tabular}{ll}
-\hline & \\
-\textbf{Rauschen \skript{24}}
 	& \matlab{randn} \\
 \parbox{7cm}{
 	\includegraphics[width=7cm]{./bilder/rauschen.png}
@@ -287,18 +287,18 @@
 
 \begin{tabular}{lll}
 	Signal-Rausch-Verh"altnis (SNR): &
-	$a_r = 10\cdot \log_10(\frac{P_s}{P_r}) = 20\cdot \log_10(\frac{U_s}{U_r})$ &
+	$a_r = 10\cdot \log_{10}(\frac{P_s}{P_r}) = 20\cdot \log_{10}(\frac{U_s}{U_r})$ &
 	$P_s,U_s$: Nutzsignal\\
 	
 	Rauschzahl (noise figure): &
 	$F = \frac{P_{sEingang}}{P_{rEingang}}\cdot\frac{P_{rAusgang}}{P_{sAusgang}}$ &
 	$P_r, U_r$: Rauschsignal\\
 	& $F=1$, bei einem idealen Vierpol &
-	$T$: absolute Temperatur ($0\circ = 273.15K$)\\
+	$T$: absolute Temperatur ($0^{\circ} = 273.15K$)\\
 	
 	Rauschmass: &
 	$a_F = 10 \cdot \log_1(F) = a_{rEingang} - a_{rAusgang}$ & 
-	$\Delta F$: Bandbreite\\
+	$\Delta f$: Bandbreite\\
 	
 	Effektive Rauschspannung: &
 	$U_r = \sqrt { 4 \cdot k \cdot T \cdot \Delta f \cdot R}$ & 
@@ -318,7 +318,7 @@
 			$$p(a) = \lim_{da\rightarrow 0}\frac{\underbrace{\sum t\left(
 			a-\frac{da}{2}<x(t)\leq a+\frac{da}{2}\right)}_{dt}}{T\cdot da} = \frac{1}{T}\cdot
 			\frac{dt}{da}$$
-			$$\int\limits_{-\infty}^{\infty} p(a) da = 1; \qquad p(a) \geq 0 \forall a$$
+			$$\int\limits_{-\infty}^{\infty} p(a) da = 1; \qquad p(a) \geq 0  \quad \forall a$$
 			
 			\begin{tabular}{ll}
             Linearer Mittelwert 
@@ -335,7 +335,7 @@ $\begin{array}{ll}
 	x_1(t) \text{ mit} & p_1(a) \\
 	x_2(t) \text{ mit} & p_2(a)
 \end{array} 
-\rightarrow x_3(t) = x_1(t) + x_2(t) \text{mit} p_3(a) = (p_1 \ast p_2)(a)$
+\rightarrow x_3(t) = x_1(t) + x_2(t) \text{ mit } p_3(a) = (p_1 \ast p_2)(a)$
 
 %\newpage
 
@@ -405,7 +405,7 @@ sind 99,73\% aller Messwerte zu finden. In der Zeichung ist diese Stelle mit
 		S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n Z_i \nonumber
 	\end{equation}
 	den Erwartungswert $n \mu$ und die Varianz $n \sigma^2$. \\
-  Die damit verbundene standardisierte ($E(X) = 0, var(X) = 1$) Variable $S_n$ ist somit wie
+  Die damit verbundene standardisierte ($E(S_n) = 0, var(S_n) = 1$) Variable $S_n$ ist somit wie
   folgt definiert: \\ 
 	\begin{equation}
 		S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n \frac{X_i - \mu}{\sigma}
@@ -434,7 +434,7 @@ sind 99,73\% aller Messwerte zu finden. In der Zeichung ist diese Stelle mit
   	Faltung im Frequenzbereich $\rightarrow$ Multiplikation im Zeitbereich
   	$$F(s) * G(s) \Laplace \frac{1}{2 \pi} f(t) g(t)$$
 		Faltung zweier Normalverteilungen
-		$$N(\mu_1; \sigma_1) \ast N(\mu_2; \sigma_2) = N(\mu_1+\mu_2;\sqrt{\sigma_1^2+\sigma_2^2}$$} \\
+		$$N(\mu_1; \sigma_1) \ast N(\mu_2; \sigma_2) = N\left(\mu_1+\mu_2;\sqrt{\sigma_1^2+\sigma_2^2}\right)$$} \\
 \end{tabular}
 
 \begin{tabular}{ll}
