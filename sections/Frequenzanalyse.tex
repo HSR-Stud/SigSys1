@@ -1,0 +1,61 @@
+\section{Frequenzanalyse \skript{55}}
+
+\subsection{Divere Formeln}
+	\begin{tabular}{|l|l|}
+		\hline
+			Bessel's Theorem\skript{72} &
+			$\int\limits_{-\infty}^{\infty}|f(t)|^2 dt = \frac{1}{2\pi} \int\limits_{-\infty}^{\infty}|F(j\omega)|^2d\omega$\\
+		\hline
+			Parseval's Theorem\skript{72} &
+			$\int\limits_{-\infty}^{\infty}f(t)\cdot g^*(t)dt = \frac{1}{2\pi}\int\limits_{-\infty}^{\infty}F(j\omega)
+			\cdot G^*(j\omega) d\omega$\\
+		\hline
+			Gibbschesph"anomen &
+			"Uberschwinger betr"agt ca. $18\%$ der Amplitude oder ca. $9\%$ der Sprungh"ohe.\\
+			& $S_{\infty} = \frac{f(x_0^+)+f(x_0^-)}{2} \qquad$ (approximiert)\\
+		\hline
+			Autokorrelation\skript{67} &
+			$\varphi_{xx}(\tau) = \sum\limits_{k=-\infty}^{\infty}c_kc_{-k}e^{-j\frac{2\pi k}{T_0}\tau} =
+			\sum\limits_{k=-\infty}^{\infty}|c_k|^2 e^{-j\frac{2\pi k}{T_0}\tau} =
+			|c_0|^2 + 2\cdot \sum\limits_{k=1}^{\infty} |c_k|^2 \cdot \cos(\frac{2\pi k}{T_0}\tau)$ \\
+		\hline
+			Leistung\skript{67} &
+			$X^2 = \sum\limits_{k=-\infty}^{\infty} |c_k|^2 = |c_0|^2 + 2\cdot \sum\limits_{k=1}^{\infty} |c_k|^2 =
+			(\frac{a_0}{2})^2 + \sum\limits_{k=1}^{\infty} \frac{a_k^2 + b_k^2}{2} =
+			(\frac{a_0}{2})^2 + \sum\limits_{k=1}^{\infty}\frac{A_k^2}{2}$\\
+		\hline
+			Bandbreitentheorem\skript{70} &
+			$\Delta\omega \cdot \Delta t \geq \gamma \qquad \text{mit } \gamma \geq \frac{1}{2}$\\
+		\hline
+	\end{tabular}
+	
+\subsection{Leisungsdichtespektrum\skript{80}}
+	\begin{tabular}{p{6cm} l}
+		$\phi(j\omega) = \lim\limits_{T\to\infty} \frac{|F(j\omega)|^2}{T}$ &
+		$\phi(j\omega)$: Leistungsdichtespektrum\\
+		
+		$P_n = \frac{1}{2\pi} \int\limits_{-\infty}^{\infty}\phi(j\omega)d\omega$ &
+		$P_n$: normierte Leistung\\
+		
+		$E(j\omega) = |F(j\omega)|^2$ &
+		$E(j\omega)$: Energiedichtespektrum
+	\end{tabular}
+	
+\subsection{Wiener-Chintchine Theorem\skript{81}}
+	\begin{align}
+		\varphi_{xx}(t) &= \frac{1}{2\pi}\int\limits_{-\infty}^{\infty}\phi(j\omega)e^{j\omega t}d\omega \laplace
+			\phi(j\omega) = \int\limits_{-\infty}^{\infty}\varphi_{xx}(t)e^{-j\omega t} dt \nonumber \\
+		\varphi_{xx}(t) &= \frac{1}{2\pi}\int\limits_{-\infty}^{\infty}E(j\omega)e^{j\omega t}d\omega \laplace
+			E(j\omega) = \int\limits_{-\infty}^{\infty}\varphi_{xx}(t)e^{-j\omega t} dt \nonumber \\
+		\varphi_{xy}(t) &= \frac{1}{2\pi}\int\limits_{-\infty}^{\infty}\phi_{xy}(j\omega)e^{j\omega t}d\omega \laplace
+			\phi_{xy}(j\omega) = \int\limits_{-\infty}^{\infty}\varphi_{xy}(t)e^{-j\omega t} dt \nonumber
+	\end{align}
+	
+\subsection{Eigenschaften von $\phi(j\omega)$}
+	\begin{enumerate}
+		\item	$\phi(j\omega)$ ist reell
+		\item $\phi(j\omega) \geq 0$
+		\item $\phi(j\omega) = \phi(-j\omega)$
+		\item $P = X^2 = \varphi_{xx}(0) = \frac{1}{2\pi} \int\limits_{-\infty}^{\infty} \phi(j\omega) d\omega$
+		\item $\phi(0) = \int\limits_{-\infty}^{\infty} \varphi_{xx}(\tau)d\tau$
+	\end{enumerate}
