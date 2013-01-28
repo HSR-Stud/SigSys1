@@ -1,7 +1,8 @@
-tmp/*
-SigSys1.pdf
+/SigSys1.pdf
 /*.aux
 /*.log
 /*.out
-/*.gz
+/*.tcp
 /*.toc
+/*.tps
+/*.gz
