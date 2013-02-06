@@ -1,11 +1,10 @@
-RegT1E - Regelungstechnik 1
+SigSys1 - Signale und Systeme 1
 ======
 
 ## Erlaubte Hilfsmittel (nach Modulprüfung HS2012/13)
 
-* 2 Bücher
-* 10 A4-Seiten Zusammenfassung
-* *kein* Taschenrechner
+* Open-Book: Alle schriftlichen Hilfsmittel erlaubt (inkl. alte Prüfungen usw.)
+* normaler Taschenrechner (keine PCs, Tabletts)
 
 ## Ausdruck
 * Zusammenfassung am Besten als A5-Booklet ausdrucken
