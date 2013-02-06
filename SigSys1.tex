@@ -2,9 +2,10 @@
 % Dokumentinformationen %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\titleinfo}{Signale und Systeme 1 - Zusammenfassung}
-\newcommand{\authorinfo}{Braun \& Co, Rast \& Co., Gwerder,  K\"orner, Badertscher}
+\newcommand{\authorinfo}{Braun \& Co, Rast \& Co., Gwerder,  K\"orner, Badertscher, Bruhin}
 \newcommand{\versioninfo}{$Rev: 1.0 $ | 
-						gem\"ass Unterricht Heinz Mathis/HS2012} 
+							gem\"ass Unterricht Heinz Mathis/HS2012} 
+						
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Standard projektübergreifender Header für
@@ -15,7 +16,10 @@
 % DORT NUR ERGÄNZEN, NICHTS LÖSCHEN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{header/header}
-\usepackage{pdfpages}
+\usepackage{pdfpages, tabularx}
+
+\newcommand{\beispiel}[1]{\textcolor{brown}{\mbox{#1}}}
+\newcommand{\formel}[1]{\fcolorbox{black}{yellow}{#1}}
 
 % Möglichst keine Ergänzungen hier, sondern in header.tex
 \begin{document}
@@ -26,8 +30,8 @@
 
 \input{sections/Signalbeschreibung}
 \newpage
-\input{sections/Frequenzanalyse}
-\input{sections/Systeme}
+%\input{sections/Frequenzanalyse}
+%\input{sections/Systeme}
 \newpage
 %\input{sections/Signale}
 \section{Idiotenseite}
