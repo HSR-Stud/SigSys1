@@ -1,462 +1,555 @@
 \section{Signalbeschreibung \skript{1}}
-\subsection{Energie- und Leistungssignale \skript{3}}
-\begin{tabular}{|l|l|l|}
-	\hline
-	\textbf{Klasse 1: Energiesignal} & \multicolumn{2}{|c|}{\textbf{Klasse 2: Leistungssignale}} \\
-	\hline
-	zeitbegrenzt oder abklingend,  	& \multicolumn{2}{|c|}{nicht zeitbregrenzt} \\ 
-	einmalige Vorgänge, Impulse		& \multicolumn{2}{|c|}{}\\
-	$W_n < \infty$		 	& \multicolumn{2}{|c|}{$W_n = \infty $} \\
-	$P_n = 0$				& \multicolumn{2}{|c|}{$P_n \neq 0 $} \\
-	\hline
-							& \textbf{Klasse 2a: periodisch}	& \textbf{Klasse 2b: aperiodisch} \\
-	\hline
-	\parbox[c][4cm]{6cm}{\includegraphics[width=5.9cm]{./bilder/Signale/SinusAbklingend.png}} &
-	\parbox[c][4cm]{6cm}{\includegraphics[width=5.9cm]{./bilder/Signale/Dreieck.png}} &
-	\parbox[c][4cm]{6cm}{\includegraphics[width=5.9cm]{./bilder/Signale/Noise.png}} \\
-	\hline
-\end{tabular} \\
-
-\begin{tabular}{|p{6cm}|p{6cm}|p{6cm}|}
- \hline
- 	&\textbf{Zeitbereich} &  \textbf{Frequenzbereich} \\
- \hline
-	 Normierte Signalenergie & $E_n = W_n =
-	 \lim\limits_{T\to\infty}\,\int\limits_{-\frac{T}{2}}^\frac{T}{2}|f(t)|^2\,dt$ &
-	 $E_n = \frac{1}{2\pi}\,\int\limits_{-\infty}^\infty|F(j\omega)|^2\,dt$ \\
- \hline
-	 Normierte Signalleistung: & $P_n = \lim\limits_{T\to\infty}\,
-	 \frac{1}{T}\int\limits_{-\frac{T}{2}}^\frac{T}{2}|f(t)|^2\,dt$ &  $P_n = \frac{1}{2\pi}\,\int\limits_{-\infty}^\infty\left(
-	 \lim\limits_{T\to\infty}\frac{|F(j\omega)|^2}{T}\right)\,dt$ \\
-\hline
-\end{tabular}
-
-
-\subsection{Mittelwerte \skript{5}}
-\begin{tabular}{p{4.6cm}p{7.4cm}p{6cm}}
-	Arithmetischer Mittelwert, Gleichwert, Linearer MW &
-	$X_0 = \overline{X} = X_m = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x(t)dt$ &
-	(Kl. 2a) Ist die Fläche unter der Zeitfunktion über eine Periode.
-    \\
-	& $X_0 = \lim\limits_{T\to\infty} \frac{1}{T} \int\limits_{-\frac{T}{2}}^{\frac{T}{2}}x(t)dt \qquad$ &
-	(Kl. 2b)\\	
-		
-	Quadratischer MW, Leistung &
-	$X^2 = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x^2(t)dt$ & 
-	$X^n = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x^n(t)dt$ (MW $n$. Ordnung) 
-	\\
-	Effektivwert &
-	$X = X_{\text{eff}}= \sqrt{X^2} = \sqrt{\frac{1}{T} \int\limits ^{t_0+T} _{t_0}{x^2(t)dt}}$
-	& 
-	\\
-	Gleichrichtwert &
-	$X_{|m|} = \bar{|X|} = \frac{1}{T} \int\limits_{t_0}^{t_0+T}{|x(t)| dt}$ &
-    Arithm. Mittelwert der Zweiweggleichrichterschaltung
-    \\
-	Varianz, Standardabweichung	&
-	$\text{Var}(x)=\sigma^2= \frac {1} {T} \int\limits_{-T/2}^{T/2}(x(t)-X_0)^2dt = X^2-X_0^2$ &
-	Mittl. Abweichung im Quadrat
-	\\
-	& $X^2 = var(x)+X_0^2 = |X|^2 = var(|x|) + |X_0|^2$ & \\
-\end{tabular}
-
-\newpage
-
-\subsection{Funktionen}
-\begin{tabular}{ll}
-\textbf{Autokorrelationsfunktion (AKF)}
-	& ``Wie weit wird die Zukunft von der Vergangenheit geprägt?'' \\
-\parbox{6cm}{
-	\skript{8}\\
-	\includegraphics[width=4cm]{./bilder/akf1.png}\\
-	\includegraphics[width=4cm]{./bilder/akf2.png}
-	} 
-	& \parbox{12cm}{
-	Für \textbf{Energiesignale} (Klasse 1):
-	$$\varphi_{xx}(\tau) = \lim_{T\to\infty}\int\limits_{-T/2}^{T/2}
-	x(t)x(t-\tau)dt=
-	\lim_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt =
-	\varphi_{xx}(-\tau)$$
+	\renewcommand{\arraystretchOriginal}{1}
 	
-	Für \textbf{periodische Leistungssignale} (Klasse 2a):
-	$$\varphi_{xx}(\tau) = \frac {1} {T}
-	\int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt 
-	= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt =
-	\varphi_{xx}(-\tau)$$
+	\subsection{Signalklassen \skript{2}}
 	
-	Für \textbf{nichtperiodische, stochastische Leistungssignale} (Klasse 2b):
-	$$\varphi_{xx}(\tau) = \lim_{T\rightarrow\infty} \frac {1} {T}
-	\int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt=\lim_{T\rightarrow\infty}\frac {1}
-	{T} \int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt = \varphi_{xx}(-\tau)$$
-	
-	\textbf{Eigenschaften}
-	\begin{itemize}
-     \item $\varphi_{xx}(0) = X^2$ (Hat immer Diracstoss bei $\tau = 0$)
-     \item $\varphi_{xx}(\tau)=\varphi_{xx}(\tau\pm mT)$, d.h. die
-     AKF\index{Autokorrelationsfunktion} ist periodisch mit der gleichen Periode
-     $T$ wie das Signal $x(t)$.
-	\item $\varphi_{xx}(\tau)=\varphi_{xx}(-\tau)$: d.h. die AKF ist eine {\bf
-	gerade Funktion}
-	\item $\varphi_{xx}(0)\geq|\varphi_{xx}(\tau)|\quad$
-	\item $\varphi_{xx}(\tau)\geq (X_0)^2-\sigma^2\quad$
-   \end{itemize}
-   \begin{tabular}{ll}
-		 Beispiel: &$x(t) = a_k \cos(\omega t + \varphi) \Rightarrow \varphi_{xx}(\tau) =
-		 \frac{a_k^2}{2} \cos(\omega \tau)$\\
-		 & $x(t) = b_k \sin(\omega t + \varphi) \Rightarrow \varphi_{xx}(\tau) =
-		 \frac{b_k^2}{2} \cos(\omega \tau)$ 
+		\begin{tabular}{|l|c|l|}
+		\hline 
+		periodisch & $\Longleftrightarrow$ & nicht-periodisch \\ 
+		\hline 
+		kontinuierlich & $\Longleftrightarrow$ & zeitdiskret \\ 
+		\hline 
+		analog & $\Longleftrightarrow$ & digital \\ 
+		\hline 
+		reell & $\Longleftrightarrow$ & komplex \\ 
+		\hline 
+		eindimensional & $\Longleftrightarrow$ & mehrdimensional \\ 
+		\hline 
+		deterministisch & $\Longleftrightarrow$ & stochastisch \\ 
+		\hline 
 		\end{tabular}
-	} \\
-\hline & \\
-\textbf{Kreuzkorrelationsfunktion (KKF)}
-	& ``Wie ähnlich sind sich zwei Signale?'' \matlab{xcorr}\\
-\parbox{6cm}{
- 	\skript{11} \\
-	\includegraphics[width=4cm]{./bilder/kkf.png}
-	}
-	& \parbox{12cm}{
-	Für \textbf{Energiesignale} (Klasse 1):
-	$$\varphi_{xy}(\tau) = \lim_{T\rightarrow\infty}\int\limits_{-T/2}^{T/2}
-	x(t)y(t-\tau)dt =\int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt$$ 
 
-	Für \textbf{periodische Leistungssignale} (Klasse 2a):
-	$$\varphi_{xy}(\tau) = \frac {1} {T} \int\limits_{-T/2}^{T/2}  x(t)y(t-\tau)dt
-	= \frac {1} {T} \int\limits_{-T/2}^{T/2}  x(t+\tau)y(t)dt$$ 
+
+		\subsubsection{Energie- und Leistungssignale \skript{3}}
 		
-	Für \textbf{nichtperiodische, stochastische Leistungssignale} (Klasse 2b):
-	$$\varphi_{xy}(\tau) = \lim_{T\rightarrow\infty} \frac {1} {T}
-	\int\limits_{-T/2}^{T/2}x(t)y(t-\tau)dt = \lim_{T\rightarrow\infty}\frac {1}
-	{T} \int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt$$  
-	
-	Bei Signalen mit verschiedenen Frequenzen ist $\varphi_{xy}$ immer $0$, ausser die
-	Gleichstromanteile!\\
-	} \\
-\end{tabular}
-
-\begin{tabular}{ll}
-\textbf{Sprungfunktion \skript{16}}
-	& Einschaltfunktion, Einheitssprung, Heaviside-Function \matlab{heaviside} \\
-\parbox{6cm}{
-	\includegraphics[width=5.5cm]{./bilder/sprungfunktion.png}
-	}
-	& \parbox{12cm}{
-	$$u(t) = 1(t) = 
-  \begin{cases}
-    0 & \mbox{f"ur } t < 0,\\
-    \frac{1}{2} & \mbox{f"ur } t = 0,\\
-    1 & \mbox{f"ur } t > 0.\\
-  \end{cases}$$	
-	$$\mathcal{L:}\quad u(t) \; \laplace \; \frac1s$$
-	} \\
-
-\hline & \\
-\textbf{Signumfunktion \skript{17}}
-	& Vorzeichenfunktion \matlab{sign} \\
-\parbox{6cm}{
-	\includegraphics[width=5.5cm]{./bilder/sign.png}
-	}
-	
-	& \parbox{12cm}{
-	$$\sgn(t) =
-  \begin{cases}
-    -1 & \mbox{f"ur } t < 0,\\
-    0 & \mbox{f"ur } t = 0,\\
-    1 & \mbox{f"ur } t > 0.\\
-  \end{cases}$$
-	$$\mathcal{F:}\quad \sgn(t) \; \laplace \; \frac{-2j}{\omega}$$
-	\\
-	} \\
-\hline & \\
-
-\textbf{Rampenfunktion \skript{17}}
-	& \matlab{ramp} \\
-\parbox{6cm}{
-	\includegraphics[width=5.5cm]{./bilder/ramp.png}
-	}
-	& \parbox{12cm}{
-	$$r(t) = t u(t) =
-  \begin{cases}
-    0 & \mbox{f"ur } t \leq 0\\
-    t & \mbox{f"ur } t > 0\\
-  \end{cases}$$
-	$$\mathcal{L:}\quad r(t) \; \laplace \; \frac{1}{s^2}$$
-	\\
-	} \\
-\hline & \\
-
-\textbf{Rechteckimpuls \skript{18}}
-	&  \\
-\parbox{6cm}{
-	\includegraphics[width=5.5cm]{./bilder/rechteckimpuls.png}
-	}
-	& \parbox{12cm}{
-	$$p_a(t) = u(t+a) -u(t-a) = 
-  \begin{cases}
-    1 & \mbox{f"ur } |t| < a\\
-    \frac{1}{2} & \mbox{f"ur } |t| = a\\
-    0 & \mbox{f"ur } |t| > a\\
-  \end{cases}$$
-	$$\mathcal{F:}\quad p_a(t) \; \laplace \; 2a \sinc(a \omega) = \frac{2}{\omega} \sin(a \omega)$$
-	\\
-	} \\
-\hline & \\
-
-\textbf{Dreieckimpuls \skript{19}}
-	&  \\
-\parbox{6cm}{
-	\includegraphics[width=5.5cm]{./bilder/dreieckimpuls.png}
-	}
-	& \parbox{12cm}{
-	$$\Lambda_a(t) =
-  \begin{cases}
-    1 - \frac{|t|}{a}& \mbox{f"ur } |t| < a\\
-    0 & \mbox{f"ur } |t| \geq a\\
-  \end{cases}$$
-	$$\mathcal{F:}\quad \Lambda_a(t) \; \laplace \;
-	a\left(\frac{\sin(\frac{a\omega}{2})}{\frac{a\omega}{2}}\right)^2 = a \sinc^2\left(\frac{a\omega}{2}\right)$$ \\
-	} \\
-\hline & \\
-
-\textbf{Sincfunktion \skript{19}}
-	& \matlab{sinc}  \\
-\parbox{6cm}{
-	\includegraphics[width=5.5cm]{./bilder/sinc.png}
-	}
-	& \parbox{12cm}{
-	$$ \sinc_{\alpha}(t) = \frac{\sin(\alpha t)}{t} \qquad 
-	\sinc(\alpha t) = \frac{\sin(\alpha t)}{\alpha t}$$
-	
-	$$\mathcal{F:}\quad  \sinc_{\alpha}(t) = \frac{\sin(\alpha t)}{t} \; \laplace \;
-	\pi p_{\alpha}(\omega)$$
-	$$\mathcal{F:}\quad  \sinc(\alpha t) = \frac{\sin(\alpha t)}{\alpha t} \; \laplace \;
-	\frac{\pi}{\alpha} p_{\alpha}(\omega)$$ } \\
-\end{tabular}
-
-\begin{tabular}{ll}
-\textbf{Impulsfunktion \skript{20}}
-	& Diracimpuls, Diracstoss, Deltaimpuls \matlab{dirac} \\
-\parbox{5cm}{
-	\includegraphics[width=5cm]{./bilder/dirac.png}
-	}
-	& \parbox{13cm}{
-	$$\delta(t) =
-  \begin{cases}
-    \infty & \mbox{f"ur } t = 0\\
-    0 & \mbox{sonst}\\
-  \end{cases} \qquad \int\limits_{-\infty}^{\infty}\delta(t) dt = 1$$
-	\begin{tabular}{|r|c|l|}\hline
-	 1. & $\delta(at) = \frac{1}{|a|}\delta(t)$ & Skalierung\index{Skalierung}\\ \hline
-	 2. & $\delta(\frac{t-t_0}{a}) = |a|\cdot\delta(t-t_0)$ & Skalierung und Verschiebung  \\ \hline
-	 3. & $\delta(-t+t_0) = \delta(t-t_0)$ & symmetrisch\\ \hline
-	 4. & $\delta(-t) = \delta(t)$ & $\delta(t)=\mbox{ gerade Funktion}$ \\ \hline
-	 \textbf{5.} & $\int\limits_{-\infty}^{\infty}\delta(t-t_0)f(t)dt = f(t_0)$ & \textbf{Siebungseigenschaft}\\ \hline
-	 6. & $\delta(t-t_0)f(t) = f(t_0)\delta(t-t_0)$ &  Abtastung\index{Abtastung}\\ \hline
-	 \textbf{7.} & $\int\limits_{-\infty}^{\infty}A\cdot\delta(t)dt = A$ & \textbf{Spezialfall der Siebungseigenschaft} \\ \hline
-	 8. & $\delta(t-t_0)\ast f(t) = f(t-t_0)$ & Faltung\\ \hline
-	 9. & $\delta(t-t_1)\ast\delta(t-t_2) = \delta(t-t_1-t_2)$ & Faltung\index{Faltung}\\ \hline
-	10. & $\int\limits_{-\infty}^t\delta(\tau)d\tau = u(t);	\qquad \delta(t)=\frac{\partial u(t)}{\partial t}$ & 
-			Ableitung des Einheitssprungs\index{Ableitung}\\ \hline
-	11. & $\delta(t)=\lim\limits_{\omega\rightarrow \infty}\frac{\sin(\omega
-	t)}{\pi t}$ & Definition\\ \hline 
-	12. & $\mathcal{L}, \mathcal{F}:\quad \delta(t) \; \laplace \; 1$ 
-		& Frequenzbereich \\ 
-	& $1 \; \laplace \; 2\pi\delta(\omega)$ & \\	
-		\hline
-	\end{tabular}\\
-	\vspace{.1cm}\\
-	} \\
-\hline
-\end{tabular}
-
-
-\subsection{Rauschen \skript{24}}
-\begin{tabular}{ll}
-	& \matlab{randn} \\
-\parbox{7cm}{
-	\includegraphics[width=7cm]{./bilder/rauschen.png}
-	}
-	& \parbox{11cm}{
-	Ist die Intensit"at der
-	Rauschspannung "uber viele Frequenzdekaden
-	gleich verteilt, so spricht man von weissem Rauschen. \\
-	Signal to Noise Ratio: $\text{SNR} =
-	\frac{\text{Signalleistung}}{\text{Rauschleistung}}$ (rauschfrei $ \rightarrow
-	\infty$) \\ 
-	}
-\end{tabular}
-
-\begin{tabular}{lll}
-	Signal-Rausch-Verh"altnis (SNR): &
-	$a_r = 10\cdot \log_{10}(\frac{P_s}{P_r}) = 20\cdot \log_{10}(\frac{U_s}{U_r})$ &
-	$P_s,U_s$: Nutzsignal\\
-	
-	Rauschzahl (noise figure): &
-	$F = \frac{P_{sEingang}}{P_{rEingang}}\cdot\frac{P_{rAusgang}}{P_{sAusgang}}$ &
-	$P_r, U_r$: Rauschsignal\\
-	& $F=1$, bei einem idealen Vierpol &
-	$T$: absolute Temperatur ($0^{\circ} = 273.15K$)\\
-	
-	Rauschmass: &
-	$a_F = 10 \cdot \log_1(F) = a_{rEingang} - a_{rAusgang}$ & 
-	$\Delta f$: Bandbreite\\
-	
-	Effektive Rauschspannung: &
-	$U_r = \sqrt { 4 \cdot k \cdot T \cdot \Delta f \cdot R}$ & 
-	$k = 1.380662\cdot 10^{-23}\frac{J}{K}$: Boltzmann-Konstante\\
-	
-	Effktive Rauschleistung: &
-	$P_r = k \cdot T \cdot \Delta f$ & \\
-\end{tabular}
-
-\subsection{Amplitudenanalyse \skript{29}}
-\begin{tabular}{ll}
-	& ``Zeit während sich Signal in bestimmtem Amplitudenintervall aufhält'' \\
-\parbox{7cm}{
-	\includegraphics[width=7cm]{./bilder/amplitudenanalyse.png}
-	}
-	& \begin{minipage}[]{11cm}
-			$$p(a) = \lim_{da\rightarrow 0}\frac{\underbrace{\sum t\left(
-			a-\frac{da}{2}<x(t)\leq a+\frac{da}{2}\right)}_{dt}}{T\cdot da} = \frac{1}{T}\cdot
-			\frac{dt}{da}$$
-			$$\int\limits_{-\infty}^{\infty} p(a) da = 1; \qquad p(a) \geq 0  \quad \forall a$$
-			
-			\begin{tabular}{ll}
-            Linearer Mittelwert 
-            	& \fbox{$X_0  = \int\limits_{-\infty}^{\infty}a\cdot p(a)da$} \\ \\ 
-            Mittelwert $n$. Ordnung 
-            	& \fbox{$X^n = \int\limits_{-\infty}^{\infty}a^n\cdot p(a)da$} \\ \\
-						Varianz
-							& \fbox{$Var(x) = \int\limits_{-\infty}^{\infty}(a-X_0)^2\cdot p(a) da$} \\ \\
-            \end{tabular}
-      \end{minipage} \\
-\end{tabular}
-
-$\begin{array}{ll}
-	x_1(t) \text{ mit} & p_1(a) \\
-	x_2(t) \text{ mit} & p_2(a)
-\end{array} 
-\rightarrow x_3(t) = x_1(t) + x_2(t) \text{ mit } p_3(a) = (p_1 \ast p_2)(a)$
-
-%\newpage
-
-\begin{sidewaystable}
-\begin{center}
-\textbf{Zusammenstellung verschiedener Verteilungen \skript{39}} \\
-\begin{tabular}{|c|c|c|c|c|}\hline
-Verteilung & gleichverteilt & gaussf"ormig & sinusf"ormig & exponentiell\\ \hline\hline
- & 
-	\includegraphics[width=4.3cm]{./bilder/verteilungen-gleichvert.png}
- &
-	\includegraphics[width=4.3cm]{./bilder/verteilungen-gauss.png}
- &
-	\includegraphics[width=4.3cm]{./bilder/verteilungen-sinus.png}
- &
-	\includegraphics[width=4cm]{./bilder/verteilungen-expo.png} \\ \hline 
-Amplitudendichte & & & & \\ $p(a)=$ & $\begin{cases} \frac{1}{A}&|a-m|\leq
-\frac{A}{2},\\ 0&|a-m|>\frac{A}{2}.\\ \end{cases}$ &
-$\displaystyle\frac{1}{\sqrt{2\pi}\sigma}e^{\displaystyle\frac{-(a-\mu)^2}{2\sigma^2}}$ & $\begin{cases} \frac{1}{\pi\sqrt{A^2-a^2}}&|a|\leq A,\\ 0&|a|>A.\\ \end{cases}$ &
- $\begin{cases} 
-		\lambda e^{-\lambda a}  & a \geq 0\\
-		0 & a < 0
-	\end{cases}$\\ \hline  
-
- Wahrscheinlichkeit,& & & &\\ 
-dass die Amplitude $a$ & & & &\\  
-kleiner gleich $\alpha$ ist& & & & \\ 
-$P(a\!\leq\!\alpha)\!=\!\!\int\limits_{-\infty}^{\alpha}\!p(a)da=$ &
-$\begin{cases}0&\alpha<m-\frac{A}{2},\\ \frac{\alpha-(m-\frac{A}{2})}{A}&
-|\alpha-m|\leq\frac{A}{2} \\1&\alpha\geq m+\frac{A}{2}. \end{cases}$  &
-$Q\left(\frac{\displaystyle\mu-\alpha}{\displaystyle\sigma}\right)$ &
-$\begin{cases}0&\alpha\!\leq\!-A,\\
-\frac{1}{\pi}\left(\frac{\pi}{2}\!+\!\sin^{-1}\!\left(\frac{a}{A}\right)\right)&
-|\alpha|\!<\!A,\\1&\alpha\geq A. \end{cases}$ &
-$\begin{cases}
-	0 & \alpha < 0\\
-	1-e^{-\lambda \alpha} & \alpha \geq 0
-\end{cases}$\\ \hline      
- & & & & \\ 
-Mittelwert $X_0 =$& $m$ & $\mu$ & 0 & $\frac{1}{\lambda}$\\ 
-& & & &\\ \hline
-& & & &\\
-Varianz $\operatorname{Var}(x) = $& $\dfrac{A^2}{12}$
-& $\sigma^2$ & $\dfrac{A^2}{2}$ & $\frac{1}{\lambda^2}$\\ & & & & \\ \hline
-& & & &\\
-Leistung $X^2 =$& $m^2+\dfrac{A^2}{12}$ &
-$\mu^2+\sigma^2$ & $\dfrac{A^2}{2}$ & $\frac{2}{\lambda^2}$ \\ 
-& & & & \\ \hline
-\end{tabular}
-
-\textbf{Anmerkung zur gaussförmigen Verteilung:} Im Intervall $\mu \pm 3\sigma$
-sind 99,73\% aller Messwerte zu finden. In der Zeichung ist diese Stelle mit
-\textbf{b} gekennzeichnet.
-\end{center}
-\end{sidewaystable}
-
-
-
-
-\newpage
-\textbf{Zentraler Grenzwertsatz}\\ \\
-	$X_1, X_2, \ldots , X_n$ sind lauter identisch verteilte (nicht notwendig normalverteilt!)
-	unabhängige Zufallsvariablen mit demselben Erwartungswert $\mu$ und derselben Varianz $\sigma^2$
-	und mit $Z = \frac{X-\mu}{\sigma}$\\
-  Dann hat die Summe
-	\begin{equation}
-		S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n Z_i \nonumber
-	\end{equation}
-	den Erwartungswert $n \mu$ und die Varianz $n \sigma^2$. \\
-  Die damit verbundene standardisierte ($E(S_n) = 0, var(S_n) = 1$) Variable $S_n$ ist somit wie
-  folgt definiert: \\ 
-	\begin{equation}
-		S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n \frac{X_i - \mu}{\sigma}
-		= \frac{1}{\sqrt{n}\cdot \sigma}\left[\left(\sum\limits_{i=1}^n X_i\right) -n \mu\right]
-		=\dfrac{\bar{X} - \mu}{\sigma / \sqrt{n}} \nonumber
-	\end{equation}
-  Für $\boldsymbol{n \to \infty}$ strebt die Verteilung von $S_n$ gegen die
-  Standardnormalverteilung. \\
-\hrule
-
-\begin{tabular}{ll}
-\textbf{Faltung \skript{35}}
-	& Convolution, ``Addition zweier unabhängiger ergodischer Prozesse $n_i$'' \matlab{conv} \\
-\parbox{5cm}{
-	\includegraphics[width=5cm]{./bilder/faltung.png}
-	\\}
-	& \parbox{13cm}{
-	$p(a) =
-	\int\limits_{-\infty}^{\infty}p_1(\xi)\cdot p_2(a-\xi) d\xi = p_1(a)
-	\ast p_2(a) =  p_2(a) \ast p_1(a) = \int\limits_{-\infty}^{\infty}p_2(\xi)\cdot 
-  	p_1(a-\xi) d\xi$ \\
-  	Die Breite des Faltungsproduktes entspricht der Summe der Breite der
-  	einzelnen Faktoren.\\ \\
-  	Faltung im Zeitbereich $\rightarrow$ Multiplikation im Frequenzbereich 
-  	$$f(t) * g(t) \; \laplace \; F(s) G(s)$$
-  	Faltung im Frequenzbereich $\rightarrow$ Multiplikation im Zeitbereich
-  	$$F(s) * G(s) \; \Laplace \; \frac{1}{2 \pi} f(t) g(t)$$
-		Faltung zweier Normalverteilungen
-		$$N(\mu_1; \sigma_1) \ast N(\mu_2; \sigma_2) = N\left(\mu_1+\mu_2;\sqrt{\sigma_1^2+\sigma_2^2}\right)$$} \\
-\end{tabular}
-
-\begin{tabular}{ll}
-\hline & \\
-\textbf{Q-Funktion \skript{42}}
-	& ``Wahrscheinlichkeit eines Fehlers'' \matlab{erf, erfc} \\
-\parbox{6cm}{
-	\includegraphics[width=5cm]{./bilder/q-funktion.png}
-	}
-	& \parbox{12cm}{
-		Wenn die Resultate einer Messserie mit einer Normalverteilung mit Varianz
-		$\sigma$ und Erwartungswert $0$ auftreten, dann ist
-		$\operatorname{erf}\,\left(\,\frac{a}{\sigma \sqrt{2}}\,\right)$ die
-		Wahrscheinlichkeit, dass ein einzelner Messwert zwischen $-a$ und $a$ liegt. 
+			\begin{tabularx}{\textwidth}{|p{3.1cm}|c|c|X|}
+			\hline
+				{}
+			&	Klasse 1: Energiesignale
+			&	\multicolumn{2}{c|}{Klasse 2: Leistungssignale}
+			\\ \hline
+				{}
+			&	
+			&	Klasse 2a: periodisch
+			&	Klasse 2b: aperiodisch
+			\\ \hline 
+				{}
+			&	\includegraphics[width=2.3cm]{./bilder/sinc.png}
+			& 	\includegraphics[width=4.5cm]{./bilder/dreieck.png}
+			& 	\includegraphics[width=5.8cm]{./bilder/rauschen.png}
+			\\ \hline 
+				Energie-/Leistungs-dichtesprektrum
+			& 	$ E(j \omega) = |F(j \omega)|^2 $
+			& 	\multicolumn{2}{c|}{$ \Phi(j\omega) = \lim\limits_{T \to \infty} \dfrac{|F(j\omega)|^2}{T} $}
+			\\ \hline 
+				Normierte
+			& 	$ P_n = 0$
+			& 	\formel{$P_n = X^2$} (quadr. Mittelwert)
+			& 	$ P_n = \lim\limits_{T \rightarrow \infty} \frac{1}{T} 
+									\int\limits_{-T/2}\limits^{T/2} |f(t)|^2 dt $
+			\\
+				Signalleistung
+			&
+			& 	(Formeln rechts gelten auch)
+			& 	$ P_n = \dfrac{1}{2\pi} \cdot \int\limits_{-\infty}^{\infty} \Phi(j\omega) d\omega $
+			\\ \hline
+				Normierte
+			& 	$ E_n = \lim\limits_{T \rightarrow \infty} \int\limits_{-T/2}\limits^{T/2} |f(t)|^2 dt $
+			&	\multicolumn{2}{c|}{$ E_n = \infty $}
+			\\
+				Signalenergie
+			& 	$ E_n = \frac{1}{2 \pi} \int\limits_{-\infty}\limits^{\infty}
+									E(j \omega) d\omega $
+			&	\multicolumn{2}{c|}{}
+			\\ \hline
+			\end{tabularx}
+		
+		
+	\subsection{Mittelwerte \skript{5}}
+		
+		\begin{tabularx}{\textwidth}{p{4.7cm}p{8.1cm}X}
+			Arithmetischer Mittelwert, Gleichwert, Linearer MW
+		&	$X_0 = \overline{X} = X_m = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x(t)dt$
+		&	Ist die Fläche unter der Zeitfunktion über eine Periode.
 		\\
-		Tabelle \skript{53}\\
-		$$Q(\xi)=\frac{1}{\sqrt{2\pi}}\int\limits_{\xi}^{\infty}
-		e^{-\frac{y^2}{2}}dy$$
-		$$Q(\xi) = \frac12 \operatorname{erfc}\left(\frac{\xi}{\sqrt2}\right)
-		= \frac12 \left(1 - \operatorname{erf}\left( \frac{\xi}{\sqrt2}\right) \right)
-		$$ }
-\end{tabular}
+			Quadratischer MW, Leistung
+		&	$X^2 = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x^2(t)dt$
+		& 	\colorbox{yellow}{Oder mit Amplitudendichte!}
+		\\
+			{}
+		&	\multicolumn{2}{l}{$X^2	= \sum\limits_{k=-\infty}^{\infty} |c_k|^2 
+									= |c_0|^2 + 2 \cdot \sum\limits_{k=1}^{\infty} |c_k|^2
+									= \left( \frac{a_0}{2} \right)^2 + \sum\limits_{k=1}^{\infty} \dfrac{a_k^2 + b_k^2}{2}$}
+		\\
+			Mittelwert n. Ordnung
+		&	$X^n = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x^n(t)dt$
+		& 	{}
+		\\
+			Effektivwert
+		&	$X = X_{\text{eff}}= \sqrt{X^2} = \sqrt{\frac{1}{T} \int\limits ^{t_0+T} _{t_0}{x^2(t)dt}}$
+		&	{} 
+		\\
+			Gleichrichtwert
+		&	$X_{|m|} = \bar{|X|} = \frac{1}{T} \int\limits_{t_0}^{t_0+T}{|x(t)| dt}$
+		&	Arithm. Mittelwert der Zweiweggleichrichterschaltung
+	    \\
+			Varianz, Standardabweichung
+		&	$\text{Var}(x)=\sigma^2= \frac {1} {T} \int\limits_{-T/2}^{T/2}(x(t)-X_0)^2dt = X^2-X_0^2$
+		&	Mittlerer Fehler im Quadrat
+		\\
+		\end{tabularx} \\
+	
+		\textbf{Hinweis:} \\
+		\begin{tabularx}{\textwidth}{llX}
+			Für \textbf{reelle Signale} gilt: &
+			$ X^2 = |X|^2 = Var(|x|) + |X_0|^2 $ &
+			Dies kann die Berechnung des quadratischen Mittelwertes eines zum linearen Mittelwert symmetrischen Signales erleichtern.
+		\end{tabularx}
+		
+		
+	\subsection{Autokorrelationsfunktion (AKF) \skript{8}} 
+		\textit{''Wie weit wird die Zukunft von der Vergangenheit geprägt?''} \\
+		
+		\bgroup
+		\setlength{\tabcolsep}{1mm}
+		\begin{tabularx}{\textwidth}{|cX|cX|cX|}
+		\hline 
+			\multicolumn{2}{|c|}{\textbf{Energiesignale} (Klasse 1)} &
+			\multicolumn{2}{|c|}{\textbf{periodische Leistungssignale} (2a)} & 
+			\multicolumn{2}{|c|}{\textbf{stochastische Leistungssignale} (2b)}
+		\\ \hline 
+			$ \varphi_{xx}(\tau) $ &
+			$ 		= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
+				$ 	= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
+				$	= \varphi_{xx}(-\tau)$ &
+			$ \varphi_{xx}(\tau) $ &
+			$ 		= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
+				$	= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
+				$	= \varphi_{xx}(-\tau) $ &
+			$ \varphi_{xx}(\tau) $ &
+			$		= \lim\limits_{T\rightarrow\infty} \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
+				$	= \lim\limits_{T\rightarrow\infty}\frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
+				$	= \varphi_{xx}(-\tau) $
+		\\ \hline
+		\end{tabularx} 
+		\egroup
+		
+		\begin{tabularx}{\textwidth}{lX}
+		\parbox{6cm}{
+			\includegraphics[width=4cm]{./bilder/akf1.png}\\
+			\includegraphics[width=4cm]{./bilder/akf2.png}
+		} 
+		&
+		\parbox{12cm}{
+			\textbf{Eigenschaften}
+			\begin{itemize}
+     			\item $\varphi_{xx}(0) = X^2$ (Hat immer Diracstoss bei $\tau = 0$)
+     			\item $\varphi_{xx}(\tau)=\varphi_{xx}(\tau\pm mT)$, d.h. die AKF
+     				ist periodisch mit der gleichen Periode $T$ wie das Signal $x(t)$.
+				\item $\varphi_{xx}(\tau)=\varphi_{xx}(-\tau)$: d.h. die AKF ist eine {\bf gerade Funktion}
+				\item $\varphi_{xx}(0)\geq|\varphi_{xx}(\tau)|\quad$
+				\item $\varphi_{xx}(\tau)\geq (X_0)^2-\sigma^2\quad$
+   			\end{itemize}
+   			
+   			\textbf{Für Leistungssignale gilt:} \ \ \textit{$\Phi(j\omega)$: Leistungsdichtespektrum} \\
+   			\fbox{$ \dfrac{1}{2\pi} \cdot \int\limits_{-\infty}^{\infty} \Phi(j\omega) \cdot \e^{j\omega t} d\omega 
+						= \colorbox{yellow}{$\varphi_{xx}(t) \ \laplace \ \Phi(j\omega)$} =
+						\int\limits_{-\infty}^{\infty} \varphi_{xx}(t) \cdot \e^{-j\omega t} dt $}\\
+						
+			\textbf{Für Energiesignale gilt:} \ \ \textit{$E(j\omega)$: Energiedichtespektrum} \\
+   			\fbox{$ \dfrac{1}{2\pi} \cdot \int\limits_{-\infty}^{\infty} E(j\omega) \cdot \e^{j\omega t} d\omega 
+						= \colorbox{yellow}{$\varphi_{xx}(t) \ \laplace \ E(j\omega)$} =
+						\int\limits_{-\infty}^{\infty} \varphi_{xx}(t) \cdot \e^{-j\omega t} dt $}\\
+   
+   			\textbf{Beispiele}
+   			\begin{itemize}
+     			\item $x(t) = a_k \cos(\omega t + \varphi) \Rightarrow \varphi_{xx}(t) = \frac{a_k^2}{2} \cos(\omega t)$
+     			\item $x(t) = b_k \sin(\omega t + \varphi) \Rightarrow \varphi_{xx}(t) = \frac{b_k^2}{2} \cos(\omega t)$
+   			\end{itemize}
+   		} \\
+		\end{tabularx}
+		
 
+		
+	\subsection{Kreuzkorrelationsfunktion (KKF) \skript{11}} 
+		\textit{''Wie ähnlich sind sich zwei Signale?'' \ \matlab{xcorr}}
+	
+		\bgroup
+		\setlength{\tabcolsep}{1mm}
+		\begin{tabularx}{\textwidth}{|cX|cX|cX|}
+		\hline 
+			\multicolumn{2}{|c|}{\textbf{Energiesignale} (Klasse 1)} &
+			\multicolumn{2}{|c|}{\textbf{periodische Leistungssignale} (2a)} & 
+			\multicolumn{2}{|c|}{\textbf{stochastische Leistungssignale} (2b)}
+		\\ \hline 
+			$ \varphi_{xy}(\tau) $ &
+			$ 		= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
+				$ 	= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
+			$ \varphi_{xy}(\tau) $ &
+			$ 		= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
+				$	= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
+			$ \varphi_{xy}(\tau) $ &
+			$		= \lim\limits_{T\rightarrow\infty} \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
+				$	= \lim\limits_{T\rightarrow\infty}\frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $
+		\\ \hline
+		\end{tabularx} 
+		\egroup
 
+		\begin{tabularx}{\textwidth}{llX}
+		\parbox{2.9cm}{
+			\includegraphics[width=2.9cm]{./bilder/kkf1.png}
+		} 
+		&
+		\parbox{3.9cm}{
+			\includegraphics[width=3.9cm]{./bilder/kkf2.png}
+		} 
+		&
+		\parbox{10cm}{
+			\textbf{Eigenschaften}
+			\begin{itemize}
+     			\item Bei Signalen mit verschiedenen Frequenzen ist $\varphi_{xy}$ immer $0$!
+     			\item Bei stochastischen Signalen ist $\varphi_{xy}$ immer $0$!
+   			\end{itemize}
+   			
+   			\textbf{Für stochastische Leistungssignale (Klasse 2b) gilt:} \\
+   			\fbox{$ \dfrac{1}{2\pi} \int\limits_{-\infty}^{\infty} \Phi_{xy}(j\omega) \e^{j\omega t} d\omega 
+						= \colorbox{yellow}{$\varphi_{xy}(t) \ \laplace \ \Phi_{xy}(j\omega)$} =
+						\int\limits_{-\infty}^{\infty} \varphi_{xy}(t) \e^{-j\omega t} dt $}\\
+   		} \\
+		\end{tabularx}
+		
+		
+	\subsection{Rauschen \skript{24} \matlab{randn}}
+	
+		\begin{tabularx}{\textwidth}{lX}
+			\parbox{8cm}{
+				\includegraphics[width=8cm]{./bilder/rauschen2.png}
+			} &
+			\parbox{9.5cm}{
+			Ist die Intensität der
+			Rauschspannung "uber viele Frequenzdekaden
+			gleich verteilt, so spricht man von weissem Rauschen.\\ \\
+			\textbf{Ideale Blindwiderstände verursachen kein Rauschen!}
+			\begin{itemize}
+     			\item $\text{SNR} = \frac{P_s}{P_r} = \frac{\text{Signalleistung}}{\text{Rauschleistung}}$ (rauschfrei: $ \text{SNR} \rightarrow \infty$) 
+     			\item Effektive Rauschspannung: \fbox{$U_r = \sqrt { 4 \cdot k \cdot T \cdot \Delta f \cdot R}$}
+     			\item Effektive Rauschleistung: \fbox{$P_r = k \cdot T \cdot \Delta f$}
+     			\item Bolzmann-Konstante: $k =1.380662 \cdot 10^{-23}\frac{J}{K}$
+   			\end{itemize}
+			}
+		\end{tabularx}\\
+		
+		Siehe auch Beispiel 2.27 zum \textbf{weissen Rauschen}: \skript{82}
+		
+		
+		\subsubsection{Schrotrauschen \skript{28}}
+		
+		Durchschnittliche Schrotrauschleistung: \fbox{$I_{Schrotrauschen}^2 = 2 \cdot I \cdot e \cdot \Delta f$} $e = 1.602176 \cdot 10^{-9} As$
+		
+	\subsection{Signal-Rausch-Verhältnis (SNR) \skript{26}}
+	
+		Zur Qualitätsbeurteilung von Signalen wird das Verhältnis zwischen der Leistung des Nutzsignales $P_s$ und der 
+		des Rauschsignales $P_r$ gebildet. Dieses Verhältnis wird \textbf{Störabstand} oder \textbf{Rauschabstand} $a:r$ genannt.\\
+	
+		\formel{$a_r = 10 \cdot log_{10} \left(\frac{P_s}{P_r}\right) = 20 \cdot log_{10} \left(\frac{U_s}{U_r}\right)$}
+		$[a_r] = dB$
+	
+	
+	\subsection{Rauschzahl und Rauschmass \skript{26}}
+	
+		Jeder Vierpol verkleinert den Rauschabstand des Ausgangssignales gegenüber dem Rauschabstand des Eingangssignales.
+		Die Verschlechterung des Rauschleistungsabstandes wird durch die Rauschzahl $F$ \textit{(noise figure)} angegeben.
+		Es ist das Verhältnis des Rauschabstandes am Eingang zum Rauschabstand am Ausgang eines Vierpoles.\\
+		
+		\begin{tabular}{lll}
+			\textbf{Rauschzahl:}
+		&	\fbox{$F 	= \dfrac{\text{SNR}_{Eingang}}{\text{SNR}_{Ausgang}}
+						= \dfrac{\frac{P_{sEingang}}{P_{rEingang}}}{\frac{P_{sAusgang}}{P_{rAusgang}}} 
+						= \frac{P_{sEingang}}{P_{rEingang}} \cdot \frac{P_{rAusgang}}{P_{sAusgang}}$}
+		&	Idealer Vierpol: $F = 1$
+		\\
+			\textbf{Rauschmass} (logarithmisch):
+		&	\formel{$a_F = 10 \cdot log_{10} (F) = a_{rEingang} - a_{rAusgang}$}
+		&	$[a_F] = dB$
+		\end{tabular}\\
+		
+		\subsubsection{Rauschen in Verstärkeranordnungen \skript{26}}
+		
+			\begin{tabular}{ll}
+				\parbox{8cm}{
+					\includegraphics[width=8cm]{./bilder/rauschzahl.png}
+				}
+			&
+				$F_{total} = \underbrace{\underbrace{\underbrace{\underbrace{
+								1}_{F_{00}}
+								+ \frac{P_{r1}}{P_r \cdot G_1}}_{F_{01}}
+								+ \frac{P_{r2}}{P_r \cdot G_1 \cdot G_2}}_{F_{02}}
+								+ \frac{P_{r3}}{P_r \cdot G_1 \cdot G_2 \cdot G_3} }_{F_{03}}
+								+ \ldots $
+			\end{tabular} \\
+			Wichtig ist, dass die \textbf{ersten beiden Stufen} sehr rauscharm sind und eine hohe Verstärkung haben!
+	
+	\subsection{Amplitudenanalyse von Signalen \skript{29}}
+	
+		\begin{tabular}{ll}
+			\parbox{7cm}{
+				\includegraphics[width=7cm]{./bilder/amplitudenanalyse.png}
+			}
+		& 	\begin{minipage}[]{11cm}
+			''Zeit während sich Signal in bestimmtem Amplitudenintervall aufhält''\\
+				\fbox{$p(a) 	= \lim\limits_{da \rightarrow 0}\frac{\underbrace{\sum t\left(
+								a-\frac{da}{2}<x(t)\leq a+\frac{da}{2}\right)}_{dt}}{T\cdot da}
+							= \frac{1}{T}\cdot\frac{dt}{da}$}\\
+      		\end{minipage}
+		\\
+			\parbox{7cm}{
+				\includegraphics[width=7cm]{./bilder/amplitudenanalyse2.png}
+			}
+		& 	\begin{minipage}[]{11cm}
+				\textbf{Eigenschaften}
+				\begin{itemize}
+					\item Es gibt keine negativen Werte! $p(a) \geq 0 \ \ \forall a$
+     				\item \fbox{$\int\limits_{-\infty}^{\infty} p(a) da = 1$}
+     				\item \fbox{$p(a_1 < a < a_2) = \int\limits_{a_1}^{a_2} p(a) da$}
+   				\end{itemize}
+				
+      		\end{minipage}
+		\end{tabular}\\ \\
+	
+		\begin{tabular}{ll}
+        		\textbf{Linearer Mittelwert:} \fbox{$X_0  = \int\limits_{-\infty}^{\infty}a\cdot p(a)da$}
+        	&	\textbf{Mittelwert $n$. Ordnung:} \fbox{$X^n = \int\limits_{-\infty}^{\infty}a^n\cdot p(a)da$}\\
+        	&	\\
+        		\textbf{Varianz:} \fbox{$Var(x)  = \int\limits_{-\infty}^{\infty}(a-X_0)^2 \cdot p(a)da$}
+        	&
+        \end{tabular}\\ \\
+	
+		\textbf{Beispiel:}\\
+		\beispiel{
+		\begin{tabularx}{\textwidth}{cX}
+			\parbox{7cm}{
+				\includegraphics[width=7cm]{./bilder/amplitudenverteilung_bsp1.png}
+			}
+		&	\begin{minipage}[]{11cm}
+				\fbox{$f(t) = sin(t)$} \\
+				$t = arcsin(a)$ \\
+				$\frac{dt}{da} = 2 \cdot \frac{d(arcsin(a))}{da} = 2 \cdot \frac{1}{\sqrt{1-a^2}}$ \\
+				\textit{Der Faktor $2$ kommt daher, dass die Sinusfunktion nicht eindeutig ist!}\\
+				\fbox{$p(a) = \frac{1}{T} \cdot \frac{dt}{da} = \frac{2}{2 \pi} \cdot \frac{1}{\sqrt{1-a^2}}$}
+      		\end{minipage}
+		\end{tabularx}
+		}
+		
+	\subsection{Zentraler Grenzwertsatz}
+		$X_1, X_2, \ldots , X_n$ sind lauter identisch verteilte (nicht notwendig normalverteilt!)
+		unabhängige Zufallsvariablen mit demselben Erwartungswert $\mu$ und derselben Varianz $\sigma^2$
+		und mit $Z = \frac{X-\mu}{\sigma}$\\
+	  	Dann hat die Summe
+		\begin{equation}
+			S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n Z_i \nonumber
+		\end{equation}
+		den Erwartungswert $n \mu$ und die Varianz $n \sigma^2$. \\
+	  	Die damit verbundene standardisierte ($E(S_n) = 0, var(S_n) = 1$) Variable $S_n$ ist somit wie
+	  	folgt definiert: \\ 
+		\begin{equation}
+			S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n \frac{X_i - \mu}{\sigma}
+			= \frac{1}{\sqrt{n}\cdot \sigma}\left[\left(\sum\limits_{i=1}^n X_i\right) -n \mu\right]
+			=\dfrac{\bar{X} - \mu}{\sigma / \sqrt{n}} \nonumber
+		\end{equation}
+	  	Für $\boldsymbol{n \to \infty}$ strebt die Verteilung von $S_n$ gegen die Standardnormalverteilung.
+	
+	\newpage
+	\subsection{Stochastische Signale und deren Verteilungen \skript{32}}
 
+		\rotatebox{90}{
+		\begin{minipage}[]{23cm}
+			\begin{tabular}{|c|c|c|c|c|}
+			\hline
+				Verteilung
+			& 	\textbf{gleichverteilt}
+			& 	\textbf{gaussförmig}
+			& 	\textbf{sinusförmig}
+			&	\textbf{exponentiell}
+			\\ \hline\hline
+			& 	\includegraphics[width=4.3cm]{./bilder/verteilungen-gleichvert.png}
+			&	\includegraphics[width=4.3cm]{./bilder/verteilungen-gauss.png}
+			&	\includegraphics[width=4.3cm]{./bilder/verteilungen-sinus.png}
+			&	\includegraphics[width=3cm]{./bilder/verteilungen-exp.png}
+			\\ \hline 
+				Amplitudendichte
+			& & & &
+			\\ 
+				$p(a)=$
+			& 	$\begin{cases} \frac{1}{A}&|a-m|\leq \frac{A}{2},\\ 0&|a-m|>\frac{A}{2}.\\ \end{cases}$
+			&	$\displaystyle\frac{1}{\sigma \sqrt{2\pi}}e^{\displaystyle\frac{-(a-\mu)^2}{2\sigma^2}}$
+			& 	$\begin{cases} \frac{1}{\pi\sqrt{A^2-a^2}}&|a|\leq A,\\ 0&|a|>A.\\ \end{cases}$
+			&	$\begin{cases} \lambda \e^{-\lambda a} & a \geq 0, \\ 0 & a<0.\\ \end{cases}$
+			\\ \hline  
+			 	Wahrscheinlichkeit,
+			& & & &
+			\\ 
+				dass die Amplitude $a$
+			& & & &
+			\\  
+				kleiner gleich $\alpha$ ist
+			& & & &
+			\\ 
+				$P(a\!\leq\!\alpha)\!=\!\!\int\limits_{-\infty}^{\alpha}\!p(a)da=$
+			&	$\begin{cases}0&\alpha<m-\frac{A}{2},\\ \frac{\alpha-(m-\frac{A}{2})}{A}&
+					|\alpha-m|\leq\frac{A}{2} \\1&\alpha\geq m+\frac{A}{2}. \end{cases}$
+			&	$Q\left(\frac{\displaystyle\mu-\alpha}{\displaystyle\sigma}\right)$
+			&	$\begin{cases}0&\alpha\!\leq\!-A,\\ \frac{1}{\pi}\left(\frac{\pi}{2}\!+\!\sin^{-1}\!
+					\left(\frac{a}{A}\right)\right)&|\alpha|\!<\!A,\\1&\alpha\geq A. \end{cases}$ 
+			&	$\begin{cases} 0 & a < 0, \\ 1-\e^{-\lambda a} & a \geq 0.\\ \end{cases}$
+			\\ \hline      
+			& & & &
+			\\ 
+				linearer Mittelwert $X_0 =$
+			& 	$m$
+			& 	$\mu$
+			& 	$0$
+			&	$\dfrac{1}{\lambda}$
+			\\ 
+			& & & &
+			\\ \hline
+			& & & &
+			\\
+				Varianz $\operatorname{Var}(x) = $
+			& 	$\dfrac{A^2}{12}$
+			& 	$\sigma^2$ 
+			& 	$\dfrac{A^2}{2}$ 
+			&	$\dfrac{1}{\lambda^2}$
+			\\
+				$X^2 - X_0^2$ & & & &
+			\\ \hline
+			& & & &
+			\\
+				Leistung $X^2 =$
+			& 	$m^2+\dfrac{A^2}{12}$ 
+			&	$\mu^2+\sigma^2$ 
+			& 	$\dfrac{A^2}{2}$
+			&	$\dfrac{2}{\lambda^2}$
+			\\
+				$\operatorname{Var}(x) + X_0^2$
+			& & & &
+			\\
+				(quadratischer Mittelwert) 
+			& & & &
+			\\ \hline
+			\end{tabular}\\ \\
+			\textbf{Anmerkung zur gaussförmigen Verteilung:}\\
+			Im Intervall $\mu \pm 3\sigma$ sind 99,73\% aller Messwerte zu finden.
+			In der Zeichung ist diese Stelle mit \textbf{b} gekennzeichnet.\\ \\
+			Allgemein: \formel{$\operatorname{Var}(x) = X^2 - X_0^2$}
+		\end{minipage}
+		}
+		
+		
+	\newpage
+	\subsection{Faltung \skript{35}}
+	
+		\begin{tabularx}{\textwidth}{lX}
+			\parbox{5cm}{
+				\includegraphics[width=5cm]{./bilder/faltung.png}
+			}
+		& 	\parbox{13cm}{
+				Convolution, ``Addition zweier unabhängiger ergodischer Prozesse $n_i$'' \matlab{conv}\\
+				\formel{$p(a) 	= p_1(a) \ast p_2(a)
+							= p_2(a) \ast p_1(a)
+							= \int\limits_{-\infty}^{\infty}p_1(\xi)\cdot p_2(a-\xi) d\xi$
+				} \\
+				
+			  	\begin{itemize}
+			  		\item Gesamtbreite der Faltung = Summe der Breiten aller Funktionen
+			  		\item Startpunkt = Summe aller Startpunkte
+			  		\item Endpunkt = Summe aller Endpunkte
+			  		\item $f(t) * g(t) \ \laplace \ F(s) G(s)$
+			  		\item $F(s) * G(s) \ \Laplace \ \frac{1}{2 \pi} f(t) g(t)$
+			  	\end{itemize}
+			}
+		\\
+			\textbf{Faltung zweier Normalverteilungen:}
+		&
+			Ergibt wieder eine Normalverteilung: \newline
+			\fbox{$N(\mu_1, \sigma_1) \ast N(\mu_2, \sigma_2) = 
+				N \left( \underbrace{\mu_1 + \mu_2}_{\mu} \underbrace{\sqrt{\sigma_1^2 + \sigma_2^2}}_{\sigma} \right)$}
+		\\ & \\
+			\textbf{Zentraler Grenzwertsatz:}
+		&	Unendlich viele unabhängige Prozesse miteinander gefaltet ergibt
+				(unabhängig von den einzelnen Verteilungen) eine \textbf{Normalverteilung}.
+		\end{tabularx}
+		
+		
+	\subsection{Q-Funktion \skript{42}}
+	
+		\begin{tabular}{ll}
+			\parbox{6cm}{
+				Tabelle \skript{53} \\
+				\includegraphics[width=5cm]{./bilder/q-funktion.png}
+			}
+		& 	\parbox{12cm}{
+				``Wahrscheinlichkeit eines Fehlers'' \matlab{erf, erfc} \\
+				Wenn die Resultate einer Messserie mit einer Normalverteilung mit Varianz
+				$\sigma$ und Erwartungswert $0$ auftreten, dann ist
+				$\operatorname{erf}\,\left(\,\frac{a}{\sigma \sqrt{2}}\,\right)$ die
+				Wahrscheinlichkeit, dass ein einzelner Messwert zwischen $-a$ und $a$ liegt. 
+				\\
+				\fbox{$Q(\xi) = 1-Q(-\xi) = \frac{1}{\sqrt{2\pi}}\int\limits_{\xi}^{\infty}
+				e^{-\frac{y^2}{2}}dy$} \\
+				\fbox{$Q(\xi) = \frac12 \operatorname{erfc}\left(\frac{\xi}{\sqrt2}\right)
+				= \frac12 \left(1 - \operatorname{erf}\left( \frac{\xi}{\sqrt2}\right) \right)$} \\
+			}
+		\end{tabular}
+	
+	
+	\subsubsection{Beispiel: Wahrscheinlichkeit einer Falschdetektierung eines Schwellwertdetektors \skript{40}}
+		
+		\begin{tabularx}{\textwidth}{ccX}
+			\multicolumn{2}{c}{
+				\parbox{7cm}{
+					\includegraphics[width=7cm]{./bilder/schwellwertdetektor1.png}
+				}
+			}
+		&	\beispiel{\parbox{10.5cm}{
+				\textbf{Gegeben:} $\mu = 0V$, $\sigma^2 = 1V^2$\\
+				$P_{F1}$ ist die Fehlerwahrscheinlichkeit, dass 5V gesendet wurde, der Detektor sich aber für -5V entschieden hat
+				($P_{F2}$ umgekehrt).
+			}}
+		\\
+			\parbox{2.5cm}{
+				\includegraphics[width=3.5cm]{./bilder/schwellwertdetektor2.png}
+			}
+		&	\parbox{2.5cm}{
+				\includegraphics[width=3.5cm]{./bilder/schwellwertdetektor3.png}
+			}
+		& 	\beispiel{\parbox{10.5cm}{
+				$P_{F2} 	= \frac{1}{2} \cdot \int\limits_{0V}^{\infty V} p_2(a+5V) da
+						= \frac{1}{2} \cdot \int\limits_{0V}^{\infty V} \dfrac{1}{1V \cdot \sqrt{2 \pi}} \e^{\dfrac{-(a+5V)^2}{2 \cdot 1V^2}} da $\\
+				$P_{F1} 	= \frac{1}{2} \cdot \int\limits_{-\infty V}^{0V} p_2(a-5V) da
+						= \frac{1}{2} \cdot \int\limits_{-\infty V}^{0V} \dfrac{1}{1V \cdot \sqrt{2 \pi}} \e^{\dfrac{-(a-5V)^2}{2 \cdot 1V^2}} da $
+			}}
+		\\
+			\multicolumn{2}{c}{
+				\parbox{7cm}{
+					\includegraphics[width=7cm]{./bilder/schwellwertdetektor4.png}
+				}
+			}
+		&	\beispiel{\parbox{10.5cm}{
+				\textbf{Substitution:} $y = \dfrac{a-5V}{1V}$, $dy = \dfrac{da}{1V}$ \\
+				\fbox{$P_{F1} = \frac{1}{2} \cdot \int\limits_{-\infty}^{-5} \dfrac{1}{\sqrt{2 \pi}} \e^{\dfrac{-y^2}{2}} dy 
+						= \frac{1}{2} \cdot \int\limits_{5}^{\infty} \dfrac{1}{\sqrt{2 \pi}} \e^{\dfrac{-y^2}{2}} dy 
+						= \frac{1}{2} \cdot Q(5) $} \\
+				\fbox{$P_{F2} 	= \frac{1}{2} \cdot Q(5) $} \\
+				\textbf{Gesamte Fehlerwahrscheinlichkeit:}\\
+				\fbox{$P_F = P_{F1} + P_{F2} = Q(5) = 2.867 \cdot 10^{-7}$}
+			}}
+		\\ 
+		\end{tabularx}
+
+	\newpage
+	\subsection{Zusammenstellung einiger wichtiger Funktionen \skript{45}}
+
+		\begin{center}
+			\includegraphics[width=24.5cm,angle=90]{./bilder/zusammenstellung.png}
+		\end{center}
+	
