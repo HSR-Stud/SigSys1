@@ -107,8 +107,8 @@
 		
 		
 	\subsection{Autokorrelationsfunktion (AKF) \skript{8}} 
-		\textit{''Wie weit wird die Zukunft von der Vergangenheit geprägt?''} \\
-		
+	Die Autokorrelation ist ein Mass für die innere Kohärenz (Ähnlichkeit) eines Signals (Wie weit wird die Zukunft von der Vergangenheit geprägt?).
+	
 		\bgroup
 		\setlength{\tabcolsep}{1mm}
 		\begin{tabularx}{\textwidth}{|cX|cX|cX|}
@@ -128,7 +128,7 @@
 			$ \varphi_{xx}(\tau) $ &
 			$		= \lim\limits_{T\rightarrow\infty} \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
 				$	= \lim\limits_{T\rightarrow\infty}\frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
-				$	= \varphi_{xx}(-\tau) $
+				$ = \varphi_{xx}(-\tau) $
 		\\ \hline
 		\end{tabularx} 
 		\egroup
@@ -142,7 +142,7 @@
 		\parbox{12cm}{
 			\textbf{Eigenschaften}
 			\begin{itemize}
-     			\item $\varphi_{xx}(0) = X^2$ (Hat immer Diracstoss bei $\tau = 0$)
+     			\item $\varphi_{xx}(0) = X^2 = (X_0)^2+\sigma^2$ (Hat immer Diracstoss bei $\tau = 0$)
      			\item $\varphi_{xx}(\tau)=\varphi_{xx}(\tau\pm mT)$, d.h. die AKF
      				ist periodisch mit der gleichen Periode $T$ wie das Signal $x(t)$.
 				\item $\varphi_{xx}(\tau)=\varphi_{xx}(-\tau)$: d.h. die AKF ist eine {\bf gerade Funktion}
@@ -167,12 +167,10 @@
    			\end{itemize}
    		} \\
 		\end{tabularx}
-		
-
-		
+				
 	\subsection{Kreuzkorrelationsfunktion (KKF) \skript{11}} 
-		\textit{''Wie ähnlich sind sich zwei Signale?'' \ \matlab{xcorr}}
-	
+		Die Kreuzkorrelationsfunktion von periodischen Leistungssignalen (Klasse 2a) ist ein Mass für die Ähnlichkeit von zwei verschiedenen Signalen . \textit{''Wie ähnlich sind sich zwei Signale?'' \ \matlab{xcorr}}
+		\\	
 		\bgroup
 		\setlength{\tabcolsep}{1mm}
 		\begin{tabularx}{\textwidth}{|cX|cX|cX|}
