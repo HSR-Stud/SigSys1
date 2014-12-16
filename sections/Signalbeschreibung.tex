@@ -22,21 +22,21 @@
 
 		\subsubsection{Energie- und Leistungssignale \skript{3}}
 		
-			\begin{tabularx}{\textwidth}{|p{3.1cm}|c|c|X|}
+			\begin{tabularx}{\textwidth}{|p{3.1cm}|c|c|c|}
 			\hline
 				{}
-			&	Klasse 1: Energiesignale
+			&	\multirow{2}{*}{Klasse 1: Energiesignale}
 			&	\multicolumn{2}{c|}{Klasse 2: Leistungssignale}
-			\\ \hline
+			\\ 
 				{}
 			&	
 			&	Klasse 2a: periodisch
 			&	Klasse 2b: aperiodisch
 			\\ \hline 
 				{}
-			&	\includegraphics[width=2.3cm]{./bilder/sinc.png}
-			& 	\includegraphics[width=4.5cm]{./bilder/dreieck.png}
-			& 	\includegraphics[width=5.8cm]{./bilder/rauschen.png}
+			&	\includegraphics[width=3.3cm]{./bilder/sinc.png}
+			& 	\includegraphics[width=3.5cm]{./bilder/dreieck.png}
+			& 	\includegraphics[width=5.29cm]{./bilder/rauschen.png}
 			\\ \hline 
 				Energie-/Leistungs-dichtesprektrum
 			& 	$ E(j \omega) = |F(j \omega)|^2 $
@@ -54,12 +54,12 @@
 			& 	$ P_n = \dfrac{1}{2\pi} \cdot \int\limits_{-\infty}^{\infty} \Phi(j\omega) d\omega $
 			\\ \hline
 				Normierte
-			& 	$ E_n = \lim\limits_{T \rightarrow \infty} \int\limits_{-T/2}\limits^{T/2} |f(t)|^2 dt $
-			&	\multicolumn{2}{c|}{$ E_n = \infty $}
+			& 	$ W_n = \lim\limits_{T \rightarrow \infty} \int\limits_{-T/2}\limits^{T/2} |f(t)|^2 dt $
+			&	\multicolumn{2}{c|}{$ W_n = \infty $}
 			\\
 				Signalenergie
-			& 	$ E_n = \frac{1}{2 \pi} \int\limits_{-\infty}\limits^{\infty}
-									E(j \omega) d\omega $
+			& 	$ W_n = \frac{1}{2 \pi} \int\limits_{-\infty}\limits^{\infty}
+									W(j \omega) d\omega $
 			&	\multicolumn{2}{c|}{}
 			\\ \hline
 			\end{tabularx}
@@ -69,28 +69,27 @@
 		
 		\begin{tabularx}{\textwidth}{p{4.7cm}p{8.1cm}X}
 			Arithmetischer Mittelwert, Gleichwert, Linearer MW
-		&	$X_0 = \overline{X} = X_m = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x(t)dt$
-		&	Ist die Fläche unter der Zeitfunktion über eine Periode.
+		&	$X_0 = \overline{X} = X_m = \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)dt$
+		&	Ist die Fläche unter der Zeitfunktion über eine Periode, nur Klasse 2a
+		\\
+		    {}
+		&   $X_0 = \lim\limits_{T\rightarrow \infty}{\frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)dt}$
+		&   nur Klasse 2b
 		\\
 			Quadratischer MW, Leistung
-		&	$X^2 = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x^2(t)dt$
-		& 	\colorbox{yellow}{Oder mit Amplitudendichte!}
-		\\
-			{}
-		&	\multicolumn{2}{l}{$X^2	= \sum\limits_{k=-\infty}^{\infty} |c_k|^2 
-									= |c_0|^2 + 2 \cdot \sum\limits_{k=1}^{\infty} |c_k|^2
-									= \left( \frac{a_0}{2} \right)^2 + \sum\limits_{k=1}^{\infty} \dfrac{a_k^2 + b_k^2}{2}$}
+		&	$X^2 = \frac {1} {T} \int\limits_{-T/2}^{T/2} x^2(t)dt$
+		& 	nur Klasse 2a
 		\\
 			Mittelwert n. Ordnung
-		&	$X^n = \frac {1} {T} \int\limits_{t_0}^{t_0+T} x^n(t)dt$
-		& 	{}
+		&	$X^n = \frac {1} {T} \int\limits_{-T/2}^{T/2} x^n(t)dt$
+		& 	nur Klasse 2a
 		\\
 			Effektivwert
-		&	$X = X_{\text{eff}}= \sqrt{X^2} = \sqrt{\frac{1}{T} \int\limits ^{t_0+T} _{t_0}{x^2(t)dt}}$
-		&	{} 
+		&	$X = X_{\text{eff}}= \sqrt{X^2} = \sqrt{\frac{1}{T} \int\limits_{-T/2}^{T/2}{x^2(t)dt}}$
+		&	nur Klasse 2a
 		\\
 			Gleichrichtwert
-		&	$X_{|m|} = \bar{|X|} = \frac{1}{T} \int\limits_{t_0}^{t_0+T}{|x(t)| dt}$
+		&	$X_{|m|} = \bar{|X|} = \frac{1}{T} \int\limits_{-T/2}^{T/2}{|x(t)| dt}$
 		&	Arithm. Mittelwert der Zweiweggleichrichterschaltung
 	    \\
 			Varianz, Standardabweichung
