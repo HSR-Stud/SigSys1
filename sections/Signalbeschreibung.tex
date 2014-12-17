@@ -236,18 +236,23 @@
 			}
 		\end{tabularx}\\
 		
-		Siehe auch Beispiel 2.27 zum \textbf{weissen Rauschen}: \skript{82}
-		
 	\subsection{Signal-Rausch-Verhältnis (SNR) \skript{27}}
 	
 		Zur Qualitätsbeurteilung von Signalen wird das Verhältnis zwischen der Leistung des Nutzsignales $P_s$ und der 
-		des Rauschsignales $P_r$ gebildet. Dieses Verhältnis wird \textbf{Störabstand} oder \textbf{Rauschabstand} $a:r$ genannt.\\
+		des Rauschsignales $P_r$ gebildet. Dieses Verhältnis wird \textbf{Störabstand} oder \textbf{Rauschabstand} $a_r$ genannt.\\
 	
-		\formel{$a_r = 10 \cdot log_{10} \left(\frac{P_s}{P_r}\right) = 20 \cdot log_{10} \left(\frac{U_s}{U_r}\right)$}
-		$[a_r] = dB$
+		\begin{minipage}[]{10cm}
+			\formel{$a_r = 10 \cdot log_{10} \left(\frac{P_s}{P_r}\right) = 20 \cdot log_{10} \left(\frac{U_s}{U_r}\right)$}
+			$[a_r] = dB$\\
+		\end{minipage}
+		\begin{minipage}[]{10cm}		
+			Mindestwert für eine rauschfreie Übertragung: \\
+			Musik und Sprache $\rightarrow$ 30 dB \\
+			Bilder $\rightarrow$ 40 dB
+		\end{minipage}
 	
 	
-	\subsection{Rauschzahl und Rauschmass \skript{27}}
+	\subsection{Rauschzahl $F$ und Rauschmass $a_F$ \skript{27}}
 	
 		Jeder Vierpol verkleinert den Rauschabstand des Ausgangssignales gegenüber dem Rauschabstand des Eingangssignales.
 		Die Verschlechterung des Rauschleistungsabstandes wird durch die Rauschzahl $F$ \textit{(noise figure)} angegeben.
@@ -264,22 +269,6 @@
 		&	\formel{$a_F = 10 \cdot log_{10} (F) = a_{rEingang} - a_{rAusgang}$}
 		&	$[a_F] = dB$
 		\end{tabular}\\
-		
-		\subsubsection{Rauschen in Verstärkeranordnungen \skript{26}}
-		
-			\begin{tabular}{ll}
-				\parbox{8cm}{
-					\includegraphics[width=8cm]{./bilder/rauschzahl.png}
-				}
-			&
-				$F_{total} = \underbrace{\underbrace{\underbrace{\underbrace{
-								1}_{F_{00}}
-								+ \frac{P_{r1}}{P_r \cdot G_1}}_{F_{01}}
-								+ \frac{P_{r2}}{P_r \cdot G_1 \cdot G_2}}_{F_{02}}
-								+ \frac{P_{r3}}{P_r \cdot G_1 \cdot G_2 \cdot G_3} }_{F_{03}}
-								+ \ldots $
-			\end{tabular} \\
-			Wichtig ist, dass die \textbf{ersten beiden Stufen} sehr rauscharm sind und eine hohe Verstärkung haben!
 	
 	\subsection{Amplitudenanalyse von Signalen \skript{29}}
 	
@@ -288,6 +277,7 @@
 				\includegraphics[width=7cm]{./bilder/amplitudenanalyse.png}
 			}
 		& 	\begin{minipage}[]{11cm}
+			Die Amplitudendichte $p(a)$ ist ein Mass für u die relative Zeit ( Zeit / Gesamtzeit =	Wahrscheinlichkeit), während der sich das Signal in einem bestimmten Amplitudenintervall a +- da / 2 aufhält.
 			''Zeit während sich Signal in bestimmtem Amplitudenintervall aufhält''\\
 				\fbox{$p(a) 	= \lim\limits_{da \rightarrow 0}\frac{\underbrace{\sum t\left(
 								a-\frac{da}{2}<x(t)\leq a+\frac{da}{2}\right)}_{dt}}{T\cdot da}
@@ -333,28 +323,65 @@
 		}
 		
 	\subsection{Zentraler Grenzwertsatz}
-		$X_1, X_2, \ldots , X_n$ sind lauter identisch verteilte (nicht notwendig normalverteilt!)
-		unabhängige Zufallsvariablen mit demselben Erwartungswert $\mu$ und derselben Varianz $\sigma^2$
-		und mit $Z = \frac{X-\mu}{\sigma}$\\
-	  	Dann hat die Summe
-		\begin{equation}
-			S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n Z_i \nonumber
-		\end{equation}
-		den Erwartungswert $n \mu$ und die Varianz $n \sigma^2$. \\
-	  	Die damit verbundene standardisierte ($E(S_n) = 0, var(S_n) = 1$) Variable $S_n$ ist somit wie
-	  	folgt definiert: \\ 
-		\begin{equation}
-			S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n \frac{X_i - \mu}{\sigma}
-			= \frac{1}{\sqrt{n}\cdot \sigma}\left[\left(\sum\limits_{i=1}^n X_i\right) -n \mu\right]
-			=\dfrac{\bar{X} - \mu}{\sigma / \sqrt{n}} \nonumber
-		\end{equation}
-	  	Für $\boldsymbol{n \to \infty}$ strebt die Verteilung von $S_n$ gegen die Standardnormalverteilung.
+		\begin{minipage}[]{11cm}
+			$X_1, X_2, \ldots , X_n$ sind lauter identisch verteilte (nicht notwendig normalverteilt!)
+			unabhängige Zufallsvariablen mit demselben Erwartungswert $\mu$ und derselben Varianz $\sigma^2$
+			und mit $Z = \frac{X-\mu}{\sigma}$
+		  	Dann hat die Summe
+			\begin{equation}
+				S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n Z_i \nonumber
+			\end{equation}
+			den Erwartungswert $n \mu$ und die Varianz $n \sigma^2$. \\
+		  	Die damit verbundene standardisierte ($E(S_n) = 0, var(S_n) = 1$) Variable $S_n$ ist somit wie
+		  	folgt definiert: \\ 
+			\begin{equation}
+				S_n = \frac{1}{\sqrt{n}}\sum_{i=1}^n \frac{X_i - \mu}{\sigma}
+				= \frac{1}{\sqrt{n}\cdot \sigma}\left[\left(\sum\limits_{i=1}^n X_i\right) -n \mu\right]
+				=\dfrac{\bar{X} - \mu}{\sigma / \sqrt{n}} \nonumber
+			\end{equation}
+		  	Für $\boldsymbol{n \to \infty}$ strebt die Verteilung von $S_n$ gegen die Standardnormalverteilung. \\
+		  \end{minipage}
+		  \begin{minipage}[]{8cm}
+		  	\includegraphics[width=8cm]{./bilder/grenzwertsatz.png}
+		  \end{minipage}
+	  	
+		\subsection{Faltung \skript{34}}
+		
+		\begin{tabularx}{\textwidth}{lX}
+			\parbox{5cm}{
+				\includegraphics[width=5cm]{./bilder/faltung.png}
+			}
+			& 	\parbox{13cm}{
+				Convolution, ``Addition zweier unabhängiger ergodischer Prozesse $n_i$'' \matlab{conv}\\
+				\formel{$p(a) 	= p_1(a) \ast p_2(a)
+					= p_2(a) \ast p_1(a)
+					= \int\limits_{-\infty}^{\infty}p_1(\xi)\cdot p_2(a-\xi) d\xi$
+				} \\
+				
+				\begin{itemize}
+					\item Gesamtbreite der Faltung = Summe der Breiten aller Funktionen
+					\item Startpunkt = Summe aller Startpunkte
+					\item Endpunkt = Summe aller Endpunkte
+					\item $f(t) * g(t) \ \laplace \ F(s) G(s)$
+					\item $F(s) * G(s) \ \Laplace \ \frac{1}{2 \pi} f(t) g(t)$
+				\end{itemize}
+			}
+			\\
+			\textbf{Faltung zweier Normalverteilungen:}
+			&
+			Ergibt wieder eine Normalverteilung: \newline
+			\fbox{$N(\mu_1, \sigma_1) \ast N(\mu_2, \sigma_2) = 
+				N \left( \underbrace{\mu_1 + \mu_2}_{\mu} \underbrace{\sqrt{\sigma_1^2 + \sigma_2^2}}_{\sigma} \right)$}
+			\\ & \\
+			\textbf{Zentraler Grenzwertsatz:}
+			&	Unendlich viele unabhängige Prozesse miteinander gefaltet ergibt
+			(unabhängig von den einzelnen Verteilungen) eine \textbf{Normalverteilung}.
+		\end{tabularx}
 	
 	\newpage
-	\subsection{Stochastische Signale und deren Verteilungen \skript{31}}
-
+	\subsection{Stochastische Signale und deren Verteilungen \skript{38}}
 		\rotatebox{90}{
-		\begin{minipage}[]{23cm}
+		\begin{minipage}[]{22.5cm}
 			\begin{tabular}{|c|c|c|c|c|}
 			\hline
 				Verteilung
@@ -435,113 +462,76 @@
 			Allgemein: \formel{$\operatorname{Var}(x) = X^2 - X_0^2$}
 		\end{minipage}
 		}
-		
-		
-	\newpage
-	\subsection{Faltung \skript{34}}
-	
-		\begin{tabularx}{\textwidth}{lX}
-			\parbox{5cm}{
-				\includegraphics[width=5cm]{./bilder/faltung.png}
-			}
-		& 	\parbox{13cm}{
-				Convolution, ``Addition zweier unabhängiger ergodischer Prozesse $n_i$'' \matlab{conv}\\
-				\formel{$p(a) 	= p_1(a) \ast p_2(a)
-							= p_2(a) \ast p_1(a)
-							= \int\limits_{-\infty}^{\infty}p_1(\xi)\cdot p_2(a-\xi) d\xi$
-				} \\
-				
-			  	\begin{itemize}
-			  		\item Gesamtbreite der Faltung = Summe der Breiten aller Funktionen
-			  		\item Startpunkt = Summe aller Startpunkte
-			  		\item Endpunkt = Summe aller Endpunkte
-			  		\item $f(t) * g(t) \ \laplace \ F(s) G(s)$
-			  		\item $F(s) * G(s) \ \Laplace \ \frac{1}{2 \pi} f(t) g(t)$
-			  	\end{itemize}
-			}
-		\\
-			\textbf{Faltung zweier Normalverteilungen:}
-		&
-			Ergibt wieder eine Normalverteilung: \newline
-			\fbox{$N(\mu_1, \sigma_1) \ast N(\mu_2, \sigma_2) = 
-				N \left( \underbrace{\mu_1 + \mu_2}_{\mu} \underbrace{\sqrt{\sigma_1^2 + \sigma_2^2}}_{\sigma} \right)$}
-		\\ & \\
-			\textbf{Zentraler Grenzwertsatz:}
-		&	Unendlich viele unabhängige Prozesse miteinander gefaltet ergibt
-				(unabhängig von den einzelnen Verteilungen) eine \textbf{Normalverteilung}.
-		\end{tabularx}
-		
-		
-	\subsection{Q-Funktion \skript{41}}
-	
-		\begin{tabular}{ll}
-			\parbox{6cm}{
-				Tabelle \skript{52} \\
-				\includegraphics[width=5cm]{./bilder/q-funktion.png}
-			}
-		& 	\parbox{12cm}{
-				``Wahrscheinlichkeit eines Fehlers'' \matlab{erf, erfc} \\
-				Wenn die Resultate einer Messserie mit einer Normalverteilung mit Varianz
-				$\sigma$ und Erwartungswert $0$ auftreten, dann ist
-				$\operatorname{erf}\,\left(\,\frac{a}{\sigma \sqrt{2}}\,\right)$ die
-				Wahrscheinlichkeit, dass ein einzelner Messwert zwischen $-a$ und $a$ liegt. 
-				\\
-				\fbox{$Q(\xi) = 1-Q(-\xi) = \frac{1}{\sqrt{2\pi}}\int\limits_{\xi}^{\infty}
-				e^{-\frac{y^2}{2}}dy$} \\
-				\fbox{$Q(\xi) = \frac12 \operatorname{erfc}\left(\frac{\xi}{\sqrt2}\right)
-				= \frac12 \left(1 - \operatorname{erf}\left( \frac{\xi}{\sqrt2}\right) \right)$} \\
-			}
-		\end{tabular}
-	
-	
-	\subsubsection{Beispiel: Wahrscheinlichkeit einer Falschdetektierung eines Schwellwertdetektors \skript{40}}
-		
-		\begin{tabularx}{\textwidth}{ccX}
-			\multicolumn{2}{c}{
-				\parbox{7cm}{
-					\includegraphics[width=7cm]{./bilder/schwellwertdetektor1.png}
-				}
-			}
-		&	\beispiel{\parbox{10.5cm}{
-				\textbf{Gegeben:} $\mu = 0V$, $\sigma^2 = 1V^2$\\
-				$P_{F1}$ ist die Fehlerwahrscheinlichkeit, dass 5V gesendet wurde, der Detektor sich aber für -5V entschieden hat
-				($P_{F2}$ umgekehrt).
-			}}
-		\\
-			\parbox{2.5cm}{
-				\includegraphics[width=3.5cm]{./bilder/schwellwertdetektor2.png}
-			}
-		&	\parbox{2.5cm}{
-				\includegraphics[width=3.5cm]{./bilder/schwellwertdetektor3.png}
-			}
-		& 	\beispiel{\parbox{10.5cm}{
-				$P_{F2} 	= \frac{1}{2} \cdot \int\limits_{0V}^{\infty V} p_2(a+5V) da
-						= \frac{1}{2} \cdot \int\limits_{0V}^{\infty V} \dfrac{1}{1V \cdot \sqrt{2 \pi}} \e^{\dfrac{-(a+5V)^2}{2 \cdot 1V^2}} da $\\
-				$P_{F1} 	= \frac{1}{2} \cdot \int\limits_{-\infty V}^{0V} p_2(a-5V) da
-						= \frac{1}{2} \cdot \int\limits_{-\infty V}^{0V} \dfrac{1}{1V \cdot \sqrt{2 \pi}} \e^{\dfrac{-(a-5V)^2}{2 \cdot 1V^2}} da $
-			}}
-		\\
-			\multicolumn{2}{c}{
-				\parbox{7cm}{
-					\includegraphics[width=7cm]{./bilder/schwellwertdetektor4.png}
-				}
-			}
-		&	\beispiel{\parbox{10.5cm}{
-				\textbf{Substitution:} $y = \dfrac{a-5V}{1V}$, $dy = \dfrac{da}{1V}$ \\
-				\fbox{$P_{F1} = \frac{1}{2} \cdot \int\limits_{-\infty}^{-5} \dfrac{1}{\sqrt{2 \pi}} \e^{\dfrac{-y^2}{2}} dy 
-						= \frac{1}{2} \cdot \int\limits_{5}^{\infty} \dfrac{1}{\sqrt{2 \pi}} \e^{\dfrac{-y^2}{2}} dy 
-						= \frac{1}{2} \cdot Q(5) $} \\
-				\fbox{$P_{F2} 	= \frac{1}{2} \cdot Q(5) $} \\
-				\textbf{Gesamte Fehlerwahrscheinlichkeit:}\\
-				\fbox{$P_F = P_{F1} + P_{F2} = Q(5) = 2.867 \cdot 10^{-7}$}
-			}}
-		\\ 
-		\end{tabularx}
+		\newpage
 
-	\newpage
+		
+		
+%	\subsection{Q-Funktion \skript{41}}
+%	
+%		\begin{tabular}{ll}
+%			\parbox{6cm}{
+%				Tabelle \skript{52} \\
+%				\includegraphics[width=5cm]{./bilder/q-funktion.png}
+%			}
+%		& 	\parbox{12cm}{
+%				``Wahrscheinlichkeit eines Fehlers'' \matlab{erf, erfc} \\
+%				Wenn die Resultate einer Messserie mit einer Normalverteilung mit Varianz
+%				$\sigma$ und Erwartungswert $0$ auftreten, dann ist
+%				$\operatorname{erf}\,\left(\,\frac{a}{\sigma \sqrt{2}}\,\right)$ die
+%				Wahrscheinlichkeit, dass ein einzelner Messwert zwischen $-a$ und $a$ liegt. 
+%				\\
+%				\fbox{$Q(\xi) = 1-Q(-\xi) = \frac{1}{\sqrt{2\pi}}\int\limits_{\xi}^{\infty}
+%				e^{-\frac{y^2}{2}}dy$} \\
+%				\fbox{$Q(\xi) = \frac12 \operatorname{erfc}\left(\frac{\xi}{\sqrt2}\right)
+%				= \frac12 \left(1 - \operatorname{erf}\left( \frac{\xi}{\sqrt2}\right) \right)$} \\
+%			}
+%		\end{tabular}
+%	
+%	
+%	\subsubsection{Beispiel: Wahrscheinlichkeit einer Falschdetektierung eines Schwellwertdetektors \skript{40}}
+%		
+%		\begin{tabularx}{\textwidth}{ccX}
+%			\multicolumn{2}{c}{
+%				\parbox{7cm}{
+%					\includegraphics[width=7cm]{./bilder/schwellwertdetektor1.png}
+%				}
+%			}
+%		&	\beispiel{\parbox{10.5cm}{
+%				\textbf{Gegeben:} $\mu = 0V$, $\sigma^2 = 1V^2$\\
+%				$P_{F1}$ ist die Fehlerwahrscheinlichkeit, dass 5V gesendet wurde, der Detektor sich aber für -5V entschieden hat
+%				($P_{F2}$ umgekehrt).
+%			}}
+%		\\
+%			\parbox{2.5cm}{
+%				\includegraphics[width=3.5cm]{./bilder/schwellwertdetektor2.png}
+%			}
+%		&	\parbox{2.5cm}{
+%				\includegraphics[width=3.5cm]{./bilder/schwellwertdetektor3.png}
+%			}
+%		& 	\beispiel{\parbox{10.5cm}{
+%				$P_{F2} 	= \frac{1}{2} \cdot \int\limits_{0V}^{\infty V} p_2(a+5V) da
+%						= \frac{1}{2} \cdot \int\limits_{0V}^{\infty V} \dfrac{1}{1V \cdot \sqrt{2 \pi}} \e^{\dfrac{-(a+5V)^2}{2 \cdot 1V^2}} da $\\
+%				$P_{F1} 	= \frac{1}{2} \cdot \int\limits_{-\infty V}^{0V} p_2(a-5V) da
+%						= \frac{1}{2} \cdot \int\limits_{-\infty V}^{0V} \dfrac{1}{1V \cdot \sqrt{2 \pi}} \e^{\dfrac{-(a-5V)^2}{2 \cdot 1V^2}} da $
+%			}}
+%		\\
+%			\multicolumn{2}{c}{
+%				\parbox{7cm}{
+%					\includegraphics[width=7cm]{./bilder/schwellwertdetektor4.png}
+%				}
+%			}
+%		&	\beispiel{\parbox{10.5cm}{
+%				\textbf{Substitution:} $y = \dfrac{a-5V}{1V}$, $dy = \dfrac{da}{1V}$ \\
+%				\fbox{$P_{F1} = \frac{1}{2} \cdot \int\limits_{-\infty}^{-5} \dfrac{1}{\sqrt{2 \pi}} \e^{\dfrac{-y^2}{2}} dy 
+%						= \frac{1}{2} \cdot \int\limits_{5}^{\infty} \dfrac{1}{\sqrt{2 \pi}} \e^{\dfrac{-y^2}{2}} dy 
+%						= \frac{1}{2} \cdot Q(5) $} \\
+%				\fbox{$P_{F2} 	= \frac{1}{2} \cdot Q(5) $} \\
+%				\textbf{Gesamte Fehlerwahrscheinlichkeit:}\\
+%				\fbox{$P_F = P_{F1} + P_{F2} = Q(5) = 2.867 \cdot 10^{-7}$}
+%			}}
+%		\\ 
+%		\end{tabularx}
+
 	\subsection{Zusammenstellung einiger wichtiger Funktionen \skript{44}}
-
-		\begin{center}
-			\includegraphics[width=24.5cm,angle=90]{./bilder/zusammenstellung.png}
-		\end{center}
+		\includegraphics[width=24.5cm,angle=90]{./bilder/zusammenstellung.png}
 	
