@@ -49,19 +49,25 @@
 	    \begin{multicols}{2}
 	    
 	      \subsubsection{Regel 1: Kettentransformation \skript{61}}
+		      Die gesamte Übertragung einer Kaskade von Zweigen (d.h. einem Pfad) ist gleich dem Produkt der einzelnen Transmittanzen. \\
+		      \includegraphics[width=8cm]{./bilder/kettentransformation.png}
 	      
 	      \subsubsection{Regel 2: Paralleltransformation \skript{61}}
+		      Die gesamte Transmittanz paralleler Zweige ist gleich der Summe der einzelnen Zweigtransmittanzen. \\
+		      \includegraphics[width=8cm]{./bilder/paralleltransformation.png}
 	      
 	      \subsubsection{Regel 3: Entfernung eines Knotens \skript{61}}
-	      
-	      \subsubsection{Regel 4: Transmittanzverschiebung\skript{62}}
+		      Der Anfangs- oder Endpunkt einer Transmittanz kann entfernt oder verschoben werden, solange die Transmittanz zwischen den interessierenden Knoten im System unverändert bleibt. \\
+		      \includegraphics[width=8cm]{./bilder/entfernungeinesknotens.png}
+
+	      \subsubsection{Regel 4: Transmittanzverschiebung \skript{62}}
 	        \includegraphics[width=7cm]{./bilder/transmittanzverschiebung.png} \\
 	        Wichtig ist, dass eine neue Variable $x_3'$ eingeführt wird, wenn der Endpunkt eines
-	        inneren Zweiges verschoben wird. \newline (siehe c)
-	        \vfill
+	        inneren Zweiges verschoben wird. \newline (siehe c)    
+	    \vfill
 	    \columnbreak
 	    
-	      \subsubsection{Regel 5: Pfadinversion\skript{63}}
+	      \subsubsection{Regel 5: Pfadinversion \skript{63}}
 	        \includegraphics[width=8cm]{./bilder/pfadinversion.png} \\
 	        Es gilt zu beachten, das die Inversion eines Pfaden (dessen Anfangspunkt nach Definition
 	        eine Quelle sein muss) den Effekt hat, dass die Quelle vom einen Ende des Pfades zum anderen
@@ -70,18 +76,37 @@
 	        $x_i$ endeten, werden verschoben, dass sie neu in $x_j$ enden und ihre Transmittanzen werden
 	        mit $-\frac{1}{L}$ multipliziert.
 	        
-	      \subsubsection{Regel 6: Entfernen einer Eigenschleife\skript{64}}
+	      \subsubsection{Regel 6: Entfernen einer Eigenschleife \skript{64}}
 	        \includegraphics[width=8cm]{./bilder/eigenschleife.png} \\
 	        Die Eigenschleife hat die Transmittanz $L$. Sie wird entfernt indem man bei allen anderen
 	        Zweigen welche \textbf{in den Knoten münden}, durch $(1-L)$ \textbf{dividiert}.
 	        
-	      \subsubsection{Regel 7: Schleifenreduktion \skript{64}}
-	      
+	      \subsubsection{Regel 7: Schleifenreduktion \skript{65}}
+		      \paragraph{Einzelne Schleife} \ \\
+			      Die Transmittanz einer unabhängigen Variablen $x_i$ (d. h. einer Quelle) zu einer abhängigen Variable (d. h. einem inneren Knoten oder einer Senke) in einem SFD, das nur eine Schleife und einen Vorwärtspfad enthält, ist gleich $H_{ij}=\frac{P_{ij}}{1-L}$ wobei $P_{ij}$ die Transmittanz des Vorwärtspfades von $x_i$ nach $x_j$ und $L$ die Transmittanz der Schleife ist. Die Formel lässt sich mittels der Lösung des entsprechenden Gleichungssystems oder äquivalent durch Transmittanzverschiebung und Entfernung der Eigenschleife beweisen. \\
+			      \includegraphics[width=10cm]{./bilder/schleifenreduktion_einzelneschleife.png}
+			      
+			  \paragraph{Mehrere sich nicht berührende Schleifen} \ \\
+				  Bei einer Kaskade von sich nicht berührenden Schleifen (d. h. , dass sie keine jeweils gemeinsamen Knoten haben) ist die gesamte Transmittanz gleich dem Produkt der einzelnen Transmittanzen: $H_{in}=\frac{P_{ij}}{1-L_j}\cdot\frac{P_{jk}}{1-L_k}\cdot\ldots\cdot\frac{P_{(n-1)n}}{1-L_n}$ \\
+				  \includegraphics[width=10cm]{./bilder/schleifenreduktion_nichtberuehrend.png} \\
+				  $H_{15}=\frac{x_5}{x_1}=\frac{P_{13}}{1-L_1}\cdot\frac{P_{35}}{1-L_2}=\frac{P_{15}}{1-L_1-L_2+L_1\cdot L_2}=\frac{abcd}{1-be-df+bedf}$
+				  
+			  \paragraph{Mehrere sich berührende Schleifen} \ \\
+			      Für den Fall, dass die zwei Schleifen mindestens einen gemeinsamen Knoten haben, ist die gesamte Transmittanz gegeben durch: $H_{ij}=\frac{P_{ij}}{1-L_i-L_j}$ \\
+			      \includegraphics[width=10cm]{./bilder/schleifenreduktion_beruehrend.png} \\
+			      $H_{15}=\frac{x_5}{x_1}=\frac{P_{15}}{1-L_1-L_2}=\frac{abcd}{1-be-cf}$
+			      
 	      \subsubsection{Regel 8: Allgemeine Mehrfachschleifen-Reduktionsregel für einfache Pfade \skript{66}}
-	       
+		       Wir betrachten hier den Mehrfachschleifenfall wo nur ein Pfad zwischen einer Quelle $x_i$ und einem abhängigen Knoten $x_j$ existiert, wobei dieser Pfad jede Schleife im SFD berührt, (d. h. dass er wenigstens einen Knoten mit jeder Schleife gemeinsam hat). Kurz ausgedrückt, lautet die Mehrfachschleifen Reduktionsregel für einfache Pfade: $H_{ij}=\frac{P_{ij}}{\Delta}$ \\
+		       Die Grösse $\delta$ ist die Graph- oder Netzwerkdeterminante. $\Delta$ wird folgendermassen ermittelt:\\
+		       $\Delta=1-(\text{Summe alle Schleifen})+(\text{Summe aller Produkte zweier Schleifen, die sich nicht berühren})-(\text{Summe aller Produkte dreier Schleifen, die sich nicht berühren})+\ldots$ \\
+		       \includegraphics[width=10cm]{./bilder/mehrfachreduktion_1.png} \\
+		       $H_{17}=\frac{x_7}{x_1}=\frac{P_{17}}{\Delta}=\frac{P_{17}}{1-(L_1+L_2+L_3+L_4+L_5)+(L_1L_3+L_1L_4+L_1L_5+L_2L_4+L_2L_5+L_3L_5)-L_1L_3L_5}=\frac{abcdef}{1-(bg+ch+di+ej+fk)+(bgdi+bgej+bgfk+chej+chfk+difk)-bgdifk}$ \\
+		       \includegraphics[width=10cm]{./bilder/mehrfachreduktion_2.png} \\
+		       $H_{06}=\frac{x_6}{x_0}=\frac{P_{06}}{\Delta}=\frac{P_{06}}{1-(L_1+L_2+L_3)+(L_1L_2+L_1L_3+L_2L_3)-L_1L_2L_3}=\frac{abcde}{1-af-cg-eh+afcg+afeh+cgeh-afcgeh}$
 	   \end{multicols}
+	   \newpage
 	   
-	  \newpage 
 \subsection{Mason's Regel \skript{69}}
   $\boxed{H_{ij} = \frac{\sum\limits_k P_k\cdot\Delta_k}{\Delta}}\quad
   \Rightarrow$ UTF von $x_i$ nach $x_j$, wobei \textbf{$x_i$} eine
@@ -102,76 +127,52 @@
   gesucht wird, kann Mason's Regel nicht direkt angewandt werden. Abhilfe: \\
   $\boxed{H_{ij} = \frac{x_j}{x_i} = \frac{x_j}{x_q} \frac{x_q}{x_i} =
   \frac{H_{qj}}{H_{qi}}}$ Wobei $x_q$ eine Quelle sei. 
-  Schlussendlich kürzt sich die Netzwerkdeterminante heraus.
+  Schlussendlich kürzt sich die Netzwerkdeterminante heraus. \\
 
-
+\begin{minipage}[t]{10cm}
 \subsection{Beispiel eines SFD \skript{73}}
-\begin{tabular}{ll}
-	\parbox{7cm}{
-    	\includegraphics[width=7cm]{./bilder/sfd-bsp.png}
-    }
-    
-    & \parbox{12cm}{
+	\includegraphics[width=7cm]{./bilder/sfd-bsp.png} 
     \begin{enumerate}
 		\item[a)] Die UTF\index{UTF} zwischen $X_1$ und $X_4$ ist (mit Mason's Regel):\index{Mason's Regel}\\
-		\begin{equation*}
-		H_{14}=\frac{X_4}{X_1}=\frac{aeh+abc(1-g)}{1-ef-g}
-		\end{equation*}
-		\item[b)] Das folgende Gleichungssystem beschreibt das SFD.
-		\begin{eqnarray*}
-		X_2 &=&a\cdot X_1+f\cdot X_3\\
-		X_3 &=&e\cdot X_2+g\cdot X_3\\
-		X_4 &=&h\cdot X_3+c\cdot X_6\\
-		X_5 &=&d\cdot X_4\\
-		X_6 &=&b\cdot X_2
-		\end{eqnarray*}
-		Nach Umformung der Gleichungen erhalten wir:
-		\begin{equation*}
-		X_4=h\cdot X_3+\frac{bc}{e}\cdot (1-g)\cdot X_3\quad\&\quad X_3\cdot
-		\frac{1-g}{e}=a\cdot X_1+f\cdot X3.
-		\end{equation*}
-		Somit ist $X_4=\frac{h+\frac{bc}{e}(1-g)}{\frac{1-g}{ae}-\frac{f}{a}}X_1=\frac{aeh+abc(1-g)}{1-g-ef}X_1$.
-	\end{enumerate}}
-\end{tabular}
-
+		$H_{14}=\frac{X_4}{X_1}=\frac{aeh+abc(1-g)}{1-ef-g}$
+		\item[b)] Das folgende Gleichungssystem beschreibt das SFD.\\
+		$X_2 =a\cdot X_1+f\cdot X_3$\\
+		$X_3 =e\cdot X_2+g\cdot X_3$\\
+		$X_4 =h\cdot X_3+c\cdot X_6$\\
+		$X_5 =d\cdot X_4$\\
+		$X_6 =b\cdot X_2$
+		\item Nach Umformung der Gleichungen erhalten wir: \\
+		$X_4=h\cdot X_3+\frac{bc}{e}\cdot (1-g)\cdot X_3\quad\&\quad X_3\cdot
+		\frac{1-g}{e}=a\cdot X_1+f\cdot X3.$ 
+		\item Somit ist \\ $X_4=\frac{h+\frac{bc}{e}(1-g)}{\frac{1-g}{ae}-\frac{f}{a}}X_1=\frac{aeh+abc(1-g)}{1-g-ef}X_1$.
+	\end{enumerate}
+	
 \subsection{Fundamentales SFD \skript{74}}
-\begin{tabular}{ll}
-	\parbox{7cm}{
-    	\includegraphics[width=7cm]{./bilder/sfd-ordnung.png}
-    }
-    
-    & \parbox{12cm}{
+	\includegraphics[width=7cm]{./bilder/sfd-ordnung.png} \\
 		\textit{Ordnung eines SFD = Anzahl der fundamentalen Knoten}: Knoten, welche
-		entfernt werden müssen, um \textit{alle} Schleifen aufzubrechen. \\ \\
-	}
-\end{tabular}
-
+		entfernt werden müssen, um \textit{alle} Schleifen aufzubrechen.
+\end{minipage}
+\begin{minipage}[t]{8cm}
 \subsubsection{Fundamentales SFD erster Ordnung \skript{75}}
-\begin{tabular}{ll}
-	\parbox{7cm}{
-    	\includegraphics[width=3cm]{./bilder/sfd-fundamental-erster-ordnung.png}
-    }
-    & \parbox{12cm}{
-		Durch Reduzieren auf das fundamentale SFD 1. Ordnung, kann die UTF direkt
-		ermittelt werden: \\
-		\[ H_{io} = \frac{E_o}{E_i}=
-		t_{io}+\frac{t_{ix}t_{xo}}{1-t_{xx}}=
-		\frac{t_{io}-t_{io}t_{xx}+t_{ix}t_{xo}}{1-t_{xx}} \] \\
-    \begin{tabular}{l l p{8cm}}
-      $E_x$ & = & Fundamentaler Knoten\\
-      $E_i$ & = & Quelle (Eingang) \\
-      $E_o$ & = & Senke (Ausgang) \\
-      $t_{xx}$ & = & alle Eigenschleifen des Knoten $E_x$ \\
-      $t_{ix}$ & = & alle Pfade von der Quelle zum Knoten $E_x$ \\
-      $t_{xo}$ & = &alle Pfade vom Knoten $E_x$ zur Senke \\
-      $t_{io}$ & = & Leckpfad, alle Pfade von der Quelle zur Senke, welche \underline{nicht}
-      durch den Knoten $E_x$ führen.
-    \end{tabular}\\
-    Wenn es mehrere Wege gibt, dann zusammen zählen: Bsp.: $tix = tix_1 +
-    tix_2$
-	}
-\end{tabular}
-
+	\includegraphics[width=3cm]{./bilder/sfd-fundamental-erster-ordnung.png} \\
+	Durch Reduzieren auf das fundamentale SFD 1. Ordnung, kann die UTF direkt
+	ermittelt werden: \\
+	\[ H_{io} = \frac{E_o}{E_i}=
+	t_{io}+\frac{t_{ix}t_{xo}}{1-t_{xx}}=
+	\frac{t_{io}-t_{io}t_{xx}+t_{ix}t_{xo}}{1-t_{xx}} \] \\
+	\begin{tabular}{l l p{7cm}}
+		$E_x$ & = & Fundamentaler Knoten\\
+		$E_i$ & = & Quelle (Eingang) \\
+		$E_o$ & = & Senke (Ausgang) \\
+		$t_{xx}$ & = & alle Eigenschleifen des Knoten $E_x$ \\
+		$t_{ix}$ & = & alle Pfade von der Quelle zum Knoten $E_x$ \\
+		$t_{xo}$ & = &alle Pfade vom Knoten $E_x$ zur Senke \\
+		$t_{io}$ & = & Leckpfad, alle Pfade von der Quelle zur Senke, welche \underline{nicht}
+		durch den Knoten $E_x$ führen.
+	\end{tabular}\\
+	Wenn es mehrere Wege gibt, dann zusammen zählen: Bsp.: $tix = tix_1 +
+	tix_2$
+\end{minipage}
 
 \subsection{Einbezug analoger Verstärker \skript{80}}
 \includegraphics[width=18cm]{./bilder/sfd-op.png}
@@ -193,26 +194,27 @@
   \end{multicols}
 
 \subsection{Skalierung \skript{85}}
-	Um einen oder mehrere Knoten zu ändern, ohne das gesamte System zu
-	ändern (Voraussetzung: Start/Endknoten werden nicht mitmaskiert), kann man
-	diese Knoten skalieren.\\
-	Vorgehen: 
-	\begin{enumerate}
+	\vspace*{-1cm}
+	\begin{minipage}[]{10cm}
+		Um einen oder mehrere Knoten zu ändern, ohne das gesamte System zu
+		ändern (Voraussetzung: Start/Endknoten werden nicht mitmaskiert), kann man
+		diese Knoten skalieren.\\
+		Vorgehen: 
+		\begin{enumerate}
                 \item Skalierungszone festlegen (Trennbündel) $N_b$
                 \item Alle eingehende Zweige mit $\lambda$ multiplizieren
                 \item Alle ausgehende Zweige mit $\frac{1}{\lambda}$
                 multiplizieren
-    \end{enumerate}
-    Wenn alle maximalen Signalniveaus gleich $\rightarrow$ maximal möglichen
-    Dynamikbereich\\
-    \begin{minipage}{9cm}
+	    \end{enumerate}
+	    Wenn alle maximalen Signalniveaus gleich $\rightarrow$ maximal möglichen
+	    Dynamikbereich\\
+	\end{minipage}
+	\hspace*{1cm}
+    \begin{minipage}[t]{7cm}
       \includegraphics[width=7cm]{./bilder/sfd-scalierung.png}
+       Die Skalierung kann verwendet werden um den Dynamikbereich zu maximieren, Inverter zu entfernen
+       und die Verstärkung und Signalniveaus innerhalb eines Systems zu ändern.
     \end{minipage}
-    \begin{minipage}{9cm}
-      Die Skalierung kann verwendet werden um den Dynamikbereich zu maximieren, Inverter zu entfernen
-      und die Verstärkung und Signalniveaus innerhalb eines Systems zu ändern.
-    \end{minipage}
-    
 
     
 
