@@ -1,5 +1,4 @@
-\section{Systeme \skript{109}}
-	
+\section{Systeme \skript{161}}	
 	\subsection{Begriffe}
 	
 		\begin{tabularx}{\textwidth}{|p{4.5cm}|p{6cm}|X|}
@@ -8,17 +7,17 @@
 		& 	\textbf{Beschreibung}
 		& 	\textbf{Bedingung, Erkennung}
 		\\ \hline
-			Wirkungsfreiheit \skript{109}
+			Wirkungsfreiheit \skript{161}
 		& 	Eingang des Systems hochohmig, \newline Ausgang niederohmig
 		& 	Kaskadierte Systeme durch Einheitsverstärker verbunden
 		\\ \hline
-			Statische bzw. dynamische Systeme \skript{110}
+			Statische bzw. dynamische Systeme \skript{162}
 		& 	Statisch: ohne Gedächtnis \newline 
 			Dynamisch: mit Gedächtnis
 		& 	Statisch: $u_2(t)$ nur vom Eingangssignal $u_1(t)$ bei $t$ abhängig \newline
 			Dynamisch: $\int dt; \; \frac{d}{dt}; \; f(t \pm t_0) $
 		\\ \hline
-			Kausale bzw. akausale \newline Systeme \skript{112}
+			Kausale bzw. akausale \newline Systeme \skript{164}
 		& 	Kausal: Keine zukünftigen Werte \newline
 			Akausal: System ''sieht in die Zukunft'' \newline
 			\colorbox{yellow}{\parbox{6cm}{\textbf{Statische  und reale (physikalische) Systeme sind immer kausal!}}}
@@ -26,7 +25,7 @@
 					$Impulsantwort:\ h(t) = 0 \ \ \forall \ t < 0 $ \newline \newline
 			Akausal: $f(-t); \; f(t + t_0); \; \int^{t+t_0} f(\tau) d \tau$
 		\\ \hline
-			Lineare bzw. nichtlineare \newline Systeme \skript{113}
+			Lineare bzw. nichtlineare \newline Systeme \skript{165}
 		&	Nichtlinear: Ausgangssignal kann \newline \textbf{neue Frequenzanteile}  enthalten\newline
 			Linear: Ausgangssignal hat keine \newline neuen Frequenzanteile
 		& 	Nichtlinear: $f^{\alpha}(t); \; \alpha + f(t); \; \alpha^{x(t)} $ \newline
@@ -34,7 +33,7 @@
 			Linear: $S(x1+x2)=S(x1)+S(x2)$ \newline
 					$S(c\cdot x)=c\cdot S(x)$
 		\\ \hline
-			Zeitinvariante bzw. zeitvariante Systeme \skript{118}
+			Zeitinvariante bzw. zeitvariante Systeme \skript{170}
 		& 	Zeitvariant: Von der Zeit abhängig \newline
 			Zeitinvariant: Von der Zeit unabhängig
 		& 	Zeitvariant: $\cos(t) x(t); t^{\alpha} x(t) \quad \text{(} \alpha \neq 0 \text{)} $ \newline
@@ -114,9 +113,9 @@
 			\egroup
 			
 			
-	\subsubsection{Linearisierung von Systemen: Siehe \skript{117}}
+	\subsubsection{Linearisierung von Systemen: Siehe \skript{169}}
 
-	\subsection{Übertragungsfunktion von LTI-Systemen \skript{122}}
+	\subsection{Übertragungsfunktion von LTI-Systemen \skript{174}}
 	
 		\begin{tabular}{ll}
 			\parbox{13cm}{
@@ -129,6 +128,9 @@
 				$H_{total}(s) = H_1(s) H_2(s)$ bzw. bei $n$ gleichen Systemen:
 				$H_{total} = (H(s))^n$}
 		\\
+		\end{tabular}
+		
+		\begin{tabular}{ll}
 			\parbox{13cm}{ \beispiel{ \parbox{12cm}{
 				\textbf{Beispiel}: Gesucht UTF $H(s) = \frac{Y(s)}{X(s)}$ \\
 				$$H(s) = \frac{sL}{\frac{1}{sC} + sL + R} = \frac{s^2}{\frac{1}{LC} + s
@@ -153,12 +155,64 @@
 				C & $\frac{1}{sC}$ \\
 			\end{tabular}
 			Parallelschaltung $= \frac{1}{\frac{1}{R}+\frac{1}{sL}+sC}$\\ \\}
-		\parbox{6cm}{
+		\parbox{8cm}{
 			
 			Das Potential in einem Punkt berechnet man mit $=\frac{Summe\ aller\
 			Elemente\ zwischen\ Punkt\ und\ GND}{Summe\ aller\ Elemente\ der\ Kompletten\ Schaltung}$\\
-			Die \textbf{Ordnung der UTF} ist die Anzahl unabhängiger Speicher (L oder C).}
+			Die \textbf{Ordnung der UTF} ist die Anzahl unabhängiger Speicher (L oder C).}		
 		
+		\subsubsection{Beispiele von Übertragungsfunktionen (verschiedene Filter)}
+		\renewcommand{\arraystretchOriginal}{1}
+		\begin{tabularx}{\textwidth}{|X|c|c|c|c|}
+			\hline
+			{}
+			&	Tiefpassfilter
+			&	Hochpassfilter
+			&	Bandpassfilter
+			&	Allpassfilter
+			\\
+			{}
+			&	1. Ordnung
+			&	1. Ordnung
+			&	2. Ordnung
+			&	1. Ordnung
+			\\ \hline
+			{}
+			&	\includegraphics[width=2.5cm]{./bilder/tiefpass.png}
+			&	\includegraphics[width=2.5cm]{./bilder/hochpass.png}
+			&	\includegraphics[width=2.5cm]{./bilder/bandpass.png}
+			&	\includegraphics[width=2.5cm]{./bilder/allpass.png}
+			\\ \hline & & & & \\
+			Übertragungsfunktion $H(s)$
+			&	$\dfrac{1}{1 + sRC}$
+			&	$\dfrac{sRC}{1 + sRC}$
+			&	$\dfrac{sRC}{1 + sRC + s^2 LC}$
+			&	$\dfrac{sRC - 1}{sRC + 1}$
+			\\ & & & & \\ \hline & & & & \\
+			Amplitudengang $|H(\omega)|$
+			&	$\dfrac{1}{\sqrt{1 + (\omega RC)^2}}$
+			&	$\dfrac{|\omega RC|}{\sqrt{1 + (\omega RC)^2}}$
+			&	$\dfrac{|\omega RC|}{\sqrt{(\omega^2 LC - 1)^2 + (\omega RC)^2}}$
+			&	$1$
+			\\ & & & & \\ \hline & & & & \\
+			Phasengang $\varphi(\omega)$
+			&	$-arctan(\omega RC)$
+			&	$arctan(\dfrac{1}{\omega RC})$
+			&	$-arctan(\dfrac{\omega^2 LC -1}{\omega RC})$
+			&	$\pi - 2 arctan(\omega RC)$
+			\\ & & & & \\ \hline & & & & \\
+			Grenzfrequenz $f_c$
+			&	$\dfrac{1}{2 \pi RC}$
+			&	$\dfrac{1}{2 \pi RC}$
+			&
+			& 	
+			\\ & & & & \\ \hline
+			Spannung am Ausgang
+			&	\multicolumn{4}{|c|}{
+				$\text{Spannung am Eingang} \cdot |H(\omega)|$
+			}
+			\\ \hline
+		\end{tabularx}
 		
 		\subsubsection{Berechnung des Amplituden- und Phasengangs aus der Übertragungsfunktion}
 			
@@ -178,7 +232,7 @@
 			\end{tabular}
 		
 		
-		\subsubsection{Zusammenhang zwischen Impuls- \& Einheitssprungantwort, Endwerte \skript{123}}
+		\subsubsection{Zusammenhang zwischen Impuls- \& Einheitssprungantwort, Endwerte \skript{175}}
 		
 			$ \text{Einheitssprungantwort } g(t) \text{, Impulsantwort }h(t)$
 			$$h(t)= \frac{d g(t)}{d t}\quad\text{bzw.}\quad
@@ -188,70 +242,14 @@
 			\lim\limits_{t \rightarrow \infty}  g(t)= \lim\limits_{s \rightarrow 0} H(s)$$
 		
 		
-		\subsubsection{Zusammenhang zwischen Impulsantwort und Kausalität eines Systems \skript{124}}
+		\subsubsection{Zusammenhang zwischen Impulsantwort und Kausalität eines Systems \skript{176}}
 		
 			Damit ein System kausal ist, muss dessen Impulsantwort $h(t)$ für alle $t < 0$ gleich Null sein.\\
 			\formel{$h(t) = 0 \ \ \forall \ t < 0 \ \ \Longrightarrow $ System kausal!}
 			
-		
-		\subsubsection{Beispiele von Übertragungsfunktionen (verschiedene Filter)}
-			\renewcommand{\arraystretchOriginal}{1}
-			\begin{tabularx}{\textwidth}{|X|c|c|c|c|}
-			\hline
-				{}
-			&	Tiefpassfilter
-			&	Hochpassfilter
-			&	Bandpassfilter
-			&	Allpassfilter
-			\\
-				{}
-			&	1. Ordnung
-			&	1. Ordnung
-			&	2. Ordnung
-			&	1. Ordnung
-			\\ \hline
-				{}
-			&	\includegraphics[width=2.5cm]{./bilder/tiefpass.png}
-			&	\includegraphics[width=2.5cm]{./bilder/hochpass.png}
-			&	\includegraphics[width=2.5cm]{./bilder/bandpass.png}
-			&	\includegraphics[width=2.5cm]{./bilder/allpass.png}
-			\\ \hline & & & & \\
-				Übertragungsfunktion $H(s)$
-			&	$\dfrac{1}{1 + sRC}$
-			&	$\dfrac{sRC}{1 + sRC}$
-			&	$\dfrac{sRC}{1 + sRC + s^2 LC}$
-			&	$\dfrac{sRC - 1}{sRC + 1}$
-			\\ & & & & \\ \hline & & & & \\
-				Amplitudengang $|H(\omega)|$
-			&	$\dfrac{1}{\sqrt{1 + (\omega RC)^2}}$
-			&	$\dfrac{|\omega RC|}{\sqrt{1 + (\omega RC)^2}}$
-			&	$\dfrac{|\omega RC|}{\sqrt{(\omega^2 LC - 1)^2 + (\omega RC)^2}}$
-			&	$1$
-			\\ & & & & \\ \hline & & & & \\
-				Phasengang $\varphi(\omega)$
-			&	$-arctan(\omega RC)$
-			&	$arctan(\dfrac{1}{\omega RC})$
-			&	$-arctan(\dfrac{\omega^2 LC -1}{\omega RC})$
-			&	$\pi - 2 arctan(\omega RC)$
-			\\ & & & & \\ \hline & & & & \\
-				Grenzfrequenz $f_c$
-			&	$\dfrac{1}{2 \pi RC}$
-			&	$\dfrac{1}{2 \pi RC}$
-			&
-			& 	
-			\\ & & & & \\ \hline
-				Spannung am Ausgang
-			&	\multicolumn{4}{|c|}{
-					$\text{Spannung am Eingang} \cdot |H(\omega)|$
-				}
-			\\ \hline
-			\end{tabularx}
-			
-		
-	\newpage
-	\subsection{Stabilität von LTI-Systemen}
+	\subsection{Stabilität von LTI-Systemen \skript{177}}
 		\renewcommand{\arraystretchOriginal}{1}
-		\subsubsection{BIBO-Stabilität \skript{125}}
+		\subsubsection{BIBO-Stabilität \skript{177}}
 			\textit{BIBO = Bounded Input Bounded Output}\\
 					Ein beliebiges System ist \textbf{BIBO-stabil}, wenn auf jedes \textbf{beschränkte Eingangssignal}
 					das \textbf{Ausgangssignal} ebenfalls \textbf{beschränkt} ist.$|u_{in}(t)| < A \rightarrow |u_{out}(t)| < B$ mit $0 < A,B \in \mathbf{N} < \infty$
@@ -259,7 +257,7 @@
 %		\int\limits_{-\infty}^{\infty} |h(t)| dt < \infty \nonumber
 %	\end{equation}
 		
-	\subsubsection{Asymptotische Stabilität \skript{126}}
+	\subsubsection{Asymptotische Stabilität \skript{178}}
 		
 			\begin{tabular}{ll}
 				Stabil: 
@@ -274,7 +272,7 @@
 			\end{tabular}
 		
 		
-		\subsubsection{Stabilität mit Hurwitz-Polynom \skript{127}}
+		\subsubsection{Stabilität mit Hurwitz-Polynom \skript{179}}
 		
 			Es wird jeweils das Polynom im \textbf{Nenner der Übertragungsfunktion} betrachtet:
 $P(s) = a_n s^n + a_{n-1} s^{n-1} +\ldots +a_1s + a_0$ \\
@@ -329,7 +327,6 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
            	\\ \hline   
            			\end{tabular}\\
 					
-			
 			\begin{itemize}
 				\item Wenn \textbf{mindestens ein Koeffizient negativ} ist $(a_x < 0)$, dann ist das System \textbf{instabil}.
 			  	\item Wenn \textbf{alle Koeffizienten negativ} sind, kann $-1$ ausgeklammert werden und in den Zähler verschoben werden\\
@@ -337,10 +334,8 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
 			  	\item Wenn \textbf{ein Koeffizient nicht vorhanden} ist $(a_x = 0)$, dann ist das System evtl. grenzstabil, 
 			  			d.h. es ist eine \textbf{Überprüfung mit modifiziertem Hurwitz-Polynom} nötig.
 			\end{itemize}
-			
 
-
-	\subsection{Phasen- \& Gruppenlaufzeit \skript{130}}
+	\subsection{Phasen- \& Gruppenlaufzeit \skript{182}}
 	
 		\definecolor{gruppe}{rgb}{1,.75,0} % 255,192,0
 		\definecolor{phase}{rgb}{1,0,0} % 255,0,0
@@ -353,7 +348,7 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
 		$H(s)=\frac{1}{s^2+0.2s+1}$. Bemerkung: $y(t)$ ist gr"osser als $x(t)$.
 		
 		
-		\subsubsection{Signalverzögerung, Phasen- und Gruppenlaufzeit \skript{134}}
+		\subsubsection{Signalverzögerung, Phasen- und Gruppenlaufzeit \skript{186}}
 		
 			Die \textbf{Signalverzögerung}, \textbf{Phasenlaufzeit} $\tau_P(\omega)$
 			und \textbf{Gruppenlaufzeit} $\tau_G(\omega)$ sind identisch, wenn:
@@ -364,11 +359,10 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
 			
 			Das heisst, $H(j \omega)$ hat die Form \formel{$H(j\omega) = a \cdot \e^{-j\omega t_0}$}. \\
 			Die Signalverzögerung beträgt dann für alle Frequenzen \fbox{$t_0 = \tau_G = \tau_P$}.
-	
 		
-	\subsection{Verzerrungen und Klirrfaktor \skript{135}}
+	\subsection{Verzerrungen und Klirrfaktor \skript{187}}
 	
-		\subsubsection{Verzerrungen \skript{135}}
+		\subsubsection{Verzerrungen \skript{187}}
 		
 			\begin{tabular}{ll}
 				\textbf{Lineare Verzerrungen:}
@@ -388,7 +382,7 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
 			\end{tabular}
 			
 			
-		\subsubsection{Klirrfaktor \skript{137}}
+		\subsubsection{Klirrfaktor \skript{189}}
 	
 			\begin{tabularx}{\textwidth}{cX}
 				\parbox{9cm}{
@@ -412,7 +406,7 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
 			\end{tabularx}
 
 		
-		\subsubsection{Total Harmonic Distortion (THD) \skript{137}}
+		\subsubsection{Total Harmonic Distortion (THD) \skript{189}}
 		
 			\begin{center}
 				\fbox{$\text{THD} = \sqrt{ \frac {U_2^2+ U_3^2 + \ldots + U_n^2} {U_1^2} }$}
@@ -420,7 +414,7 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
 			\end{center}
 
 		
-		\subsubsection{Verzerrungsfreie Übertragung von Signalen \skript{138}}
+		\subsection{Verzerrungsfreie Übertragung von Signalen \skript{190}}
 		
 			\begin{tabularx}{\textwidth}{p{9cm}X}
 				Für eine Übertragung ohne Amplitudenverzerrung \newline (konstante Amplitude über alle Frequenzen) muss gelten:
@@ -435,17 +429,14 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
 			\begin{itemize}
 				\item \fbox{$y(t) = a \cdot x(t-t_0) \ \; \laplace \; \ Y(j\omega) = a \cdot X(j\omega) \cdot \e^{-j\omega t_0}$}
 				\item \fbox{$H(j\omega) = a \cdot \e^{-j\omega t_0} = |H(j\omega)| \cdot \e^{j \theta(\omega)} \ \Laplace \ h(t) = a \cdot \delta(t-t_0)$}
-			\end{itemize}
+			\end{itemize}	
 		
-		
-	\subsection{Übertragung von stochastischen Signalen \skript{141}}
-	
-		\textbf{Im Skript:}
+	\subsection{Übertragung von stochastischen Signalen \skript{193}}
 		\begin{itemize}
-			\item Linearer Mittelwert und Autokorrelationsfunktion des Ausgangssignales \skript{141}
-			\item Leistungsdichtespektrum \skript{141}
-			\item Kreuzkorrelationen \skript{142}
-			\item \textbf{Beispiel:} Leistungsdichtespektrum am Ausgang eines RC-Tiefpasses \skript{143}
+			\item Linearer Mittelwert und Autokorrelationsfunktion des Ausgangssignales \skript{193}
+			\item Leistungsdichtespektrum \skript{193}
+			\item Kreuzkorrelationen \skript{194}
+			\item \textbf{Beispiel:} Leistungsdichtespektrum am Ausgang eines RC-Tiefpasses \skript{195}
 		\end{itemize}
 		
 		
