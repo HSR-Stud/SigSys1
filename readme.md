@@ -1,7 +1,7 @@
-SigSys1 - Signale und Systeme 1
+﻿SigSys1 - Signale und Systeme 1
 ======
 
-## Erlaubte Hilfsmittel (nach Modulprüfung HS2014)
+## Erlaubte Hilfsmittel (nach Modulprüfung HS2019)
 
 * Open-Book: Alle schriftlichen Hilfsmittel erlaubt (inkl. alte Prüfungen usw.)
 * Taschenrechner wird verteilt
