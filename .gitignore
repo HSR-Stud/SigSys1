@@ -5,5 +5,6 @@
 /*.tcp
 /*.toc
 /*.tps
-/*.gz/
-SigSys1.synctex.gz
+/*.gz
+/SigSys1.pdf
+/SigSys1.synctex.gz/
