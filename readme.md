@@ -3,7 +3,7 @@
 
 ## Erlaubte Hilfsmittel (nach Modulprüfung HS2019)
 
-* Open-Book: Alle schriftlichen Hilfsmittel erlaubt (inkl. alte Prüfungen usw.)
+* Open-Book: Alle schriftlichen Hilfsmittel ausser alte Prüfungen sind erlaubt.
 * Taschenrechner wird verteilt
 
 ## License
