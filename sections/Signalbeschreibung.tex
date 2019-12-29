@@ -3,6 +3,7 @@
 	
 	\subsection{Signalklassen \skript{2}}
 	
+	\begin{minipage}[t]{0.37\textwidth}
 		\begin{tabular}{|l|c|l|}
 		\hline 
 		periodisch & $\Longleftrightarrow$ & nicht-periodisch \\ 
@@ -18,8 +19,23 @@
 		deterministisch & $\Longleftrightarrow$ & stochastisch \\ 
 		\hline 
 		\end{tabular}
+	\end{minipage}
+	\begin{minipage}[t]{0.2\textwidth}
+		\begin{tabular}{|l|l|}
+			\hline \multirow{2}{*}{Nachrichtensignal:}&-Trägt Information\\
+			 &-nicht deterministisch\\
+			 \hline 
+			 \multirow{2}{*}{Hilfssignal:}&-Für das Funktionieren eines Übertragungssystem\\
+		 	&-meist periodisch\\
+		 	\hline
+		 	\multirow{2}{*}{Störsignal:}&-Beeinträchtigt Information (unerwünscht)\\
+	 		&-deterministisch oder stochastisch (z.B. Rauschen)\\
+ 			\hline
+		\end{tabular}
+	\end{minipage}
 
-
+	\textbf{Stochastische Signale} sind schwach stationär (Linearer Mittelwert ${X_0}$ und Autokorrelation${\phi_xx}$(t) hängen nicht
+	von der Zeit t ab) und können nur durch \textbf{Wahrscheinlichkeitsverteilungen} beschrieben werden.
 		\subsubsection{Energie- und Leistungssignale \skript{3}}
 		
 			\begin{tabularx}{\textwidth}{|p{3.1cm}|c|c|c|}
@@ -63,42 +79,50 @@
 			&	\multicolumn{2}{c|}{}
 			\\ \hline
 			\end{tabularx}
-		
-		
+				
 	\subsection{Mittelwerte \skript{5}}
 		
-		\begin{tabularx}{\textwidth}{p{4.7cm}p{8.1cm}X}
-			Arithmetischer Mittelwert, Gleichwert, Linearer MW
+		\begin{tabularx}{\textwidth}{|p{4.7cm}|p{8.1cm}|X|}
+			\hline
+			Arithmetischer Mittelwert, Linearer MW
 		&	$X_0 = \overline{X} = X_m = \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)dt$
 		&	Ist die Fläche unter der Zeitfunktion über eine Periode, nur Klasse 2a
 		\\
-		    {}
-		&   $X_0 = \lim\limits_{T\rightarrow \infty}{\frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)dt}$
-		&   nur Klasse 2b
-		\\
+		\hline
 			Quadratischer MW, Leistung
 		&	$X^2 = \frac {1} {T} \int\limits_{-T/2}^{T/2} x^2(t)dt$
 		& 	nur Klasse 2a
 		\\
+		\hline
 			Mittelwert n. Ordnung
 		&	$X^n = \frac {1} {T} \int\limits_{-T/2}^{T/2} x^n(t)dt$
 		& 	nur Klasse 2a
 		\\
+		\hline
 			Effektivwert
 		&	$X = X_{\text{eff}}= \sqrt{X^2} = \sqrt{\frac{1}{T} \int\limits_{-T/2}^{T/2}{x^2(t)dt}}$
 		&	nur Klasse 2a
 		\\
+		\hline
 			Gleichrichtwert
 		&	$X_{|m|} = \bar{|X|} = \frac{1}{T} \int\limits_{-T/2}^{T/2}{|x(t)| dt}$
 		&	Arithm. Mittelwert der Zweiweggleichrichterschaltung
 	    \\
-			Varianz, Standardabweichung
+	    \hline
+			Varianz
 		&	$\text{Var}(x)=\sigma^2= \frac {1} {T} \int\limits_{-T/2}^{T/2}(x(t)-X_0)^2dt = X^2-X_0^2$
 		&	Mittlerer Fehler im Quadrat
 		\\
+		\hline
+		Standardabweichung
+		&	$\sigma = \sqrt{\text{Var(x)}}$
+		&	{}
+		\\
+		\hline
 		\end{tabularx} \\
 	
 		\textbf{Hinweis:} \\
+		\text{\enspace \colorbox{yellow}{Für Signale der \textbf{Klasse 2b} lassen sich Mittelwerte usw. allgemein mit $\lim\limits_{T \rightarrow \infty}$ berechnen!}}\\
 		\begin{tabularx}{\textwidth}{llX}
 			Für \textbf{reelle Signale} gilt: &
 			$ X^2 = |X|^2 = Var(|x|) + |X_0|^2 $ &
@@ -225,7 +249,7 @@
 			\parbox{9.5cm}{
 			Ist die Intensität der
 			Rauschspannung "uber viele Frequenzdekaden
-			gleich verteilt, so spricht man von weissem Rauschen.\\ \\
+			gleich verteilt, so spricht man von \textbf{weissem Rauschen}.\\ \\
 			\textbf{Ideale Blindwiderstände verursachen kein Rauschen!}
 			\begin{itemize}
      			\item $\text{SNR} = \frac{P_s}{P_r} = \frac{\text{Signalleistung}}{\text{Rauschleistung}}$ (rauschfrei: $ \text{SNR} \rightarrow \infty$) 
@@ -291,8 +315,8 @@
 				\textbf{Eigenschaften}
 				\begin{itemize}
 					\item Es gibt keine negativen Werte! $p(a) \geq 0 \ \ \forall a$
-     				\item \fbox{$\int\limits_{-\infty}^{\infty} p(a) da = 1$}
-     				\item \fbox{$p(a_1 < a < a_2) = \int\limits_{a_1}^{a_2} p(a) da$}
+     				\item Gesammtwahrscheinlichkeit:\enspace \fbox{$\int\limits_{-\infty}^{\infty} p(a) da = 1$}
+     				\item Wahrscheindlichkeit ${a_1 < a < a2}$ \enspace \fbox{$p(a_1 < a < a_2) = \int\limits_{a_1}^{a_2} p(a) da$}
    				\end{itemize}
 				
       		\end{minipage}
