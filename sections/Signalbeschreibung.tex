@@ -38,42 +38,42 @@
 	von der Zeit t ab) und können nur durch \textbf{Wahrscheinlichkeitsverteilungen} beschrieben werden.
 		\subsubsection{Energie- und Leistungssignale \skript{3}}
 		
-			\begin{tabularx}{\textwidth}{|p{3.1cm}|c|c|c|}
+			\begin{tabularx}{\textwidth}{|p{2.9cm}|c|c|c|}
 			\hline
 				{}
-			&	\multirow{2}{*}{Klasse 1: Energiesignale}
-			&	\multicolumn{2}{c|}{Klasse 2: Leistungssignale}
+			&	\multirow{2}{*}{\textbf{Klasse 1: Energiesignale}}
+			&	\multicolumn{2}{c|}{\textbf{Klasse 2: Leistungssignale}}
 			\\ 
 				{}
 			&	
-			&	Klasse 2a: periodisch
-			&	Klasse 2b: aperiodisch
+			&	\textbf{Klasse 2a: periodisch}
+			&	\textbf{Klasse 2b: aperiodisch}
 			\\ \hline 
 				{}
 			&	\includegraphics[width=3.3cm]{./bilder/sinc.png}
 			& 	\includegraphics[width=3.5cm]{./bilder/dreieck.png}
 			& 	\includegraphics[width=5.29cm]{./bilder/rauschen.png}
 			\\ \hline 
-				Energie-/Leistungs-dichtesprektrum
+				\textbf{Dichtesprektrum}
 			& 	$ E(j \omega) = |F(j \omega)|^2 $
 			& 	\multicolumn{2}{c|}{$ \Phi(j\omega) = \lim\limits_{T \to \infty} \dfrac{|F(j\omega)|^2}{T} $}
 			\\ \hline 
-				Normierte
+				\textbf{Normierte Signalleistung}
 			& 	$ P_n = 0$
 			& 	\formel{$P_n = X^2$} (quadr. Mittelwert)
 			& 	$ P_n = \lim\limits_{T \rightarrow \infty} \frac{1}{T} 
 									\int\limits_{-T/2}\limits^{T/2} |f(t)|^2 dt $
 			\\
-				Signalleistung
+				
 			&
 			& 	(Formeln rechts gelten auch)
 			& 	$ P_n = \dfrac{1}{2\pi} \cdot \int\limits_{-\infty}^{\infty} \Phi(j\omega) d\omega $
 			\\ \hline
-				Normierte
+				\textbf{Normierte Signalenergie}
 			& 	$ W_n = \lim\limits_{T \rightarrow \infty} \int\limits_{-T/2}\limits^{T/2} |f(t)|^2 dt $
 			&	\multicolumn{2}{c|}{$ W_n = \infty $}
 			\\
-				Signalenergie
+				
 			& 	$ W_n = \frac{1}{2 \pi} \int\limits_{-\infty}\limits^{\infty}
 									W(j \omega) d\omega $
 			&	\multicolumn{2}{c|}{}
@@ -84,41 +84,46 @@
 		
 		\begin{tabularx}{\textwidth}{|p{4.7cm}|p{8.1cm}|X|}
 			\hline
-			Arithmetischer Mittelwert, Linearer MW
-		&	$X_0 = \overline{X} = X_m = \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)dt$
-		&	Ist die Fläche unter der Zeitfunktion über eine Periode, nur Klasse 2a
-		\\
-		\hline
-			Quadratischer MW, Leistung
-		&	$X^2 = \frac {1} {T} \int\limits_{-T/2}^{T/2} x^2(t)dt$
-		& 	nur Klasse 2a
-		\\
-		\hline
-			Mittelwert n. Ordnung
-		&	$X^n = \frac {1} {T} \int\limits_{-T/2}^{T/2} x^n(t)dt$
-		& 	nur Klasse 2a
-		\\
-		\hline
-			Effektivwert
-		&	$X = X_{\text{eff}}= \sqrt{X^2} = \sqrt{\frac{1}{T} \int\limits_{-T/2}^{T/2}{x^2(t)dt}}$
-		&	nur Klasse 2a
-		\\
-		\hline
-			Gleichrichtwert
-		&	$X_{|m|} = \bar{|X|} = \frac{1}{T} \int\limits_{-T/2}^{T/2}{|x(t)| dt}$
-		&	Arithm. Mittelwert der Zweiweggleichrichterschaltung
-	    \\
-	    \hline
-			Varianz
-		&	$\text{Var}(x)=\sigma^2= \frac {1} {T} \int\limits_{-T/2}^{T/2}(x(t)-X_0)^2dt = X^2-X_0^2$
-		&	Mittlerer Fehler im Quadrat
-		\\
-		\hline
-		Standardabweichung
-		&	$\sigma = \sqrt{\text{Var(x)}}$
-		&	{}
-		\\
-		\hline
+				\textbf{Kenngrösse}
+			&	\textbf{Formel}
+			&	\textbf{Bemerkung(en)}
+			\\
+			\hline
+				Arithmetischer Mittelwert, Linearer MW
+			&	$X_0 = \overline{X} = X_m = \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)dt$
+			&	Ist die Fläche unter der Zeitfunktion über eine Periode, nur Klasse 2a
+			\\
+			\hline
+				Quadratischer MW, Leistung
+			&	$X^2 = \frac {1} {T} \int\limits_{-T/2}^{T/2} x^2(t)dt$
+			& 	nur Klasse 2a
+			\\
+			\hline
+				Mittelwert n. Ordnung
+			&	$X^n = \frac {1} {T} \int\limits_{-T/2}^{T/2} x^n(t)dt$
+			& 	nur Klasse 2a
+			\\
+			\hline
+				Effektivwert
+			&	$X = X_{\text{eff}}= \sqrt{X^2} = \sqrt{\frac{1}{T} \int\limits_{-T/2}^{T/2}{x^2(t)dt}}$
+			&	nur Klasse 2a
+			\\
+			\hline
+				Gleichrichtwert
+			&	$X_{|m|} = \bar{|X|} = \frac{1}{T} \int\limits_{-T/2}^{T/2}{|x(t)| dt}$
+			&	Arithm. Mittelwert der Zweiweggleichrichterschaltung
+		    \\
+		    \hline
+				Varianz
+			&	$\text{Var}(x)=\sigma^2= \frac {1} {T} \int\limits_{-T/2}^{T/2}(x(t)-X_0)^2dt = X^2-X_0^2$
+			&	Mittlerer Fehler im Quadrat
+			\\
+			\hline
+			Standardabweichung
+			&	$\sigma = \sqrt{\text{Var(x)}}$
+			&	{}
+			\\
+			\hline
 		\end{tabularx} \\
 	
 		\textbf{Hinweis:} \\
@@ -131,10 +136,10 @@
 		
 		
 	\subsection{Autokorrelationsfunktion (AKF) \skript{8}} 
-	Die Autokorrelation ist ein Mass für die innere Kohärenz (Ähnlichkeit) eines Signals (Wie weit wird die Zukunft von der Vergangenheit geprägt?).
-	
+	Die Autokorrelation ist ein Mass für die innere \textbf{Kohärenz} (Ähnlichkeit) eines Signals (Wie weit stehen die verschobenen Signale zu einander?).
+		\\
 		\bgroup
-		\setlength{\tabcolsep}{1mm}
+		\setlength{\tabcolsep}{2mm}
 		\begin{tabularx}{\textwidth}{|cX|cX|cX|}
 		\hline 
 			\multicolumn{2}{|c|}{\textbf{Energiesignale} (Klasse 1)} &
@@ -157,13 +162,8 @@
 		\end{tabularx} 
 		\egroup
 		
-		\begin{tabularx}{\textwidth}{lX}
-		\parbox{6cm}{
-			\includegraphics[width=4cm]{./bilder/akf1.png}\\
-			\includegraphics[width=4cm]{./bilder/akf2.png}
-		} 
-		&
-		\parbox{12cm}{
+		\begin{tabularx}{\textwidth}{lXX}
+		\parbox{10cm}{
 			\textbf{Eigenschaften}
 			\begin{itemize}
      			\item $\varphi_{xx}(0) = X^2 = (X_0)^2+\sigma^2$ (Hat immer Diracstoss bei $\tau = 0$)
@@ -189,14 +189,24 @@
      			\item $x(t) = a_k \cos(\omega t + \varphi) \Rightarrow \varphi_{xx}(t) = \frac{a_k^2}{2} \cos(\omega t)$
      			\item $x(t) = b_k \sin(\omega t + \varphi) \Rightarrow \varphi_{xx}(t) = \frac{b_k^2}{2} \cos(\omega t)$
    			\end{itemize}
-   		} \\
+   		} 
+   		&
+   		\parbox{5cm}{
+
+   		}
+   		&
+   		\parbox{5cm}{
+   			\includegraphics[width=4cm]{./bilder/akf1.png}\\
+   			\includegraphics[width=4cm]{./bilder/akf2.png}
+   		}
+	   	\\
 		\end{tabularx}
 				
 	\subsection{Kreuzkorrelationsfunktion (KKF) \skript{11}} 
 		Die Kreuzkorrelationsfunktion von periodischen Leistungssignalen (Klasse 2a) ist ein Mass für die Ähnlichkeit von zwei verschiedenen Signalen . \textit{''Wie ähnlich sind sich zwei Signale?'' \ \matlab{xcorr}}
 		\\	
 		\bgroup
-		\setlength{\tabcolsep}{1mm}
+		\setlength{\tabcolsep}{2mm}
 		\begin{tabularx}{\textwidth}{|cX|cX|cX|}
 		\hline 
 			\multicolumn{2}{|c|}{\textbf{Energiesignale} (Klasse 1)} &
@@ -205,27 +215,19 @@
 		\\ \hline 
 			$ \varphi_{xy}(\tau) $ &
 			$ 		= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
-				$ 	= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
+			$	 	= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
 			$ \varphi_{xy}(\tau) $ &
-			$ 		= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
-				$	= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
+			$ 		= \frac{1}{T}\int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
+			$		= \frac{1}{T}\int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
 			$ \varphi_{xy}(\tau) $ &
-			$		= \lim\limits_{T\rightarrow\infty} \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
-				$	= \lim\limits_{T\rightarrow\infty}\frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $
+			$		= \lim\limits_{T\rightarrow\infty}\frac{1}{T} \int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
+			$		= \lim\limits_{T\rightarrow\infty}\frac{1}{T} \int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $
 		\\ \hline
 		\end{tabularx} 
 		\egroup
 
 		\begin{tabularx}{\textwidth}{llX}
-		\parbox{2.9cm}{
-			\includegraphics[width=2.9cm]{./bilder/kkf1.png}
-		} 
-		&
-		\parbox{3.9cm}{
-			\includegraphics[width=3.9cm]{./bilder/kkf2.png}
-		} 
-		&
-		\parbox{10cm}{
+		\parbox{10.5cm}{
 			\textbf{Eigenschaften}
 			\begin{itemize}
      			\item Bei Signalen mit verschiedenen Frequenzen ist $\varphi_{xy}$ immer $0$!
@@ -236,16 +238,22 @@
    			\fbox{$ \dfrac{1}{2\pi} \int\limits_{-\infty}^{\infty} \Phi_{xy}(j\omega) \e^{j\omega t} d\omega 
 						= \colorbox{yellow}{$\varphi_{xy}(t) \ \laplace \ \Phi_{xy}(j\omega)$} =
 						\int\limits_{-\infty}^{\infty} \varphi_{xy}(t) \e^{-j\omega t} dt $}\\
-   		} \\
+   		} 
+   		&
+   		\parbox{2.9cm}{
+   			\includegraphics[width=2.9cm]{./bilder/kkf1.png}
+   		} 
+   		&
+   		\parbox{3.9cm}{
+   			\includegraphics[width=3.9cm]{./bilder/kkf2.png}
+   		} 
+   		\\
 		\end{tabularx}
 		
 		
 	\subsection{Rauschen \skript{25} \matlab{randn}}
 	
 		\begin{tabularx}{\textwidth}{lX}
-			\parbox{8cm}{
-				\includegraphics[width=8cm]{./bilder/rauschen2.png}
-			} &
 			\parbox{9.5cm}{
 			Ist die Intensität der
 			Rauschspannung "uber viele Frequenzdekaden
@@ -257,6 +265,10 @@
      			\item Effektive Rauschleistung: \fbox{$P_r = k \cdot T \cdot \Delta f$}
      			\item Bolzmann-Konstante: $k =1.380662 \cdot 10^{-23}\frac{J}{K}$
    			\end{itemize}
+			}
+			&
+			\parbox{8cm}{
+				\includegraphics[width=8cm]{./bilder/rauschen2.png}
 			}
 		\end{tabularx}\\
 		
