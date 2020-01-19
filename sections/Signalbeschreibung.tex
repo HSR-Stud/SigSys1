@@ -252,7 +252,6 @@
 		
 		
 	\subsection{Rauschen \skript{25} \matlab{randn}}
-	
 		\begin{tabularx}{\textwidth}{lX}
 			\parbox{9.5cm}{
 			Ist die Intensität der
@@ -273,7 +272,6 @@
 		\end{tabularx}\\
 		
 	\subsection{Signal-Rausch-Verhältnis (SNR) \skript{27}}
-	
 		Zur Qualitätsbeurteilung von Signalen wird das Verhältnis zwischen der Leistung des Nutzsignales $P_s$ und der 
 		des Rauschsignales $P_r$ gebildet. Dieses Verhältnis wird \textbf{Störabstand} oder \textbf{Rauschabstand} $a_r$ genannt.\\
 	
@@ -289,7 +287,6 @@
 	
 	
 	\subsection{Rauschzahl $F$ und Rauschmass $a_F$ \skript{27}}
-	
 		Jeder Vierpol verkleinert den Rauschabstand des Ausgangssignales gegenüber dem Rauschabstand des Eingangssignales.
 		Die Verschlechterung des Rauschleistungsabstandes wird durch die Rauschzahl $F$ \textit{(noise figure)} angegeben.
 		Es ist das Verhältnis des Rauschabstandes am Eingang zum Rauschabstand am Ausgang eines Vierpoles.\\
@@ -298,8 +295,12 @@
 			\textbf{Rauschzahl:}
 		&	\fbox{$F 	= \dfrac{\text{SNR}_{Eingang}}{\text{SNR}_{Ausgang}}
 						= \dfrac{\frac{P_{sEingang}}{P_{rEingang}}}{\frac{P_{sAusgang}}{P_{rAusgang}}} 
-						= \frac{P_{sEingang}}{P_{rEingang}} \cdot \frac{P_{rAusgang}}{P_{sAusgang}}$}
+						= \frac{P_{sEingang}}{P_{rEingang}} \cdot \frac{P_{rAusgang}}{P_{sAusgang}}$
+			}
 		&	Idealer Vierpol: $F = 1$
+		\\
+		&
+		&
 		\\
 			\textbf{Rauschmass} (logarithmisch):
 		&	\formel{$a_F = 10 \cdot log_{10} (F) = a_{rEingang} - a_{rAusgang}$}
@@ -307,17 +308,16 @@
 		\end{tabular}\\
 	
 	\subsection{Amplitudenanalyse von Signalen \skript{29}}
-	
 		\begin{tabular}{ll}
 			\parbox{7cm}{
 				\includegraphics[width=7cm]{./bilder/amplitudenanalyse.png}
 			}
 		& 	\begin{minipage}[]{11cm}
-			Die Amplitudendichte $p(a)$ ist ein Mass für u die relative Zeit ( Zeit / Gesamtzeit =	Wahrscheinlichkeit), während der sich das Signal in einem bestimmten Amplitudenintervall a +- da / 2 aufhält.
-			''Zeit während sich Signal in bestimmtem Amplitudenintervall aufhält''\\
+			Die Amplitudendichte $p(a)$ ist ein Mass für u die relative Zeit ( Zeit / Gesamtzeit =	Wahrscheinlichkeit), während der sich das Signal in einem bestimmten Amplitudenintervall a +- da / 2 aufhält.\newline
+			''\textit{Zeit während sich Signal in bestimmtem Amplitudenintervall aufhält}''\\ \newline
 				\fbox{$p(a) 	= \lim\limits_{da \rightarrow 0}\frac{\underbrace{\sum t\left(
 								a-\frac{da}{2}<x(t)\leq a+\frac{da}{2}\right)}_{dt}}{T\cdot da}
-							= \frac{1}{T}\cdot\frac{dt}{da}$}\\
+								= \frac{1}{T}\cdot\frac{dt}{da}$}\\ \newline
       		\end{minipage}
 		\\
 			\parbox{7cm}{
@@ -327,10 +327,9 @@
 				\textbf{Eigenschaften}
 				\begin{itemize}
 					\item Es gibt keine negativen Werte! $p(a) \geq 0 \ \ \forall a$
-     				\item Gesammtwahrscheinlichkeit:\enspace \fbox{$\int\limits_{-\infty}^{\infty} p(a) da = 1$}
-     				\item Wahrscheindlichkeit ${a_1 < a < a2}$ \enspace \fbox{$p(a_1 < a < a_2) = \int\limits_{a_1}^{a_2} p(a) da$}
+     				\item Gesamtwahrscheinlichkeit:\enspace \fbox{$\int\limits_{-\infty}^{\infty} p(a) da = 1$}
+     				\item Wahrscheinlichkeit ${a_1 < a < a2}$:\enspace \fbox{$p(a_1 < a < a_2) = \int\limits_{a_1}^{a_2} p(a) da$}
    				\end{itemize}
-				
       		\end{minipage}
 		\end{tabular}\\ \\
 	
@@ -382,7 +381,6 @@
 		  \end{minipage}
 	  	
 	\subsection{Faltung \skript{34}}
-		
 		\begin{tabularx}{\textwidth}{lX}
 			\parbox{5cm}{
 				\includegraphics[width=5cm]{./bilder/faltung.png}
@@ -498,8 +496,6 @@
 		\end{minipage}
 		}
 		\newpage
-
-		
 		
 %	\subsection{Q-Funktion \skript{41}}
 %	
