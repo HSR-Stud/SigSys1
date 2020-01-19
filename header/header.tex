@@ -75,7 +75,6 @@
 %\end{picture}
 %}
 
-
 % Fouriertransformationen
 \unitlength1cm
 \newcommand{\FT}
@@ -85,16 +84,12 @@
 \end{picture}
 }
 
-
 \newcommand{\IFT}
 {
 \begin{picture}(1,0.5)
 \put(0.2,0.1){\circle*{0.14}}\put(0.27,0.1){\line(1,0){0.45}}\put(0.77,0.1){\circle{0.14}}
 \end{picture}
 }
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Allgemeine Einstellungen %
@@ -118,11 +113,12 @@
 \fancyhead[R]{Seite \thepage { }von \pageref{LastPage}}
 %Fusszeile links bzw. innen
 \fancyfoot[L]{\footnotesize{\authorinfo}}
+% Lizenz CC-BY-NC-SA
+%\input{header/lizenzen}
+\fancyfoot[C]{\footnotesize{\licence \quad $\rightarrow$ \href{https://github.com/HSR-Stud}{Github: HSR-Stud}}}
+%\lizenz{cc-by-nc-sa}{small}
 %Fusszeile rechts bzw. ausen
 \fancyfoot[R]{\footnotesize{\today}}
-% Lizenz CC-BY-NC-SA
-\input{header/lizenzen}
-\lizenz{cc-by-nc-sa}{small}
 % Einrücken verhindern versuchen
 \setlength{\parindent}{0pt}
 
