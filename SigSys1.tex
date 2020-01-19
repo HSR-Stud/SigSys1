@@ -2,8 +2,12 @@
 % Dokumentinformationen %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\titleinfo}{Signale und Systeme 1 - Zusammenfassung}
-\newcommand{\authorinfo}{Schmidt, Selvarajah, Braun \& Co, Rast \& Co., Gwerder, K\"orner, Badertscher, Bruhin, Ehrler, Leuenberger}
+\newcommand{\authorinfo}{Schmidt, Selvarajah, weitere HSR-Studenten}
 \newcommand{\versioninfo}{$Rev: 2.0 $ | gem\"ass Unterricht Heinz Mathis/HS2019} 
+\newcommand{\licence}{CC BY-NC-SA}
+
+%Weitere Autoren 
+%Schmidt, Selvarajah, Braun \& Co, Rast \& Co., Gwerder, K\"orner, Badertscher, Bruhin, Ehrler, Leuenberger
 					
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Standard projektübergreifender Header für
@@ -14,8 +18,7 @@
 % DORT NUR ERGÄNZEN, NICHTS LÖSCHEN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{header/header}
-\fancyfoot[C]{
-}
+%\fancyfoot[C]{}
 \usepackage{pdfpages, pgffor, tabularx}
 \usepackage{pgfplots}
 \usepackage{tikz}
@@ -32,6 +35,7 @@
 \makeatother
 \setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
 \setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
 \iffalse
 \newenvironment{graphPlot}[2][\unskip]{
 	\begin{tikzpicture}[xscale=0.8, yscale=0.8]
@@ -57,22 +61,23 @@
 		{#1}\\[1ex]
 }{\end{tikzpicture}}
 \fi
+
 % Möglichst keine Ergänzungen hier, sondern in header.tex
 \begin{document}
-\title{\Huge{SigSys 1}}
-\maketitle
-\setcounter{tocdepth}{2}
-\tableofcontents
-\newpage
-
-\input{sections/Signalbeschreibung}
-\input{sections/Signalflussdiagramme}
-\input{sections/Frequenzanalyse}
-\input{sections/Systeme}
-\input{sections/Einheitssignale}
-\section{Tabelle der wichtigsten Ableitungen und Integrale}
-\input{table/diverses/subsections/Ableitungen}
-\input{table/diverses/subsections/unbestimmteIntegrale}
-\includepdf[pages={1-9}]{Tabellen.pdf}
+	\title{\Huge{SigSys 1}}
+	\maketitle
+	\setcounter{tocdepth}{2}
+	\tableofcontents
+	\newpage
+	
+	\input{sections/Signalbeschreibung}
+	\input{sections/Signalflussdiagramme}
+	\input{sections/Frequenzanalyse}
+	\input{sections/Systeme}
+	\input{sections/Einheitssignale}
+	\section{Tabelle der wichtigsten Ableitungen und Integrale}
+	\input{table/diverses/subsections/Ableitungen}
+	\input{table/diverses/subsections/unbestimmteIntegrale}
+	\includepdf[pages={1-9}]{Tabellen.pdf}
 
 \end{document}
