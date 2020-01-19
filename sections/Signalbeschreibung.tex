@@ -133,123 +133,132 @@
 			$ X^2 = |X|^2 = Var(|x|) + |X_0|^2 $ &
 			Dies kann die Berechnung des quadratischen Mittelwertes eines zum linearen Mittelwert symmetrischen Signales erleichtern.
 		\end{tabularx}
+	
+	\subsection{Korrelation \skript{8}}	
+		Mittels Vergleichen von Funktionen mit sich selbst oder mit einer anderen Funktion, kann herausgefunden werden, ob eine Korrelation vorliegt oder nicht. \\
+		\textbf{Hinweis:} Korrelation $\neq$ Kausalität, aber Kausalität $=$ Korrelation
 		
+		\begin{itemize}
+			\item Autokorrelation: Vergleich mit sich selbst.
+			\item Kreuzkorrelation: Vergleich mit einer anderen Funktion.
+		\end{itemize}
 		
-	\subsection{Autokorrelationsfunktion (AKF) \skript{8}} 
-	Die Autokorrelation ist ein Mass für die innere \textbf{Kohärenz} (Ähnlichkeit) eines Signals (Wie weit stehen die verschobenen Signale zu einander?).
-		\\
-		\bgroup
-		\setlength{\tabcolsep}{2mm}
-		\begin{tabularx}{\textwidth}{|cX|cX|cX|}
-		\hline 
-			\multicolumn{2}{|c|}{\textbf{Energiesignale} (Klasse 1)} &
-			\multicolumn{2}{|c|}{\textbf{periodische Leistungssignale} (2a)} & 
-			\multicolumn{2}{|c|}{\textbf{stochastische Leistungssignale} (2b)}
-		\\ \hline 
-			$ \varphi_{xx}(\tau) $ &
-			$ 		= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
-				$ 	= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
-				$	= \varphi_{xx}(-\tau)$ &
-			$ \varphi_{xx}(\tau) $ &
-			$ 		= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
-				$	= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
-				$	= \varphi_{xx}(-\tau) $ &
-			$ \varphi_{xx}(\tau) $ &
-			$		= \lim\limits_{T\rightarrow\infty} \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
-				$	= \lim\limits_{T\rightarrow\infty}\frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
-				$ = \varphi_{xx}(-\tau) $
-		\\ \hline
-		\end{tabularx} 
-		\egroup
-		
-		\begin{tabularx}{\textwidth}{lXX}
-		\parbox{10cm}{
-			\textbf{Eigenschaften}
-			\begin{itemize}
-     			\item $\varphi_{xx}(0) = X^2 = (X_0)^2+\sigma^2$ (Hat immer Diracstoss bei $\tau = 0$)
-     			\item $\varphi_{xx}(\tau)=\varphi_{xx}(\tau\pm mT)$, d.h. die AKF
-     				ist periodisch mit der gleichen Periode $T$ wie das Signal $x(t)$.
-				\item $\varphi_{xx}(\tau)=\varphi_{xx}(-\tau)$: d.h. die AKF ist eine {\bf gerade Funktion}
-				\item $\varphi_{xx}(0)\geq|\varphi_{xx}(\tau)|\quad$
-				\item $\varphi_{xx}(\tau)\geq (X_0)^2-\sigma^2\quad$
-   			\end{itemize}
-   			
-   			\textbf{Für Leistungssignale gilt:} \ \ \textit{$\Phi(j\omega)$: Leistungsdichtespektrum} \\
-   			\fbox{$ \dfrac{1}{2\pi} \cdot \int\limits_{-\infty}^{\infty} \Phi(j\omega) \cdot \e^{j\omega t} d\omega 
-						= \colorbox{yellow}{$\varphi_{xx}(t) \ \laplace \ \Phi(j\omega)$} =
-						\int\limits_{-\infty}^{\infty} \varphi_{xx}(t) \cdot \e^{-j\omega t} dt $}\\
-						
-			\textbf{Für Energiesignale gilt:} \ \ \textit{$E(j\omega)$: Energiedichtespektrum} \\
-   			\fbox{$ \dfrac{1}{2\pi} \cdot \int\limits_{-\infty}^{\infty} E(j\omega) \cdot \e^{j\omega t} d\omega 
-						= \colorbox{yellow}{$\varphi_{xx}(t) \ \laplace \ E(j\omega)$} =
-						\int\limits_{-\infty}^{\infty} \varphi_{xx}(t) \cdot \e^{-j\omega t} dt $}\\
-   
-   			\textbf{Beispiele}
-   			\begin{itemize}
-     			\item $x(t) = a_k \cos(\omega t + \varphi) \Rightarrow \varphi_{xx}(t) = \frac{a_k^2}{2} \cos(\omega t)$
-     			\item $x(t) = b_k \sin(\omega t + \varphi) \Rightarrow \varphi_{xx}(t) = \frac{b_k^2}{2} \cos(\omega t)$
-   			\end{itemize}
-   		} 
-   		&
-   		\parbox{5cm}{
-
-   		}
-   		&
-   		\parbox{5cm}{
-   			\includegraphics[width=4cm]{./bilder/akf1.png}\\
-   			\includegraphics[width=4cm]{./bilder/akf2.png}
-   		}
-	   	\\
-		\end{tabularx}
+		\subsubsection{Autokorrelationsfunktion (AKF) \skript{8}} 
+		Die Autokorrelation ist ein Mass für die innere \textbf{Kohärenz} (Ähnlichkeit) eines Signals (Wie weit stehen die verschobenen Signale zu einander?).
+			\\
+			\bgroup
+			\setlength{\tabcolsep}{2mm}
+			\begin{tabularx}{\textwidth}{|cX|cX|cX|}
+			\hline 
+				\multicolumn{2}{|c|}{\textbf{Energiesignale} (Klasse 1)} &
+				\multicolumn{2}{|c|}{\textbf{periodische Leistungssignale} (2a)} & 
+				\multicolumn{2}{|c|}{\textbf{stochastische Leistungssignale} (2b)}
+			\\ \hline 
+				$ \varphi_{xx}(\tau) $ &
+				$ 		= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
+					$ 	= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
+					$	= \varphi_{xx}(-\tau)$ &
+				$ \varphi_{xx}(\tau) $ &
+				$ 		= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
+					$	= \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
+					$	= \varphi_{xx}(-\tau) $ &
+				$ \varphi_{xx}(\tau) $ &
+				$		= \lim\limits_{T\rightarrow\infty} \frac {1} {T} \int\limits_{-T/2}^{T/2} x(t)x(t-\tau)dt $ \linebreak
+					$	= \lim\limits_{T\rightarrow\infty}\frac {1} {T} \int\limits_{-T/2}^{T/2} x(t+\tau)x(t)dt $ \linebreak
+					$ = \varphi_{xx}(-\tau) $
+			\\ \hline
+			\end{tabularx} 
+			\egroup
+			
+			\begin{tabularx}{\textwidth}{lXX}
+			\parbox{10cm}{
+				\textbf{Eigenschaften}
+				\begin{itemize}
+	     			\item $\varphi_{xx}(0) = X^2 = (X_0)^2+\sigma^2$ (Hat immer Diracstoss bei $\tau = 0$)
+	     			\item $\varphi_{xx}(\tau)=\varphi_{xx}(\tau\pm mT)$, d.h. die AKF
+	     				ist periodisch mit der gleichen Periode $T$ wie das Signal $x(t)$.
+					\item $\varphi_{xx}(\tau)=\varphi_{xx}(-\tau)$: d.h. die AKF ist eine {\bf gerade Funktion}
+					\item $\varphi_{xx}(0)\geq|\varphi_{xx}(\tau)|\quad$
+					\item $\varphi_{xx}(\tau)\geq (X_0)^2-\sigma^2\quad$
+	   			\end{itemize}
+	   			
+	   			\textbf{Für Leistungssignale gilt:} \ \ \textit{$\Phi(j\omega)$: Leistungsdichtespektrum} \\
+	   			\fbox{$ \dfrac{1}{2\pi} \cdot \int\limits_{-\infty}^{\infty} \Phi(j\omega) \cdot \e^{j\omega t} d\omega 
+							= \colorbox{yellow}{$\varphi_{xx}(t) \ \laplace \ \Phi(j\omega)$} =
+							\int\limits_{-\infty}^{\infty} \varphi_{xx}(t) \cdot \e^{-j\omega t} dt $}\\
+							
+				\textbf{Für Energiesignale gilt:} \ \ \textit{$E(j\omega)$: Energiedichtespektrum} \\
+	   			\fbox{$ \dfrac{1}{2\pi} \cdot \int\limits_{-\infty}^{\infty} E(j\omega) \cdot \e^{j\omega t} d\omega 
+							= \colorbox{yellow}{$\varphi_{xx}(t) \ \laplace \ E(j\omega)$} =
+							\int\limits_{-\infty}^{\infty} \varphi_{xx}(t) \cdot \e^{-j\omega t} dt $}\\
+	   
+	   			\textbf{Beispiele}
+	   			\begin{itemize}
+	     			\item $x(t) = a_k \cos(\omega t + \varphi) \Rightarrow \varphi_{xx}(t) = \frac{a_k^2}{2} \cos(\omega t)$
+	     			\item $x(t) = b_k \sin(\omega t + \varphi) \Rightarrow \varphi_{xx}(t) = \frac{b_k^2}{2} \cos(\omega t)$
+	   			\end{itemize}
+	   		} 
+	   		&
+	   		\parbox{1cm}{
+	
+	   		}
+	   		&
+	   		\parbox{5cm}{
+	   			\includegraphics[width=4cm]{./bilder/akf1.png}\\
+	   			\includegraphics[width=4cm]{./bilder/akf2.png}
+	   		}
+		   	\\
+			\end{tabularx}
 				
-	\subsection{Kreuzkorrelationsfunktion (KKF) \skript{11}} 
-		Die Kreuzkorrelationsfunktion von periodischen Leistungssignalen (Klasse 2a) ist ein Mass für die Ähnlichkeit von zwei verschiedenen Signalen . \textit{''Wie ähnlich sind sich zwei Signale?'' \ \matlab{xcorr}}
-		\\	
-		\bgroup
-		\setlength{\tabcolsep}{2mm}
-		\begin{tabularx}{\textwidth}{|cX|cX|cX|}
-		\hline 
-			\multicolumn{2}{|c|}{\textbf{Energiesignale} (Klasse 1)} &
-			\multicolumn{2}{|c|}{\textbf{periodische Leistungssignale} (2a)} & 
-			\multicolumn{2}{|c|}{\textbf{stochastische Leistungssignale} (2b)}
-		\\ \hline 
-			$ \varphi_{xy}(\tau) $ &
-			$ 		= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
-			$	 	= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
-			$ \varphi_{xy}(\tau) $ &
-			$ 		= \frac{1}{T}\int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
-			$		= \frac{1}{T}\int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
-			$ \varphi_{xy}(\tau) $ &
-			$		= \lim\limits_{T\rightarrow\infty}\frac{1}{T} \int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
-			$		= \lim\limits_{T\rightarrow\infty}\frac{1}{T} \int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $
-		\\ \hline
-		\end{tabularx} 
-		\egroup
-
-		\begin{tabularx}{\textwidth}{llX}
-		\parbox{10.5cm}{
-			\textbf{Eigenschaften}
-			\begin{itemize}
-     			\item Bei Signalen mit verschiedenen Frequenzen ist $\varphi_{xy}$ immer $0$!
-     			\item Bei stochastischen Signalen ist $\varphi_{xy}$ immer $0$!
-   			\end{itemize}
-   			
-   			\textbf{Für stochastische Leistungssignale (Klasse 2b) gilt:} \\
-   			\fbox{$ \dfrac{1}{2\pi} \int\limits_{-\infty}^{\infty} \Phi_{xy}(j\omega) \e^{j\omega t} d\omega 
-						= \colorbox{yellow}{$\varphi_{xy}(t) \ \laplace \ \Phi_{xy}(j\omega)$} =
-						\int\limits_{-\infty}^{\infty} \varphi_{xy}(t) \e^{-j\omega t} dt $}\\
-   		} 
-   		&
-   		\parbox{2.9cm}{
-   			\includegraphics[width=2.9cm]{./bilder/kkf1.png}
-   		} 
-   		&
-   		\parbox{3.9cm}{
-   			\includegraphics[width=3.9cm]{./bilder/kkf2.png}
-   		} 
-   		\\
-		\end{tabularx}
-		
+		\newpage
+					
+		\subsubsection{Kreuzkorrelationsfunktion (KKF) \skript{11}} 
+			Die Kreuzkorrelationsfunktion von periodischen Leistungssignalen (Klasse 2a) ist ein Mass für die Ähnlichkeit von zwei verschiedenen Signalen . \textit{''Wie ähnlich sind sich zwei Signale?'' \ \matlab{xcorr}}
+			\\	
+			\bgroup
+			\setlength{\tabcolsep}{2mm}
+			\begin{tabularx}{\textwidth}{|cX|cX|cX|}
+			\hline 
+				\multicolumn{2}{|c|}{\textbf{Energiesignale} (Klasse 1)} &
+				\multicolumn{2}{|c|}{\textbf{periodische Leistungssignale} (2a)} & 
+				\multicolumn{2}{|c|}{\textbf{stochastische Leistungssignale} (2b)}
+			\\ \hline 
+				$ \varphi_{xy}(\tau) $ &
+				$ 		= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
+				$	 	= \lim\limits_{T\to\infty}\int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
+				$ \varphi_{xy}(\tau) $ &
+				$ 		= \frac{1}{T}\int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
+				$		= \frac{1}{T}\int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $ &
+				$ \varphi_{xy}(\tau) $ &
+				$		= \lim\limits_{T\rightarrow\infty}\frac{1}{T} \int\limits_{-T/2}^{T/2} x(t)y(t-\tau)dt $ \linebreak
+				$		= \lim\limits_{T\rightarrow\infty}\frac{1}{T} \int\limits_{-T/2}^{T/2} x(t+\tau)y(t)dt $
+			\\ \hline
+			\end{tabularx} 
+			\egroup
+	
+			\begin{tabularx}{\textwidth}{llX}
+			\parbox{10.5cm}{
+				\textbf{Eigenschaften}
+				\begin{itemize}
+	     			\item Bei Signalen mit verschiedenen Frequenzen ist $\varphi_{xy}$ immer $0$!
+	     			\item Bei stochastischen Signalen ist $\varphi_{xy}$ immer $0$!
+	   			\end{itemize}
+	   			
+	   			\textbf{Für stochastische Leistungssignale (Klasse 2b) gilt:} \\
+	   			\fbox{$ \dfrac{1}{2\pi} \int\limits_{-\infty}^{\infty} \Phi_{xy}(j\omega) \e^{j\omega t} d\omega 
+							= \colorbox{yellow}{$\varphi_{xy}(t) \ \laplace \ \Phi_{xy}(j\omega)$} =
+							\int\limits_{-\infty}^{\infty} \varphi_{xy}(t) \e^{-j\omega t} dt $}\\
+	   		} 
+	   		&
+	   		\parbox{2.9cm}{
+	   			\includegraphics[width=2.9cm]{./bilder/kkf1.png}
+	   		} 
+	   		&
+	   		\parbox{3.9cm}{
+	   			\includegraphics[width=3.9cm]{./bilder/kkf2.png}
+	   		} 
+	   		\\
+			\end{tabularx}
 		
 	\subsection{Rauschen \skript{25} \matlab{randn}}
 		\begin{tabularx}{\textwidth}{lX}
@@ -356,6 +365,8 @@
       		\end{minipage}
 		\end{tabularx}
 		}
+	
+	\newpage
 		
 	\subsection{Zentraler Grenzwertsatz}
 		\begin{minipage}[]{11cm}
@@ -411,6 +422,8 @@
 			&	Unendlich viele unabhängige Prozesse miteinander gefaltet ergibt
 			(unabhängig von den einzelnen Verteilungen) eine \textbf{Normalverteilung}.
 		\end{tabularx}
+	
+	\newpage
 	
 	\subsection{Stochastische Signale und deren Verteilungen \skript{38}}
 		\rotatebox{90}{
@@ -489,13 +502,26 @@
 			& & & &
 			\\ \hline
 			\end{tabular}\\ \\
+			\textbf{Stochastische Signale} sind schwach stationär (Linearer Mittelwert $x_0$ und Autokorrelation $\phi{xx}(t)$ hängen nicht von der Zeit t ab) und können nur durch Wahrscheinlichkeitsverteilungen beschrieben werden.
+			\\
 			\textbf{Anmerkung zur gaussförmigen Verteilung:}\\
 			Im Intervall $\mu \pm 3\sigma$ sind 99,73\% aller Messwerte zu finden.
 			In der Zeichung ist diese Stelle mit \textbf{b} gekennzeichnet.\\ \\
 			Allgemein: \formel{$\operatorname{Var}(x) = X^2 - X_0^2$}
+			
+			\subsubsection{Addition von zweier stochastischen Signalen}
+				\begin{multicols}{2}
+					Die Addition von zwei unabhängigen Signalen entspricht der Faltung ihrer Wahrscheinlichkeitsverteilungen.
+					\vfill\null
+					\columnbreak
+					\vfill\null
+					\fbox{$x_1(t) : p_1(a)$} \raisebox{.5pt}{\textcircled{\raisebox{-.9pt} {$+$}}} \fbox{$x_2(t) : p_2(a)$} $=$ 
+					\fbox{$x(t) : p(a) = p_1(a) * p_2(a)$}
+				\end{multicols}
 		\end{minipage}
 		}
-		\newpage
+		
+	\newpage
 		
 %	\subsection{Q-Funktion \skript{41}}
 %	

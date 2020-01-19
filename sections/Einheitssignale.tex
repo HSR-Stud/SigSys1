@@ -1,5 +1,4 @@
 \section{Einheitssignale}
-	
 	\subsection{Funktionen}
 	\renewcommand{\arraystretchOriginal}{1}
 	\begin{tabular}{ll} 
@@ -138,7 +137,38 @@
 		\vspace{.1cm}\\
 		}
 		\end{tabular}
-
 	
-
+	\subsubsection{Signalmanipulationen}
+		\begin{tabularx}{\textwidth}{|l|X|X|X|X|X|}
+			\hline
+			{}
+			&	\multirow{2}{*}{\textbf{Spiegeln}}
+			&	\multirow{2}{*}{\textbf{Strecken um Faktor $\mathbf{a}$}}
+			&	\multirow{2}{*}{\textbf{Stauchen um Faktor $\mathbf{a}$}}
+			&	\multicolumn{2}{c|}{\textbf{Verschieben um $c$}}
+			\\ 
+			{}
+			&	
+			&	
+			&	
+			&	\textbf{nach Rechts/oben}
+			&	\textbf{nach links/unten}
+			\\ \hline 
+				x-Achse (Abszisse)
+			&	$-f(x)$
+			&	$f(\frac{1}{a} \cdot x)$
+			&	$f(a \cdot x)$
+			&	$f(x - c)$
+			&	$f(x + c)$
+			\\ \hline 
+				y-Achse (Ordinate)
+			&	$f(-x)$
+			&	$a \cdot f(x)$
+			&	$\frac{1}{a} \cdot f(x)$
+			&	$f(x) + c$
+			&	$f(x) - c$	
+			\\ \hline 
+			
+		\end{tabularx}
+	
 	\input{table/elektrotechnik/subsections/signalformen}	

@@ -24,6 +24,14 @@
 
 \newcommand{\beispiel}[1]{\textcolor{brown}{\mbox{#1}}}
 \newcommand{\formel}[1]{\fcolorbox{black}{yellow}{#1}}
+\makeatletter
+	\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+		{-2.5ex\@plus -1ex \@minus -.25ex}%
+		{1.25ex \@plus .25ex}%
+		{\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
 \iffalse
 \newenvironment{graphPlot}[2][\unskip]{
 	\begin{tikzpicture}[xscale=0.8, yscale=0.8]
@@ -65,7 +73,6 @@
 \section{Tabelle der wichtigsten Ableitungen und Integrale}
 \input{table/diverses/subsections/Ableitungen}
 \input{table/diverses/subsections/unbestimmteIntegrale}
-\input{table/elektrotechnik/subsections/signalformen}
 \includepdf[pages={1-9}]{Tabellen.pdf}
 
 \end{document}

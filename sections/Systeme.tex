@@ -1,6 +1,5 @@
 \section{Systeme \skript{161}}	
 	\subsection{Begriffe}
-	
 		\begin{tabularx}{\textwidth}{|p{4.5cm}|p{6cm}|X|}
 		\hline
 			\textbf{Bezeichnung}
@@ -361,9 +360,7 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
 			Die Signalverzögerung beträgt dann für alle Frequenzen \fbox{$t_0 = \tau_G = \tau_P$}.
 		
 	\subsection{Verzerrungen und Klirrfaktor \skript{187}}
-	
 		\subsubsection{Verzerrungen \skript{187}}
-		
 			\begin{tabular}{ll}
 				\textbf{Lineare Verzerrungen:}
 			&	\textbf{Nichtlineare Verzerrungen:}
@@ -381,39 +378,57 @@ modifiziertes Hurwitz-Polynom (grenzstabil) \\ \hline\hline
 			\\
 			\end{tabular}
 			
+		\subsubsection{Masse für Verzerrung \skript{189}}
+			Jedes verzerrte Signal kann durch ein Gütemass beschrieben werden. \\
+			Diese sind:
+			\begin{itemize}
+				\item \textbf{Klirrfaktor:} Dieser stellt das Verhältnis des Effektivwertes der entstandenen Harmonischen und des Effektivwertes des gesamten Ausgangssignals. Dieses Mass wird insbesondere in Europa verwendet.
+				\item \textbf{Total Harmonic Distortion (THD):} Dieser stellt das Verhältnis des Effektivwertes der entstandenen Harmonischen und des Effektivwertes der Grundschwingung. Dieses Mass wird insbesondere in USA verwendet. 
+			\end{itemize}
+			\begin{multicols}{2}
+				\begin{description}
+					\item Effektivwert des gesamten Ausgangssignal: 
+					\item Effektivwert der entstandenen Harmonischen: 
+					\item Effektivwert der Grundschwingung: 
+					\item Effektivwert m-ten Harmonischen: 
+				\end{description}
+				\columnbreak
+				\begin{description}
+					\item $\sqrt{U_1^2 + U_2^2 + U_3^2 + ... + U_n^2}$
+					\item $\sqrt{U_2^2 + U_3^2 + ... + U_n^2}$
+					\item $U_1^2$
+					\item $U_m^2$
+				\end{description}
+			\end{multicols}
+		
+			\paragraph{Klirrfaktor \skript{189}}
+				\begin{tabularx}{\textwidth}{cX}
+					\parbox{9cm}{
+						Als Mass für nichtlineare Verzerrungen gilt der \textit{Klirrfaktor}. Betrachtet wird jeweils der Effektivwert am Ausgang.
+						\begin{center}
+							\formel{$k = \sqrt{\frac{U_2^2 + U_3^2 + \ldots + U_n^2}{U_1^2 + U_2^2 + \ldots + U_n^2}} $} $ 0 \leq k \leq 1$ 
+						\end{center}
+					}
+						&	\parbox{9cm}{
+						\begin{tabular}{ll}
+							Teilklirrfaktor (frequenzselektiv):
+						&	\fbox{$k_m =  \frac {U_m} {\sqrt{ U_1^2+ U_2^2 + \ldots + U_n^2} }$}
+						\\
+							Klirrdämpfungsmass:
+						& 	\fbox{$a_k = 20 \log \left( \frac1k \right)$}
+						\\
+							Teilklirrdämpfungmass:
+						& 	\fbox{$a_k = 20 \log \left( \frac{1}{k_m} \right)$}
+						\end{tabular}
+					}
+				\end{tabularx}
 			
-		\subsubsection{Klirrfaktor \skript{189}}
-	
-			\begin{tabularx}{\textwidth}{cX}
-				\parbox{9cm}{
-					Als Mass für nichtlineare Verzerrungen gilt der \textit{Klirrfaktor}. Betrachtet wird jeweils der Effektivwert am Ausgang.
-					\begin{center}
-						\formel{$k = \sqrt{\frac{U_2^2 + U_3^2 + \ldots + U_n^2}{U_1^2 + U_2^2 + \ldots + U_n^2}} $} $ 0 \leq k \leq 1$ 
-					\end{center}
-				}
-			&	\parbox{9cm}{
-					\begin{tabular}{ll}
-						Teilklirrfaktor (frequenzselektiv):
-					&	\fbox{$k_m =  \frac {U_m} {\sqrt{ U_1^2+ U_2^2 + \ldots + U_n^2} }$}
-					\\
-						Klirrdämpfungsmass:
-					& 	\fbox{$a_k = 20 \log \left( \frac1k \right)$}
-					\\
-						Teilklirrdämpfungmass:
-					& 	\fbox{$a_k = 20 \log \left( \frac{1}{k_m} \right)$}
-					\end{tabular}
-				}
-			\end{tabularx}
+			\paragraph{Total Harmonic Distortion (THD) \skript{189}}
+				\begin{center}
+					\fbox{$\text{THD} = \sqrt{ \frac {U_2^2+ U_3^2 + \ldots + U_n^2} {U_1^2} }$}
+					$\infty > \text{THD} \geq k \geq 0; \quad \text{Für kleine Verzerrungen: THD} \approx k $
+				\end{center}
 
-		
-		\subsubsection{Total Harmonic Distortion (THD) \skript{189}}
-		
-			\begin{center}
-				\fbox{$\text{THD} = \sqrt{ \frac {U_2^2+ U_3^2 + \ldots + U_n^2} {U_1^2} }$}
-				$\infty > \text{THD} \geq k \geq 0; \quad \text{Für kleine Verzerrungen: THD} \approx k $
-			\end{center}
-
-		
 		\subsection{Verzerrungsfreie Übertragung von Signalen \skript{190}}
 		
 			\begin{tabularx}{\textwidth}{p{9cm}X}
