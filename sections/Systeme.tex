@@ -115,7 +115,6 @@
 	\subsubsection{Linearisierung von Systemen: Siehe \skript{169}}
 
 	\subsection{Übertragungsfunktion von LTI-Systemen \skript{174}}
-	
 		\begin{tabular}{ll}
 			\parbox{13cm}{
 				$$h(t) \; \laplace \; H(s)$$
@@ -153,12 +152,48 @@
 				L & sL\\
 				C & $\frac{1}{sC}$ \\
 			\end{tabular}
-			Parallelschaltung $= \frac{1}{\frac{1}{R}+\frac{1}{sL}+sC}$\\ \\}
+			Parallelschaltung $= \frac{1}{\frac{1}{R}+\frac{1}{sL}+sC}$\\ \\
+		}
 		\parbox{8cm}{
 			
 			Das Potential in einem Punkt berechnet man mit $=\frac{Summe\ aller\
 			Elemente\ zwischen\ Punkt\ und\ GND}{Summe\ aller\ Elemente\ der\ Kompletten\ Schaltung}$\\
 			Die \textbf{Ordnung der UTF} ist die Anzahl unabhängiger Speicher (L oder C).}		
+		
+		\subsubsection{Asymptotische Steilheit}
+			\parbox{9cm}{
+			Die asymptotische Steilheit lässt sich aus der UTF bestimmen. 
+			Folgende Schritte sind vonnöten:
+			\begin{itemize}
+				\item Den Amplitudengang von der UTF bestimmen.
+				\item Den Summand mit der höchsten Ordnung von $\omega$ extrahieren/isolieren.
+				\item Die Funktion ohne Faktor ist die Steilheit.
+			\end{itemize}
+			}
+			\parbox{1cm}{
+				\quad
+			}
+			\parbox{9cm}{
+				\textbf{Beispiel:} \\
+				$H(s) = \frac{sL}{s^3L^2C + s^2RLC} \rightarrow |H(\omega)|_{\omega >> 1} = \frac{sL}{s^3L^2C} = \frac{1}{L^2C}$
+				\formel{$\frac{1}{\omega^2}$}
+			}
+		
+			\paragraph{Steilheit in dB/Dekade}
+				\parbox{5cm}{
+					\formel{$H(\omega = 10) = 20 \cdot lg(f(\omega))$}
+				}
+				\parbox{4cm}{
+					Die Funktion wird mit der dB-Formel berechnet und als Argument wird die Zahl 10 eingefügt. \\
+				}
+				\parbox{1cm}{
+					\quad
+				}
+				\parbox{10cm}{
+					\textbf{Beispiel:}	\\
+					$H(s) = \frac{sL}{s^3L^2C + s^2RLC} \rightarrow |H(\omega)|_{\omega >> 1} = \frac{sL}{s^3L^2C} = \frac{1}{L^2C} \frac{1}{\omega^2}$	\\[5pt]
+					\formel{$|H(\omega = 10)|_{dB} = 20 \cdot lg(\frac{1}{\omega^2})$} $= -40 dB/Dekade$
+				}
 		
 		\subsubsection{Beispiele von Übertragungsfunktionen (verschiedene Filter)}
 		\renewcommand{\arraystretchOriginal}{1}
