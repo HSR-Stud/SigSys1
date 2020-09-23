@@ -6,48 +6,71 @@
 	\end{list}
 	
 	\subsection{Glossar \skript{56}}
-	  \begin{tabular}{|m{4cm} | m{14cm}|}
+	  \begin{tabular}{|m{5cm} | m{13cm}|}
 	    \hline
-	      \textbf{Knoten}: &
-	      Darstellung einer Grösse, eines Signals oder einer Variable \\
+		   \textbf{Knoten:} &
+		   Darstellung einer Grösse, eines Signals oder einer Variable 
+		   \\
+		   Quelle: &
+		   Unabhängiger Knoten, es münden keine Zweige ein 
+		   \\
+		   Senke: &
+		   Knoten, ohne weggehende Zweige 
+		   \\
+   		\hline
+	      \textbf{Zweig:} &
+	      Funktionelle Abhängigkeit einer Grösse 
+	      \\
 	    \hline
-	      \textbf{Zweig}: &
-	      Funktionelle Abhängigkeit einer Grösse \\
-	    \hline
-	      \textbf{Quelle}: &
-	      Unabhängiger Knoten, es münden keine Zweige ein \\
-	    \hline
-	      \textbf{Senke}: &
-	      Knoten, ohne weggehende Zweige \\
-	    \hline
-	      \textbf{Pfad}: &
+	      \textbf{Pfad:} &
 	      Kontinuierliche Folge von Zweigen, die in die gleiche Richtung zeigen \\
-	    \hline
-	      \textbf{Offener Pfade}: &
-	      Ein Pfad, bei dem jeder beteiligte Knoten nur einmal durchquert wird \\
-	      \textbf{Vorwärtspfad}: &
-	      Ein offener Pfad zwischen einer Quelle und einer Senke \\
-	    \hline
-	      \textbf{Schleife (L)}: &
+	      Offener Pfad: &
+	      Ein Pfad, bei dem jeder beteiligte Knoten nur \textbf{einmal} durchquert wird 
+	      \\
+	      Vorwärtspfad: &
+	      Ein offener Pfad zwischen einer Quelle und einer Senke 
+	      \\
+   		\hline
+	      \textbf{Schleife (L):} &
 	      Ein geschlossener Pfad, welcher zum Ausgangsknoten zurückkehrt, 
 	      wobei jeder beteiligte Knoten nur einmal durchlaufen wird, ausgenommen der
 	      Ausgangsknoten \\
-	    \hline
-	      \textbf{Eigenschleife}: &
+	      Eigenschleife: &
 	      Eine (Rückkopplungs)schleife, die aus einem Zweig und einem Knoten besteht \\
 	    \hline
-	      \textbf{Zweigtransmittanz}: &
+	      \textbf{Zweigtransmittanz:} &
 	      Die lineare Grösse, unabhängig von ihrer Dimension, 
 	      die einen Knoten eines Zweiges zum anderen Knoten in Beziehung setzt. \\
 	    \hline
-	      \textbf{Schleifentransmittanz}: &
+	      \textbf{Schleifentransmittanz:} &
 	      Das Produkt der Zweigtransmittanzen in einer Schleife. \\
 	    \hline
 	  \end{tabular}
+  
+	\subsection{Konstruktionsregel \skript{61}}
+		\begin{itemize}
+			\item Knoten = Variablen und Zweigtransmittanzen = Koeffizienten des linearen Gleichungssystem.
+			\item Signale durchqueren Zweige nur in Pfeilrichtung und werden mit der entsprechenden Zweigtransmittanz multipliziert.
+			\item Wert der Variable (Knoten) = Summe aller Signale, die in diesen Knoten einmünden.
+			\item Wert der Variable (Knoten) wird auf alle weggehenden Zweige übertragen.
+		\end{itemize}
+	
+		\textbf{Beispiel:}
+		
+		\begin{multicols}{2}
+			$X_1(z) = a \cdot X_4(z) + X_0(z)$	\\
+			$X_2(z) = X_1(z)$	\\
+			$X_3(z) = b_0 \cdot X_2(z) + b_1 \cdot X_4(z)$	\\
+			$X_4(z) = z^(-1) \cdot X_2(z)$	\\
+			$X_5(z) = X_3(z)$
+			\vfill
+			\columnbreak
+			\vfill
+			\includegraphics[width=8cm]{./bilder/schleifenkonstruktion_beispiel.png}
+		\end{multicols}
 	  
-	  \subsection{Reduktionsregel \skript{61}}
+	\subsection{Reduktionsregel \skript{61}}
 	    \begin{multicols}{2}
-	    
 	      \subsubsection{Regel 1: Kettentransformation \skript{61}}
 		      Die gesamte Übertragung einer Kaskade von Zweigen (d.h. einem Pfad) ist gleich dem Produkt der einzelnen Transmittanzen. \\
 		      \includegraphics[width=8cm]{./bilder/kettentransformation.png}
@@ -64,8 +87,6 @@
 	        \includegraphics[width=7cm]{./bilder/transmittanzverschiebung.png} \\
 	        Wichtig ist, dass eine neue Variable $x_3'$ eingeführt wird, wenn der Endpunkt eines
 	        inneren Zweiges verschoben wird. \newline (siehe c)    
-	    \vfill
-	    \columnbreak
 	    
 	      \subsubsection{Regel 5: Pfadinversion \skript{63}}
 	        \includegraphics[width=8cm]{./bilder/pfadinversion.png} \\
@@ -108,26 +129,33 @@
 	   \newpage
 	   
 \subsection{Mason's Regel \skript{69}}
-  $\boxed{H_{ij} = \frac{\sum\limits_k P_k\cdot\Delta_k}{\Delta}}\quad
-  \Rightarrow$ UTF von $x_i$ nach $x_j$, wobei \textbf{$x_i$} eine
-  \textbf{Quelle}, \textbf{$x_j$} jedoch nicht zwingend eine \textbf{Senke} sein
-  muss. \vspace{0.3cm}\\
-  $P_k \Rightarrow$ Vorwärtspfad $k$ (bezogen auf 1 Eingang) \qquad $\Delta_k \Rightarrow$ Kofaktor de
-  $k$-ten Pfades \qquad $\Delta \Rightarrow$ Netzwerkdet/Graphdet\vspace{0.3cm}\\
-  $\Delta$ = 1- (Summe aller Schleifen) + (Summe aller Produkte zweier
-  Schleifen, die sich nicht berühren) - (Summe
-  aller Produkte dreier Schleifen, die sich nicht berühren) + $\ldots$
-  \vspace{0.3cm}\\
-  $\Delta_k$ = 1- (Summe aller Schleifen die $P_k$ nicht berühren) + (Summe
-  aller Produkte zweier Schleifen, die $P_k$ und sich selbst nicht
-  berühren)-(Summe aller Produkte dreier Schleifen, die $P_k$ und sich selbst
-  nicht berühren) + $\ldots$ \\
-
-  Falls die \textbf{UTF eines SFD von einem beliebigen Knoten} (keiner Quelle)
-  gesucht wird, kann Mason's Regel nicht direkt angewandt werden. Abhilfe: \\
-  $\boxed{H_{ij} = \frac{x_j}{x_i} = \frac{x_j}{x_q} \frac{x_q}{x_i} =
-  \frac{H_{qj}}{H_{qi}}}$ Wobei $x_q$ eine Quelle sei. 
-  Schlussendlich kürzt sich die Netzwerkdeterminante heraus. \\
+	\begin{multicols}{2}
+		$\boxed{H_{ij} = \frac{\sum\limits_k P_k\cdot\Delta_k}{\Delta}}\quad$ 
+		\vfill
+		\columnbreak
+		\vfill
+		\boldmath{$P_k$}: Vorwärtspfad $k$ (bez. auf 1 Eingang) \enspace \\
+		\boldmath{$\Delta_k$}: Kofaktor des $k$-ten Pfades \enspace \\
+		\boldmath{$\Delta$}: Netzwerkdet/Graphdet\vspace{0.3cm}
+		\vfill
+		\columnbreak
+		\vfill
+	\end{multicols}
+	\textbf{Hinweis:} UTF von $x_i$ nach $x_j$, wobei \textbf{$x_i$} eine
+	\textbf{Quelle}, \textbf{$x_j$} jedoch nicht zwingend eine \textbf{Senke} sein
+	muss. \vspace{0.3cm}\\
+	\boldmath$\Delta_k$ = 1 - (Summe aller Schleifen die $P_k$ nicht berühren) + (Summe aller Produkte zweier Schleifen, die $P_k$ und sich selbst nicht
+	berühren) - (Summe aller Produkte dreier Schleifen, die $P_k$ und sich selbst
+	nicht berühren) + \unboldmath $\ldots$\vspace{0.3cm} \\
+	\boldmath$\Delta$ = 1 - (Summe aller Schleifen) + (Summe aller Produkte zweier
+	Schleifen, die sich nicht berühren) - (Summe
+	aller Produkte dreier Schleifen, die sich nicht berühren) +\unboldmath$\ldots$ \\
+	
+	Falls die \textbf{UTF eines SFD von einem beliebigen Knoten} (keiner Quelle)
+	gesucht wird, kann Mason's Regel nicht direkt angewandt werden. Abhilfe: \\
+	$\boxed{H_{ij} = \frac{x_j}{x_i} = \frac{x_j}{x_q} \frac{x_q}{x_i} =
+	\frac{H_{qj}}{H_{qi}}}$ Wobei $x_q$ eine Quelle sei. 
+	Schlussendlich kürzt sich die Netzwerkdeterminante heraus. \\
 
 \begin{minipage}[t]{10cm}
 \subsection{Beispiel eines SFD \skript{73}}
@@ -177,14 +205,27 @@
 \subsection{Einbezug analoger Verstärker \skript{80}}
 \includegraphics[width=18cm]{./bilder/sfd-op.png}
 
+\subsection{Inversion \skript{84}}
+	Durch schrittweise Pfadinversion erhält man das ”invertierte” Signalflussdiagramm. \\
+	Es hat folgende Eigenschaften:
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item Richtungsumdrehung aller Zweigtransmittanzen bei gleichbleibenden Transmittanzen
+			\item Spiegelung des resultierenden SFD
+			\item Bezeichnungswechsel von Eingangs- und Ausgangsknoten
+		\end{itemize}
+		\columnbreak
+		\includegraphics[width=9cm]{./bilder/inversion.png}
+	\end{multicols}
+
 \subsection{Transposition \skript{84}}
-  \begin{multicols}{2}
-    \textbf{Ablauf:}
-    \begin{enumerate}
-      \item Richtungsumdrehung aller Zweigtransmittanzen bei gleichbleibenden Transmittanzen
-      \item Spiegelung des resultierenden SFD
-      \item Bezeichnungswechsel von Eingangs- und Ausgangsknoten
-    \end{enumerate}
+ 	\begin{multicols}{2}
+		\textbf{Ablauf:}
+		\begin{enumerate}
+		  \item Richtungsumdrehung aller Zweigtransmittanzen bei gleichbleibenden Transmittanzen
+		  \item Spiegelung des resultierenden SFD
+		  \item Bezeichnungswechsel von Eingangs- und Ausgangsknoten
+		\end{enumerate}
     
     Die UTF des transponierten SFD ist \textbf{identisch} mit der UTF des ursprünglichen SFD, aber ihre
     Topologie ist verschieden.

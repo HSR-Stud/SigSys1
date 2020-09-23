@@ -2,9 +2,12 @@
 % Dokumentinformationen %
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\titleinfo}{Signale und Systeme 1 - Zusammenfassung}
-\newcommand{\authorinfo}{Braun \& Co, Rast \& Co., Gwerder,  K\"orner, Badertscher, Bruhin, Ehrler, Leuenberger}
-\newcommand{\versioninfo}{$Rev: 1.6 $ | 
-							gem\"ass Unterricht Heinz Mathis/HS2014} 
+\newcommand{\authorinfo}{Schmidt, Selvarajah, weitere HSR-Studenten}
+\newcommand{\versioninfo}{$Rev: 2.1 $ | gem\"ass Unterricht Heinz Mathis/HS2019} 
+\newcommand{\licence}{CC BY-NC-SA}
+
+%Weitere Autoren 
+%Schmidt, Selvarajah, Braun \& Co, Rast \& Co., Gwerder, K\"orner, Badertscher, Bruhin, Ehrler, Leuenberger
 					
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Standard projektübergreifender Header für
@@ -15,30 +18,66 @@
 % DORT NUR ERGÄNZEN, NICHTS LÖSCHEN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{header/header}
-\fancyfoot[C]{
-}
-\usepackage{pdfpages, tabularx}
+%\fancyfoot[C]{}
+\usepackage{pdfpages, pgffor, tabularx}
+\usepackage{pgfplots}
+\usepackage{tikz}
+
+\newlength{\pagedim}% To store page dimensions, if necessary
 
 \newcommand{\beispiel}[1]{\textcolor{brown}{\mbox{#1}}}
 \newcommand{\formel}[1]{\fcolorbox{black}{yellow}{#1}}
+\makeatletter
+	\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+		{-2.5ex\@plus -1ex \@minus -.25ex}%
+		{1.25ex \@plus .25ex}%
+		{\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
+\iffalse
+\newenvironment{graphPlot}[2][\unskip]{
+	\begin{tikzpicture}[xscale=0.8, yscale=0.8]
+		%\draw[help lines] (0,0) grid (6,4);
+		\normalsize
+		
+		\draw [<->] (0, 2.5) -- (0, 0) -- (5, 0);
+		\node [right] at (5, 0) {x};				% x-label
+		\node [above] at (0, 2.5) {y(t)};			% y-label
+		
+		\draw (1, -0.1) --  (1, 0.1);				% Strich
+		\node [below] at (1, 0) {$\frac{1}{2}$};	% Zahl beim Strich
+		\draw (2, -0.1) --  (2, 0.1);
+		\node [below] at (2, -0.1) {$1$};
+		\draw (3, -0.1) --  (3, 0.1);
+		\node [below] at (3, 0) {$\frac{3}{2}$};
+		\draw (4, -0.1) --  (4, 0.1);
+		\node [below] at (4, -0.1) {$2$};
+		
+		%\draw [dashed, red] (0, 3) -- (5, 3);		% Gestrichelte Linie
+		\node [left] at (0,2) {$1$};
+		{#2}\\[1ex]
+		{#1}\\[1ex]
+}{\end{tikzpicture}}
+\fi
 
 % Möglichst keine Ergänzungen hier, sondern in header.tex
 \begin{document}
-\title{\Huge{SigSys 1}}
-\maketitle
-\setcounter{tocdepth}{2}
-\tableofcontents
-\newpage
-
-\input{sections/Signalbeschreibung}
-\input{sections/Signalflussdiagramme}
-\input{sections/Frequenzanalyse}
-\input{sections/Systeme}
-\input{sections/Einheitssignale}
-\section{Idiotenseite}
-\input{idiotenseite/diverses/subsections/Ableitungen}
-\input{idiotenseite/diverses/subsections/unbestimmteIntegrale}
-\input{idiotenseite/elektrotechnik/subsections/signalformen}
-\includepdf[pages={1-9}]{Tabellen.pdf}
+	\title{\Huge{SigSys 1}}
+	\maketitle
+	\setcounter{tocdepth}{2}
+	\tableofcontents
+	\newpage
+	
+	\input{sections/Signalbeschreibung}
+	\input{sections/Signalflussdiagramme}
+	\input{sections/Frequenzanalyse}
+	\input{sections/Systeme}
+	\input{sections/Einheitssignale}
+	\section{Tabelle der wichtigsten Ableitungen und Integrale}
+	\input{table/diverses/subsections/Ableitungen}
+	\input{table/diverses/subsections/unbestimmteIntegrale}
+	\includepdf[pages={1-9}]{Tabellen.pdf}
 
 \end{document}

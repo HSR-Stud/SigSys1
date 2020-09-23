@@ -1,8 +1,7 @@
 \section{Einheitssignale}
-	
 	\subsection{Funktionen}
 	\renewcommand{\arraystretchOriginal}{1}
-	\begin{tabular}{ll}
+	\begin{tabular}{ll} 
 		\textbf{Sprungfunktion \skript{17}} &
 		Einschaltfunktion, Einheitssprung, Heaviside-Function \matlab{heaviside}
 		\\
@@ -138,7 +137,37 @@
 		\vspace{.1cm}\\
 		}
 		\end{tabular}
-
 	
-
-	\input{idiotenseite/elektrotechnik/subsections/signalformen}	
+	\subsubsection{Signalmanipulationen}
+		\begin{tabularx}{\textwidth}{|l|X|X|X|X|X|}
+			\hline
+			{}
+			&	\multirow{2}{*}{\textbf{Spiegeln}}
+			&	\multicolumn{2}{c|}{\textbf{Um Faktor $a$}}
+			&	\multicolumn{2}{c|}{\textbf{Verschieben um $c$}}
+			\\ 
+			{}
+			&	
+			&	\textbf{strecken}
+			&	\textbf{stauchen}
+			&	\textbf{nach Rechts/oben}
+			&	\textbf{nach links/unten}
+			\\ \hline 
+				x-Achse (Abszisse)
+			&	$-f(x)$
+			&	$f(\frac{1}{a} \cdot x)$
+			&	$f(a \cdot x)$
+			&	$f(x - c)$
+			&	$f(x + c)$
+			\\ \hline 
+				y-Achse (Ordinate)
+			&	$f(-x)$
+			&	$a \cdot f(x)$
+			&	$\frac{1}{a} \cdot f(x)$
+			&	$f(x) + c$
+			&	$f(x) - c$	
+			\\ \hline 
+			
+		\end{tabularx}
+	
+	\input{table/elektrotechnik/subsections/signalformen}	
